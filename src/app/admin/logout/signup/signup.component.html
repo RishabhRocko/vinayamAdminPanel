@@ -1,0 +1,155 @@
+<div class="bg-sign">
+  <div class="top-nav">
+    <div class="row">
+      <div class="col-md-6 col-4">
+        <img src="../../../../assets/img/logo/logo.png" alt="Charles Hall" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+
+  <main class="w-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-md-10 col-lg-10 mx-auto mt-3">
+          <div class="row">
+            <div class="col-lg-6 col-md-5 col-12 left-area my-auto">
+              <div class="text-center">
+                <img src="../../../../assets/img/photos/image.png" alt="Charles Hall" class="img-fluid" />
+                <h2>Welcome</h2>
+                <p class="lead">
+                  Sign up to your account to continue
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-7 col-12 my-auto">
+              <div class="card">
+                <img src="../../../../assets/img/photos/dot.png" alt="Charles Hall" class="img-fluid dot-image"
+                  width="30%" />
+                <div class="card-body">
+                  <div class="m-sm-3">
+                    <div>
+                      <h2>Sign up</h2>
+                      <br>
+                      <h5>
+                        Please Sign up for an Account
+                      </h5>
+                      <br>
+                    </div>
+                    <form >
+                      <div class="form-group">
+                        <div class="row mb-2">
+
+                    <div class="col-md-6">
+                        <label  for="Name"> Name</label>
+                        <div class="input-group">
+                          <input  id="Name" type="text" class="form-control" formControlName="name" >
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label  for="Phone"> Phone</label>
+                          <div class="input-group">
+                          <input  id="Phone" type="tel" class="form-control" formControlName="mobile">
+                        </div>
+                      </div>
+
+                        <div class="col-md-6">
+                        <label  for="Email"> Email</label>
+                          <div class="input-group">
+                          <input  id="Email" type="email" class="form-control" formControlName="email" >
+                        </div>
+                      </div>
+
+                        <div class="col-md-6">
+                        <label  for="Aadhar Number"> Aadhar Number</label>
+                          <div class="input-group">
+                          <input  id="Aadhar_Number" type="number" class="form-control" formControlName="aadhar">
+                        </div>
+                      </div>
+
+                        <div class="col-md-6">
+                        <label for="Role"> Role</label>
+                          <div class="input-group">
+                          <input id="Role"  type="number" max="5" min="5" class="form-control" formControlName="role_id"  placeholder="5">
+                        </div>
+                      </div>
+
+                        <div class="col-md-6">
+                        <label for="Section"> Section</label>
+                          <div class="input-group">
+                          <input id="Section"  type="number" max="5" min="5" class="form-control" formControlName="section_id"  placeholder="5">
+                        </div>
+                      </div>
+
+                        <div class="col-md-6">
+                        <label for="Profile Picture" > Profile Picture</label>
+                          <div class="input-group">
+                          <input id="Profile_Picture" type="file" class="form-control" formControlName="profile_pic" >
+                        </div>
+                      </div>
+
+                        <div class="col-md-6">
+                        <label  for="DOB"> DOB</label>
+                          <div class="input-group">
+                          <input  id="DOB" type="date" class="form-control" formControlName="dob">
+                        </div>
+                      </div>
+                        <div class="col-md-6">
+                        <label for="Password"> Password</label>
+                          <div class="input-group">
+                          <input id="Password"  type="password" class="form-control" formControlName="password">
+                        </div>
+                      </div>
+
+                        </div>
+                    </div>
+
+
+
+                          <div class="row">
+                            <div class="col-6">
+                              <label class="form-check">
+                                <input class="form-check-input" type="checkbox"
+                                  value="remember-me" name="remember-me" checked>
+                                <span class="form-check-label">
+                                  Remember me
+                                </span>
+                              </label>
+                            </div>
+                            <div class="col-6">
+                              <div class="text-right">
+                                  <button type="submit" class="btn btn-success rounded-pill" >Generate User</button>
+
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                          <div class="text-center mt-3">
+                            <hr>
+                            <p>Already have an account ? <a class="btn rounded-pill" [routerLink]="['../']">Sign in</a></p>
+                          </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+
+<ng-template #save let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"></h4>
+  </div>
+  <div class="modal-body">
+    <form >
+      <h2 ></h2>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a ><button type="button" class="btn btn-success rounded-pill" >ok</button></a>
+  </div>
+</ng-template>
