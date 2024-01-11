@@ -8,8 +8,12 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 node_modules
-.angular
-.vscode
+node_modules
+.*
+!/.angular
+.*
+!/.vscode
+
 
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
