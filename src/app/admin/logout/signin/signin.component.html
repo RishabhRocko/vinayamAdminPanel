@@ -37,8 +37,8 @@
                     <form [formGroup]="Signin" (ngSubmit)="onSubmitSignin()">
                       <div class="preview bottom-border-input-wrapper floating-label">
                         <div class="input-wrap">
-                          <input type="email" class="form-control" placeholder=" " formControlName="email" required>
-                          <label class="form-label">Enter Email</label>
+                          <input type="userName" class="form-control" placeholder=" " formControlName="userName" required>
+                          <label class="form-label">Enter UserName</label>
                         </div>
                         <div class="input-wrap">
                           <input type="password" class="form-control" placeholder=" " formControlName="password" required>
@@ -57,8 +57,7 @@
                         </div>
                         <div class="col-6">
                           <div class="text-right">
-
-                              <button type= "submit" class="btn btn-success rounded-pill" >Sign-in Now</button>
+                              <button type= "submit" class="btn btn-success rounded-pill" [disabled]="!Signin.valid">Sign-in Now</button>
                           </div>
                         </div>
                       </div>
@@ -78,19 +77,4 @@
     </div>
   </main>
 </div>
-<ng-template #autho let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title"></h4>
-  </div>
-  <div class="modal-body">
-    <form >
-      <h3></h3>
-      <h2 ><img src="" alt="" width="100px"></h2>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <a ><button type="button" class="btn btn-success rounded-pill" >ok</button></a>
-  </div>
-</ng-template>
-
 

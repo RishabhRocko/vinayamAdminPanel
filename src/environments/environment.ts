@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url:"http://vinayamgroupclasses.com/"
+  url:"http://vinayamclasses.in/"
 };
 
 /*

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component , OnInit} from '@angular/core';
+import { Router , NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,13 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
    constructor(private router:Router){}
+  ngOnInit(): void {
+    const user = localStorage.getItem("user");
+    if (user && user == '1') {
+      this.router.navigate(['/admin', 'dashboard']);
+    }else{
+      this.router.navigate(['/admin']);
+    }
+  }
 }
+
