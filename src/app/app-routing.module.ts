@@ -10,7 +10,7 @@ import { AuthGuard } from './helper/auth.guard';
 const routes: Routes = [
   {path :'',redirectTo:'admin',pathMatch:'full'},
   {path :'admin',component:SigninComponent},
-  {path :'admin/signup',component:SignupComponent},
+  {path :'admin/signup',component:SignupComponent,canActivate: [AuthGuard]},
   {path :'admin/forgotpassword',component:ForgotPasswordComponent},
   {path :'admin/dashboard',component:DashWrapperComponent,canActivate: [AuthGuard]},
   {path :'admin/profile',component:UsersComponent,canActivate: [AuthGuard]},
