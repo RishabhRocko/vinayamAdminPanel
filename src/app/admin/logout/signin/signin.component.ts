@@ -27,6 +27,7 @@ export class SigninComponent implements OnInit{
       if(response.status == true)
       {
         localStorage.setItem('token',response.data ? response.data.randomEncString : null);
+        localStorage.setItem('role',response.data ? response.data.adminRole : 0);
         this.router.navigate(['/admin', 'dashboard']);
         this.toastr.success(response.message ? response.message : 'Success', 'Success', {
           positionClass: 'successMessageClass'
