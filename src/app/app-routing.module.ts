@@ -6,13 +6,14 @@ import { SignupComponent } from './admin/logout/signup/signup.component';
 import { ForgotPasswordComponent } from './admin/logout/forgotPassword/forgotPassword.component';
 import { DashWrapperComponent } from './admin/login/wrapper/dashboard/dashboard.component';
 import { UsersComponent } from './admin/login/wrapper/users/users.component';
+import { AuthGuard } from './helper/auth.guard';
 const routes: Routes = [
   {path :'',redirectTo:'admin',pathMatch:'full'},
   {path :'admin',component:SigninComponent},
   {path :'admin/signup',component:SignupComponent},
   {path :'admin/forgotpassword',component:ForgotPasswordComponent},
-  {path :'admin/dashboard',component:DashWrapperComponent},
-  {path :'admin/profile',component:UsersComponent},
+  {path :'admin/dashboard',component:DashWrapperComponent,canActivate: [AuthGuard]},
+  {path :'admin/profile',component:UsersComponent,canActivate: [AuthGuard]},
   {path :'**',component:PageNotFoundComponent},
 ];
 
