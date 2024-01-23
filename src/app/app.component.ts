@@ -8,13 +8,6 @@ import { Router , NavigationEnd } from '@angular/router';
 })
 export class AppComponent {
    constructor(private router:Router){}
-  ngOnInit(): void {
-    const user = localStorage.getItem("user");
-    if (user && user == '1') {
-      this.router.navigate(['/admin', 'dashboard']);
-    }else{
-      this.router.navigate(['/admin']);
-    }
-  }
+  ngOnInit(): void {}
 }
 

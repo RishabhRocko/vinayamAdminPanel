@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  url:"http://vinayamclasses.in/"
+  production : false,
+  secretKey : '123456',
+  url : "http://vinayamclasses.in/"
 };
 
 /*
