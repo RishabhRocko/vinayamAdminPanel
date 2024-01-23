@@ -1,7 +1,7 @@
 <div class="bg-sign">
   <div class="top-nav">
     <div class="row">
-      <div class="col-md-6 col-4">
+      <div class="col-md-12 col-4">
         <img src="../../../../assets/img/logo/logo.png" alt="Charles Hall" class="img-fluid" />
       </div>
     </div>
@@ -17,7 +17,7 @@
                 <img src="../../../../assets/img/photos/sign-up.jpg" alt="Charles Hall" class="img-fluid" />
                 <h2>Welcome</h2>
                 <p class="lead">
-                  Sign up to your account to continue
+                  Sign up to access account
                 </p>
               </div>
             </div>
@@ -35,90 +35,56 @@
                       </h5>
                       <br>
                     </div>
-                    <form >
+                    <form [formGroup]="adminForm" (ngSubmit)="onSubmitAdmin()">
                       <div class="form-group">
                         <div class="row mb-2">
 
-                    <div class="col-md-6">
-                        <label  for="Name"> Name</label>
+                    <div class="col-md-12">
+                        <label  for="Name">User Name</label>
                         <div class="input-group">
-                          <input  id="Name" type="text" class="form-control" formControlName="name" >
+                          <input  id="userName" type="text" class="form-control" formControlName="userName" >
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <label  for="Phone"> Phone</label>
-                          <div class="input-group">
-                          <input  id="Phone" type="tel" class="form-control" formControlName="mobile">
-                        </div>
-                      </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                         <label  for="Email"> Email</label>
                           <div class="input-group">
-                          <input  id="Email" type="email" class="form-control" formControlName="email" >
+                          <input  id="email" type="email" class="form-control" formControlName="emailId" >
                         </div>
                       </div>
 
-                        <div class="col-md-6">
-                        <label  for="Aadhar Number"> Aadhar Number</label>
+                        <div class="col-md-12">
+                        <label for="Role">Role</label>
                           <div class="input-group">
-                          <input  id="Aadhar_Number" type="number" class="form-control" formControlName="aadhar">
+                          <select id="adminRole" class="form-select" formControlName="adminRole">
+                            <option value="1">Super Admin</option>
+                            <option value="2">Admin</option>
+                          </select>
                         </div>
                       </div>
 
-                        <div class="col-md-6">
-                        <label for="Role"> Role</label>
-                          <div class="input-group">
-                          <input id="Role"  type="number" max="5" min="5" class="form-control" formControlName="role_id"  placeholder="5">
-                        </div>
-                      </div>
-
-                        <div class="col-md-6">
-                        <label for="Section"> Section</label>
-                          <div class="input-group">
-                          <input id="Section"  type="number" max="5" min="5" class="form-control" formControlName="section_id"  placeholder="5">
-                        </div>
-                      </div>
-
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                         <label for="Profile Picture" > Profile Picture</label>
                           <div class="input-group">
-                          <input id="Profile_Picture" type="file" class="form-control" formControlName="profile_pic" >
+                          <input id="adminImage" type="file" class="form-control">
                         </div>
                       </div>
 
-                        <div class="col-md-6">
-                        <label  for="DOB"> DOB</label>
-                          <div class="input-group">
-                          <input  id="DOB" type="date" class="form-control" formControlName="dob">
-                        </div>
-                      </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                         <label for="Password"> Password</label>
                           <div class="input-group">
-                          <input id="Password"  type="password" class="form-control" formControlName="password">
+                          <input id="password"  type="text" class="form-control" formControlName="password">
                         </div>
                       </div>
-
                         </div>
-                    </div>
-
-
-
+                      </div>
                           <div class="row">
                             <div class="col-6">
-                              <label class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                  value="remember-me" name="remember-me" checked>
-                                <span class="form-check-label">
-                                  Remember me
-                                </span>
-                              </label>
+                              <button class="btn btn rounded-pill" (click)="reloadBack()">Back To Dashboard</button>
                             </div>
                             <div class="col-6">
                               <div class="text-right">
-                                  <button type="submit" class="btn btn-success rounded-pill" >Generate User</button>
-
+                                  <button type="submit" class="btn btn-success rounded-pill" [disabled]="!adminForm.valid" >Generate User</button>
                               </div>
                             </div>
                           </div>
@@ -133,18 +99,3 @@
     </div>
   </main>
 </div>
-
-
-<ng-template #save let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title"></h4>
-  </div>
-  <div class="modal-body">
-    <form >
-      <h2 ></h2>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <a ><button type="button" class="btn btn-success rounded-pill" >ok</button></a>
-  </div>
-</ng-template>

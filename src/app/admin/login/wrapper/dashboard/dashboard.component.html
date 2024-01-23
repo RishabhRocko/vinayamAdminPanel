@@ -15,69 +15,37 @@
                   <table class="table table-hover my-0">
                       <thead>
                           <tr>
-                              <th>Name</th>
-                              <th class="d-none d-xl-table-cell">Start Date</th>
-                              <th class="d-none d-xl-table-cell">End Date</th>
-                              <th>Status</th>
-                              <th class="d-none d-md-table-cell">Assignee</th>
+                              <th class="d-none d-md-table-cell">User Name</th>
+                              <th class="d-none d-md-table-cell">Admin Role</th>
+                              <th class="d-none d-md-table-cell">Admin Image</th>
+                              <th class="d-none d-md-table-cell">Bar Code</th>
+                              <th class="d-none d-md-table-cell">Email Id</th>
+                              <th class="d-none d-md-table-cell">Role Status</th>
+                              <th class="d-none d-md-table-cell">User Status</th>
+                              <th class="d-none d-md-table-cell">Action</th>
                           </tr>
                       </thead>
                       <tbody>
-                          <tr>
-                              <td>Project Apollo</td>
-                              <td class="d-none d-xl-table-cell">01/01/2021</td>
-                              <td class="d-none d-xl-table-cell">31/06/2021</td>
-                              <td><span class="badge bg-success">Done</span></td>
-                              <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                          </tr>
-                          <tr>
-                              <td>Project Fireball</td>
-                              <td class="d-none d-xl-table-cell">01/01/2021</td>
-                              <td class="d-none d-xl-table-cell">31/06/2021</td>
-                              <td><span class="badge bg-danger">Cancelled</span></td>
-                              <td class="d-none d-md-table-cell">William Harris</td>
-                          </tr>
-                          <tr>
-                              <td>Project Hades</td>
-                              <td class="d-none d-xl-table-cell">01/01/2021</td>
-                              <td class="d-none d-xl-table-cell">31/06/2021</td>
-                              <td><span class="badge bg-success">Done</span></td>
-                              <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                          </tr>
-                          <tr>
-                              <td>Project Nitro</td>
-                              <td class="d-none d-xl-table-cell">01/01/2021</td>
-                              <td class="d-none d-xl-table-cell">31/06/2021</td>
-                              <td><span class="badge bg-warning">In progress</span></td>
-                              <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                          </tr>
-                          <tr>
-                              <td>Project Phoenix</td>
-                              <td class="d-none d-xl-table-cell">01/01/2021</td>
-                              <td class="d-none d-xl-table-cell">31/06/2021</td>
-                              <td><span class="badge bg-success">Done</span></td>
-                              <td class="d-none d-md-table-cell">William Harris</td>
-                          </tr>
-                          <tr>
-                              <td>Project X</td>
-                              <td class="d-none d-xl-table-cell">01/01/2021</td>
-                              <td class="d-none d-xl-table-cell">31/06/2021</td>
-                              <td><span class="badge bg-success">Done</span></td>
-                              <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                          </tr>
-                          <tr>
-                              <td>Project Romeo</td>
-                              <td class="d-none d-xl-table-cell">01/01/2021</td>
-                              <td class="d-none d-xl-table-cell">31/06/2021</td>
-                              <td><span class="badge bg-success">Done</span></td>
-                              <td class="d-none d-md-table-cell">Christina Mason</td>
-                          </tr>
-                          <tr>
-                              <td>Project Wombat</td>
-                              <td class="d-none d-xl-table-cell">01/01/2021</td>
-                              <td class="d-none d-xl-table-cell">31/06/2021</td>
-                              <td><span class="badge bg-warning">In progress</span></td>
-                              <td class="d-none d-md-table-cell">William Harris</td>
+                          <tr *ngFor = "let item of landData">
+                            <td class="d-none d-md-table-cell">{{item.adminName}}</td>
+
+                            <td class="d-none d-md-table-cell" *ngIf="item.adminRole == 1">Super Admin</td>
+                            <td class="d-none d-md-table-cell" *ngIf="item.adminRole != 1">Admin</td>
+
+                            <td class="d-none d-md-table-cell"><img src="{{item.adminImage}}" alt="" width="40px"></td>
+                            <td class="d-none d-md-table-cell">{{item.barCode}}</td>
+                            <td class="d-none d-md-table-cell">{{item.emailId}}</td>
+
+                            <td class="d-none d-md-table-cell" *ngIf="item.roleStatus == 1"><span class="badge bg-success">Active</span></td>
+                            <td class="d-none d-md-table-cell" *ngIf="item.roleStatus != 1"><span class="badge bg-error">Inactive</span></td>
+
+                            <td class="d-none d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
+                            <td class="d-none d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-error">Inactive</span></td>
+
+                            <td> <button  class='btn text-success btn-sm btn-edit-user' data-type='edit'>
+                                <i class='fas fa-edit me-1'></i></button>
+                              <button  class='btn text-danger btn-sm btn-del-user' data-type='delete'>
+                              <i class='fas fa-trash-alt me-1'></i></button></td>
                           </tr>
                       </tbody>
                   </table>

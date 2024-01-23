@@ -6,13 +6,13 @@ import { encryptData } from 'src/app/helper/cryptoEncryption';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class SignupService {
 
   constructor(private http:HttpClient) { }
-  authUser(loginData:any)
+  addAdmin(adminData:any)
   {
-    let url = environment.url + 'adminLogin';
-    let encData:string = encryptData(loginData);
+    let url = environment.url + 'addAdmin';
+    let encData:string = encryptData(adminData);
     return this.http.post<any>(url,encData);
   }
 }
