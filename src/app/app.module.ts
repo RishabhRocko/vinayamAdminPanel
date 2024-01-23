@@ -40,7 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({ timeOut: 2000}),
+    ToastrModule.forRoot({ timeOut: 3000}),
     ToastContainerDirective
   ],
   providers: [],
