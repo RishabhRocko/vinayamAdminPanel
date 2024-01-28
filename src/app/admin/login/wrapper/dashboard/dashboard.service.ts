@@ -14,4 +14,10 @@ export class DashboardService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  deleteAdminData(sendData:any)
+  {
+    let url = environment.url + 'deleteAdmin';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }
