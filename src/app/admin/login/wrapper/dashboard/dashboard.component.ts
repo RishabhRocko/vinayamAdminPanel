@@ -39,7 +39,7 @@ export class DashWrapperComponent implements OnInit {
 
   deleteAdmin(isValid:any)
   {
-    if(this.deleteEncString != localStorage.getItem('token'))
+    if(isValid && this.deleteEncString != localStorage.getItem('token'))
     {
       this.sendData = {"token":this.token,"deleteId":this.deleteId,"deleteEncString":this.deleteEncString};
       this.DashboardService.deleteAdminData(this.sendData).subscribe((res: any) => {
