@@ -38,7 +38,7 @@
                             <td class="d-none d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
                             <td class="d-none d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-danger">Inactive</span></td>
 
-                            <td> <button  class='btn text-success btn-sm btn-edit-user' data-type='edit'>
+                            <td> <button *ngIf="item.isActive == 1" class='btn text-success btn-sm btn-edit-user' data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#editAdminModal" (click)="getEditData(item.id,item.randomEncString)">
                                 <i class='fas fa-edit me-1'></i></button>
                               <button *ngIf="item.isActive == 1" class='btn text-danger btn-sm btn-del-user' data-type='delete' data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="getDeleteData(item.id,item.randomEncString)" >
                                 <i class='fas fa-trash-alt me-1'></i></button>
@@ -89,3 +89,76 @@
     </div>
   </div>
 </div>
+
+<!--edit admin modal-->
+
+
+<div class="modal fade" id="editAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Admin</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <form [formGroup]="editAdminForm" (ngSubmit)="onSubmitEditAdmin()">
+        <div class="form-group">
+          <input type="hidden" id="adminId" class="form-control" formControlName='adminId'>
+
+          <div class="col-md-12">
+          <label class="fw-bold" for="Name">Admin Name</label>
+          <div class="input-group">
+            <input  id="userName" type="text" class="form-control" formControlName="userName" >
+          </div>
+          </div>
+
+          <div class="col-md-12">
+          <label class="fw-bold" for="Email">Admin Email</label>
+            <div class="input-group">
+            <input  id="emailId" type="email" class="form-control"  formControlName="emailId">
+          </div>
+          </div>
+
+          <div class="col-md-12">
+          <label class="fw-bold"for="Role">Admin Role</label>
+            <div class="input-group">
+            <select id="adminRole" class="form-select" formControlName="adminRole">
+              <option value="1" >Super Admin</option>
+              <option value="2" >Admin</option>
+            </select>
+          </div>
+          </div>
+
+          <div class="col-md-12">
+          <label class="fw-bold"for="Profile Picture" > Profile Picture</label>
+            <div class="input-group">
+            <input id="Profile_Picture" type="file" class="form-control" >
+          </div>
+          </div>
+
+          <div class="col-md-12">
+          <label class="fw-bold"for="Password"> Password</label>
+            <div class="input-group">
+            <input id="password"  type="password" class="form-control" formControlName="password">
+          </div>
+          </div>
+
+          <div class="col-md-12">
+          <label class="fw-bold"for="Confirm Password">Confirm Password</label>
+            <div class="input-group">
+            <input id="confirmPassword" type="password" class="form-control" formControlName="confirmPassword">
+          </div>
+          </div>
+
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success p-2" [disabled]="!editAdminForm.valid">Save</button>
+      </div>
+
+    </form>
+  </div>
+  </div>
+

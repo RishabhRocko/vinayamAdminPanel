@@ -20,4 +20,16 @@ export class DashboardService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  getEditAdminData(sendData:any)
+  {
+    let url = environment.url + 'getEditAdmin';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
+  saveEditAdminData(sendData:any)
+  {
+    let url = environment.url + 'saveEditAdmin';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }
