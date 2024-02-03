@@ -16,10 +16,21 @@ export class UsersService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
-
   deleteStudentData(sendData:any)
   {
     let url = environment.url + 'adminStudentDelete';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
+  getEditStudentData(sendData:any)
+  {
+    let url = environment.url + 'getEditStudent';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
+  saveEditStudentData(sendData:any)
+  {
+    let url = environment.url + 'saveEditStudent';
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
