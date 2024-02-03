@@ -39,10 +39,14 @@
                         <div class="input-wrap">
                           <input type="userName" class="form-control" placeholder=" " formControlName="userName" required>
                           <label class="form-label">Enter UserName</label>
+                          <span class="text-danger" *ngIf=" Signin.controls.userName.touched && Signin.controls.userName.errors?.['required']">User Name is required</span>
+                          <span class="text-danger" *ngIf="Signin.controls.userName.errors?.['pattern']">Invalid User Name</span>
                         </div>
                         <div class="input-wrap">
                           <input type="password" class="form-control" placeholder=" " formControlName="password" required>
                           <label>Enter Password</label>
+                          <span class="text-danger" *ngIf="Signin.controls.password.touched && Signin.controls.password.errors?.['required']">Password is required</span>
+                          <span class="text-danger" *ngIf="Signin.controls.password.errors?.['pattern']">Invalid Password</span>
                           </div>
                       </div>
                       <div class="row">

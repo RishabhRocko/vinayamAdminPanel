@@ -112,6 +112,8 @@
           <div class="input-group">
             <input  id="userName" type="text" class="form-control" formControlName="userName" >
           </div>
+          <span class="text-danger" *ngIf="editAdminForm.controls.userName.touched && editAdminForm.controls.userName.errors?.['required']">Admin Name is required</span>
+          <span class="text-danger" *ngIf="editAdminForm.controls.userName.errors?.['pattern']">Invalid Admin Name</span>
           </div>
 
           <div class="col-md-12">
@@ -119,6 +121,8 @@
             <div class="input-group">
             <input  id="emailId" type="email" class="form-control"  formControlName="emailId">
           </div>
+          <span class="text-danger" *ngIf="editAdminForm.controls.emailId.touched && editAdminForm.controls.emailId.errors?.['required']">Email Id is required</span>
+          <span class="text-danger" *ngIf="editAdminForm.controls.emailId.errors?.['pattern']">Invalid Email Id</span>
           </div>
 
           <div class="col-md-12">
@@ -129,6 +133,8 @@
               <option value="2" >Admin</option>
             </select>
           </div>
+          <span class="text-danger" *ngIf="editAdminForm.controls.adminRole.touched && editAdminForm.controls.adminRole.errors?.['required']">Admin Role is required</span>
+          <span class="text-danger" *ngIf="editAdminForm.controls.adminRole.errors?.['pattern']">Invalid Admin Role</span>
           </div>
 
           <div class="col-md-12">
@@ -143,6 +149,8 @@
             <div class="input-group">
             <input id="password"  type="password" class="form-control" formControlName="password">
           </div>
+          <span class="text-danger" *ngIf="editAdminForm.controls.password.touched && editAdminForm.controls.password.errors?.['required']">Password is required</span>
+          <span class="text-danger" *ngIf="editAdminForm.controls.password.errors?.['pattern']">Invalid Password</span>
           </div>
 
           <div class="col-md-12">
@@ -150,6 +158,8 @@
             <div class="input-group">
             <input id="confirmPassword" type="password" class="form-control" formControlName="confirmPassword">
           </div>
+          <span class="text-danger" *ngIf="editAdminForm.controls.confirmPassword.touched && editAdminForm.controls.confirmPassword.errors?.['required']">Confirm Password is required</span>
+          <span class="text-danger" *ngIf="editAdminForm.controls.confirmPassword.errors?.['pattern']">Invalid Confirm Password</span>
           </div>
 
         </div>
