@@ -72,8 +72,11 @@
                         <div class="col-md-12">
                         <label for="Profile Picture" > Profile Picture</label>
                           <div class="input-group">
-                          <input id="adminImage" type="file" class="form-control">
+                          <input id="adminImage" class="form-control" type="file" formControlName="adminImage"
+                                (change)="onFileChange($event)" multiple >
                         </div>
+                        <span class="text-danger" *ngIf="adminForm.controls.adminImage.touched && adminForm.controls.adminImage.errors?.['required']">Admin Image is required</span>
+                        <span class="text-danger" *ngIf="invalidAdminImage == 1">Admin Image must be image file and size must be less than 200 kb</span>
                       </div>
 
                         <div class="col-md-12">
@@ -92,7 +95,7 @@
                             </div>
                             <div class="col-6">
                               <div class="text-right">
-                                  <button type="submit" class="btn btn-success rounded-pill" [disabled]="!adminForm.valid" >Generate User</button>
+                                  <button type="submit" class="btn btn-success rounded-pill" [disabled]="!adminForm.valid || invalidAdminImage == 1" >Generate User</button>
                               </div>
                             </div>
                           </div>
