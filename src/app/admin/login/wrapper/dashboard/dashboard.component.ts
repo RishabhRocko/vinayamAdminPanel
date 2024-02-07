@@ -16,6 +16,10 @@ export class DashWrapperComponent implements OnInit {
   deleteEncString:any;
   editAdminData: any;
   user: any;
+  adminImageBase64Data: any;
+  adminImageFileSize: any;
+  adminImageFileType: any;
+  invalidAdminImage : number = 0;
 
   constructor(private DashboardService:DashboardService,private toastr: ToastrService){}
   ngOnInit(): void {
@@ -38,6 +42,7 @@ export class DashWrapperComponent implements OnInit {
     userName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
     emailId: new FormControl( '',[Validators.required,Validators.pattern(/^([\w\-\.\+]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/)] ),
     adminRole: new FormControl( '',[Validators.required,Validators.pattern(/^[0-9]*$/)] ),
+    adminImage: new FormControl( '',[Validators.required]),
     password: new FormControl( '',[Validators.required,Validators.pattern(/^[A-Za-z0-9][a-zA-Z0-9 .&,@$()?_#-\/\+[\]*]*$/)] ),
     confirmPassword: new FormControl( '',[Validators.required,Validators.pattern(/^[A-Za-z0-9][a-zA-Z0-9 .&,@$()?_#-\/\+[\]*]*$/)] ),
   });
@@ -47,6 +52,29 @@ export class DashWrapperComponent implements OnInit {
     this.deleteEncString = encString;
   }
 
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.encodeFileBase64(file);
+    }
+  }
+
+  encodeFileBase64(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.adminImageBase64Data = reader.result as string;
+      this.adminImageFileSize = file.size,
+      this.adminImageFileType = file.type.split("/")
+      if((this.adminImageFileType[0] != 'image') || (this.adminImageFileSize > 204800))
+      {
+        this.invalidAdminImage = 1;
+      }else{
+        this.invalidAdminImage = 0;
+      }
+
+    };
+    reader.readAsDataURL(file);
+  }
 
   getEditData(id: any,encString: any)
   {
@@ -60,12 +88,13 @@ export class DashWrapperComponent implements OnInit {
         {
          this.editAdminData = response.data;
          this.editAdminForm.setValue({
-          adminId: this.editAdminData.id,
-          emailId: this.editAdminData.emailId,
-          userName: this.editAdminData.adminName,
-          adminRole: this.editAdminData.adminRole,
-          password: null,
-          confirmPassword: null
+           adminId: this.editAdminData.id,
+           emailId: this.editAdminData.emailId,
+           userName: this.editAdminData.adminName,
+           adminRole: this.editAdminData.adminRole,
+           password: null,
+           confirmPassword: null,
+           adminImage: null
          });
         }else{
           this.toastr.error(response.message ? response.message : 'Error', 'Error', {
@@ -85,7 +114,7 @@ export class DashWrapperComponent implements OnInit {
     if(localStorage.getItem('token')){
       if(this.editAdminForm.value.password == this.editAdminForm.value.confirmPassword)
       {
-        this.user = {token:localStorage.getItem('token'),editForm:this.editAdminForm.value};
+        this.user = {token:localStorage.getItem('token'),adminImage: this.adminImageBase64Data,editForm:this.editAdminForm.value};
         this.DashboardService.saveEditAdminData(this.user).subscribe((res: any) => {
           let response = decryptData(res);
           if(response.status == true)

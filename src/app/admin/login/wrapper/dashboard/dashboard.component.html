@@ -140,9 +140,12 @@
           <div class="col-md-12">
           <label class="fw-bold"for="Profile Picture" > Profile Picture</label>
             <div class="input-group">
-            <input id="Profile_Picture" type="file" class="form-control" >
+              <input id="adminImage" class="form-control" type="file" formControlName="adminImage"
+              (change)="onFileChange($event)" multiple >
           </div>
-          </div>
+          <span class="text-danger" *ngIf="editAdminForm.controls.adminImage.touched && editAdminForm.controls.adminImage.errors?.['required']">Admin Image is required</span>
+          <span class="text-danger" *ngIf="invalidAdminImage == 1">Admin Image must be image file and size must be less than 200 kb</span>
+        </div>
 
           <div class="col-md-12">
           <label class="fw-bold"for="Password"> Password</label>
@@ -165,7 +168,7 @@
         </div>
         <div class="modal-footer justify-content-around">
           <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success p-2" [disabled]="!editAdminForm.valid">Save</button>
+          <button type="submit" class="btn btn-success p-2" [disabled]="!editAdminForm.valid  || invalidAdminImage == 1">Save</button>
       </div>
 
     </form>
