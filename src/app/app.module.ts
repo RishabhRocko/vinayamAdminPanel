@@ -9,6 +9,8 @@ import { SidebarComponent } from './admin/login/sidebar/sidebar.component';
 import { NavbarComponent } from './admin/login/navbar/navbar.component';
 import { UsersComponent } from './admin/login/wrapper/users/users.component';
 import { DashWrapperComponent } from './admin/login/wrapper/dashboard/dashboard.component';
+import { ImageComponent } from './admin/login/wrapper/image/image.component';
+import { VideoComponent } from './admin/login/wrapper/video/video.component';
 import { AppRoutingModule , routingComponents } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SidebarComponent,
     NavbarComponent,
     DashWrapperComponent,
+    ImageComponent,
+    VideoComponent,
     UsersComponent,
     routingComponents,
   ],

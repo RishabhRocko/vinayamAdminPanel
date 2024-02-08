@@ -6,198 +6,27 @@
 
       <ul class="sidebar-nav">
           <li class="sidebar-header">
-              <h4>WorkPlace</h4>
           </li>
-
-          <li class="sidebar-item active" [routerLink]="['../../admin/dashboard']">
+          <li class="sidebar-item {{dashboardPageActive == 1 ? 'active':''}}" [routerLink]="['../../admin/dashboard']">
               <a class="sidebar-link" >
                   <i class="fas fa-columns"></i> <span class="align-top" >Admins</span>
               </a>
           </li>
-
-          <li class="sidebar-item" [routerLink]="['../../admin/profile']">
+          <li class="sidebar-item {{studentPageActive == 1 ? 'active':''}}" [routerLink]="['../../admin/student']">
               <a class="sidebar-link" >
                   <i class="far fa-user-circle"></i> <span class="align-top" >Students</span>
               </a>
           </li>
-          <!-- pages multi menu started==================== -->
-          <li class="sidebar-item multiMenu-navigation">
-              <ul>
-                  <li>
-                      <a class="sidebar-link nav-arrow">
-                          <i class="far fa-file-alt"></i> <span class="align-top">Content</span>
-                      </a>
-                      <ul class="multiMenu-navigation-inner">
-                          <li>
-                              <a class="sidebar-link nav-arrow">
-                                  <i class="fas fa-magic"></i> <span class="align-top">Videos</span>
-                              </a>
-                              <ul>
-                                  <li>
-                                      <a class="sidebar-link" >
-                                          <i class="fas fa-vector-square"></i> <span class="align-top">Layout-1</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a class="sidebar-link" >
-                                          <i class="fas fa-vector-square"></i> <span class="align-top">Layout-2</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a class="sidebar-link" >
-                                          <i class="fas fa-vector-square"></i> <span class="align-top">Layout-3</span>
-                                      </a>
-                                  </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <a class="sidebar-link nav-arrow">
-                                  <i class="far fa-caret-square-down"></i> <span class="align-top">Images</span>
-                              </a>
-                              <ul>
-                                  <li>
-                                      <a class="sidebar-link">
-                                          <i class="far fa-caret-square-down"></i> <span class="align-top">Sub Menu-11</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a class="sidebar-link">
-                                          <i class="far fa-caret-square-down"></i> <span class="align-top">Sub Menu-12</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a class="sidebar-link nav-arrow">
-                                          <i class="far fa-caret-square-down"></i> <span class="align-top">Sub Sub Menu-11</span>
-                                      </a>
-                                      <ul>
-                                          <li>
-                                              <a class="sidebar-link">
-                                                  <i class="far fa-caret-square-down"></i> <span class="align-top">Sub Sub Menu-111</span>
-                                              </a>
-                                          </li>
-                                          <li>
-                                              <a class="sidebar-link">
-                                                  <i class="far fa-caret-square-down"></i> <span class="align-top">Sub Sub Menu-112</span>
-                                              </a>
-                                          </li>
-                                      </ul>
-                                  </li>
-                              </ul>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
+            <li class="sidebar-item {{imagePageActive == 1 ? 'active':''}}" [routerLink]="['../../admin/image']">
+              <a class="sidebar-link">
+                <i class="far fa-image"></i> <span class="align-top" >Images</span>
+              </a>
           </li>
-          <!-- page multi menu ends==================== -->
-
-          <li class="sidebar-header">
-            <h4>Settings</h4>
+          <li class="sidebar-item {{VideoPageActive == 1 ? 'active':''}}" [routerLink]="['../../admin/video']">
+              <a class="sidebar-link">
+                <i class="fas fa-video"></i> <span class="align-top" >Videos</span>
+              </a>
           </li>
-
-          <!-- components multi menu started==================== -->
-          <li class="sidebar-item multiMenu-navigation">
-              <ul>
-                  <li>
-                      <a class="sidebar-link nav-arrow">
-                          <i class="fas fa-tools"></i> <span class="align-top">Components</span>
-                      </a>
-                      <ul class="multiMenu-navigation-inner">
-                          <li>
-                              <a class="sidebar-link nav-arrow">
-                                  <i class="fas fa-table"></i> <span class="align-top">Table</span>
-                              </a>
-                              <ul>
-                                  <li>
-                                      <a class="sidebar-link" >
-                                          <i class="fas fa-table"></i> <span class="align-top">Regular Table</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a class="sidebar-link" >
-                                          <i class="fas fa-table"></i> <span class="align-top">Data Table</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a class="sidebar-link">
-                                          <i class="fas fa-table"></i> <span class="align-top">Data Table Dark</span>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a class="sidebar-link" >
-                                          <i class="fas fa-table"></i> <span class="align-top">Table Editable</span>
-                                      </a>
-                                  </li>
-                              </ul>
-                          </li>
-                          <li>
-                              <a class="sidebar-link" >
-                                  <i class="fas fa-boxes"></i> <span class="align-top">Accordion</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a class="sidebar-link">
-                                  <i class="fas fa-mouse"></i> <span class="align-top">Buttons</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a class="sidebar-link">
-                                  <i class="far fa-address-card"></i> <span class="align-top">Cards</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a class="sidebar-link active">
-                                  <i class="fas fa-chart-bar"></i> <span class="align-top">Charts</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a class="sidebar-link">
-                                  <i class="fas fa-bell"></i> <span class="align-top">Notification</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a class="sidebar-link" >
-                                  <i class="fas fa-text-width"></i> <span class="align-top">Typography</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a class="sidebar-link">
-                                  <i class="fas fa-circle-notch"></i> <span class="align-top">Spinners</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a class="sidebar-link" >
-                                  <i class="far fa-caret-square-down"></i> <span class="align-top">Dropdown</span>
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
-          <!-- components multi menu ends==================== -->
-
-          <!-- form multi menu start==================== -->
-          <li class="sidebar-item multiMenu-navigation">
-              <ul>
-                  <li>
-                      <a class="sidebar-link nav-arrow">
-                          <i class="fab fa-wpforms"></i> <span class="align-top">Forms</span>
-                      </a>
-                      <ul class="multiMenu-navigation-inner">
-                          <li>
-                              <a class="sidebar-link" >
-                                  <i class="fab fa-wpforms"></i> <span class="align-top">Elements</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a class="sidebar-link">
-                                  <i class="fab fa-wpforms"></i> <span class="align-top">Components</span>
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
-          <!-- form multi menu ends==================== -->
       </ul>
   </div>
 </nav>
