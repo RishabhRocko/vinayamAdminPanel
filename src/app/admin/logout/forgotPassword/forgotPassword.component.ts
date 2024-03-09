@@ -48,20 +48,27 @@ export class ForgotPasswordComponent {
 
   onSubmitOtp()
   {
-    this.submitOtpVar = {submitOtpForm:this.submitOtpForm.value};
-    this.ForgotpassService.submitOtpForgot(this.submitOtpVar).subscribe((res: any) => {
-      let response = decryptData(res);
-      if(response.status == true)
-      {
-        this.router.navigate(['/admin', '']);
-        this.toastr.success(response.message ? response.message : 'Success', 'Success', {
-          positionClass: 'successMessageClass'
+    if(this.submitOtpForm.value.newpass == this.submitOtpForm.value.confpass)
+    {
+      this.submitOtpVar = {submitOtpForm:this.submitOtpForm.value};
+      this.ForgotpassService.submitOtpForgot(this.submitOtpVar).subscribe((res: any) => {
+        let response = decryptData(res);
+        if(response.status == true)
+        {
+          this.router.navigate(['/admin']);
+          this.toastr.success(response.message ? response.message : 'Success', 'Success', {
+            positionClass: 'successMessageClass'
+        });
+        }else{
+          this.toastr.error(response.message ? response.message : 'Error', 'Error', {
+            positionClass: 'errorMessageClass'
+        });
+        }
       });
-      }else{
-        this.toastr.error(response.message ? response.message : 'Error', 'Error', {
-          positionClass: 'errorMessageClass'
-      });
-      }
+    }else{
+      this.toastr.error('Password And Confirm Password Must Be Same!', 'Error', {
+        positionClass: 'errorMessageClass'
     });
+    }
   }
 }
