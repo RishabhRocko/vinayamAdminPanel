@@ -42,14 +42,44 @@
               </a>
 
               <a class="nav-link dropdown-toggle d-none d-sm-inline-block" data-bs-toggle="dropdown">
-                  <img src="../../../../assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded-circle me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+                  <img src="{{landData.adminImage}}" class="avatar img-fluid rounded-circle me-1" alt="{{landData.adminName}}"/> <span class="text-dark">{{landData.adminName}}</span>
               </a>
               <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item" [routerLink]="['../../admin/dashboard']"><i class="fas fa-user me-1"></i>Profile</a>
-                  <a class="dropdown-item" [routerLink]="['../../admin/signup']" *ngIf="adminRole == '1'"><i class="fas fa-user me-1"></i>Add Admin</a>
+                  <a class="dropdown-item" data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fas fa-user me-1"></i>Profile</a>
+                  <a class="dropdown-item" [routerLink]="['../../admin/signup']" *ngIf="adminRole == '1'"><i class="fas fa-plus me-1"></i>Add Admin</a>
                   <a class="dropdown-item" [routerLink]="['../../admin']"><i class="fas fa-sign-out-alt me-1"></i>Log out</a>
               </div>
           </li>
       </ul>
   </div>
 </nav>
+
+
+<!-- Profile Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-3">
+            <img src="{{landData.adminImage}}"
+              class="img-fluid" alt="" width="150px">
+          </div>
+          <div class="col-9">
+            <p><strong>Information</strong></p>
+            <p>Name : {{landData.adminName}}</p>
+            <p>BarCode : {{landData.barCode}}</p>
+            <p>Email : {{landData.emailId}}</p>
+            <p>Role : {{landData.adminRole == 1 ? 'Super Admin' : 'Admin'}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
