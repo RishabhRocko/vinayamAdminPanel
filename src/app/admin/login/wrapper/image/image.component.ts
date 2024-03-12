@@ -43,9 +43,9 @@ export class ImageComponent {
   editImageForm = new FormGroup({
     imageId: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
     imageTag: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
-    imageUrl:  new FormControl( '',[Validators.required]),
+    imageUrl:  new FormControl( ''),
     imageText:  new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]*$/)]),
-    altImage:  new FormControl( '',[Validators.required]),
+    altImage:  new FormControl( ''),
   });
 
   getDeleteData(id: any)

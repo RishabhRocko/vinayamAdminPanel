@@ -126,7 +126,6 @@
               <input id="videoUrl" class="form-control" type="file" formControlName="videoUrl"
               (change)="onFileChange($event,'videoUrlBase64')" multiple >
           </div>
-          <span class="text-danger" *ngIf="editVideoForm.controls.videoUrl.touched && editVideoForm.controls.videoUrl.errors?.['required']">Video is required</span>
           <span class="text-danger" *ngIf="invalidVideoUrl == 1">Video must be video file and size must be less than 2 MB</span>
         </div>
 
@@ -136,7 +135,6 @@
               <input id="altVideo" class="form-control" type="file" formControlName="altVideo"
               (change)="onFileChange($event,'altVideoBase64')" multiple >
           </div>
-          <span class="text-danger" *ngIf="editVideoForm.controls.altVideo.touched && editVideoForm.controls.altVideo.errors?.['required']">Video is required</span>
           <span class="text-danger" *ngIf="invalidAltVideo == 1">Video must be video file and size must be less than 2 MB</span>
         </div>
 

@@ -41,9 +41,9 @@ export class VideoComponent {
   editVideoForm = new FormGroup({
     videoId: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
     videoTag: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
-    videoUrl:  new FormControl( '',[Validators.required]),
+    videoUrl:  new FormControl( ''),
     videoText:  new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]*$/)]),
-    altVideo:  new FormControl( '',[Validators.required]),
+    altVideo:  new FormControl( ''),
   });
 
   getDeleteData(id: any)

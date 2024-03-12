@@ -125,7 +125,6 @@
               <input id="imageUrl" class="form-control" type="file" formControlName="imageUrl"
               (change)="onFileChange($event,'imageUrlBase64')" multiple >
           </div>
-          <span class="text-danger" *ngIf="editImageForm.controls.imageUrl.touched && editImageForm.controls.imageUrl.errors?.['required']">Image is required</span>
           <span class="text-danger" *ngIf="invalidImageUrl == 1">Image must be image file and size must be less than 500 kb</span>
         </div>
 
@@ -135,7 +134,6 @@
               <input id="altImage" class="form-control" type="file" formControlName="altImage"
               (change)="onFileChange($event,'altImageBase64')" multiple >
           </div>
-          <span class="text-danger" *ngIf="editImageForm.controls.altImage.touched && editImageForm.controls.altImage.errors?.['required']">Image is required</span>
           <span class="text-danger" *ngIf="invalidAltImage == 1">Image must be image file and size must be less than 500 kb</span>
         </div>
 
