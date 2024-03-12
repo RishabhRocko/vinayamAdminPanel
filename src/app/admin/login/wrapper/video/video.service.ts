@@ -21,4 +21,16 @@ export class VideoService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  getEditVideoData(sendData:any)
+  {
+    let url = environment.url + 'getEditVideo';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
+  saveEditVideoData(sendData:any)
+  {
+    let url = environment.url + 'saveEditVideo';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }

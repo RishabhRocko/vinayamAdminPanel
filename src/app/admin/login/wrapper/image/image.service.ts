@@ -20,4 +20,16 @@ export class ImageService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  getEditImageData(sendData:any)
+  {
+    let url = environment.url + 'getEditImage';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
+  saveEditImageData(sendData:any)
+  {
+    let url = environment.url + 'saveEditImage';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }

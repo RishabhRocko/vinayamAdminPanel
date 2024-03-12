@@ -26,14 +26,14 @@
                         <td class="d-none d-md-table-cell">{{item.videoTagId}}</td>
                         <td class="d-none d-md-table-cell">{{item.videoText}}</td>
                         <td class="d-none d-md-table-cell"><img src="{{item.videoUrl}}" alt="" width="60px"></td>
-                        <td class="d-none d-md-table-cell">{{item.altVideo}}</td>
+                        <td class="d-none d-md-table-cell"><img src="{{item.altVideo}}" alt="" width="60px"></td>
 
                         <td class="d-none d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
                         <td class="d-none d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-danger">Inactive</span></td>
 
                         <td>
-                          <!--<button *ngIf="item.isActive == 1" class='btn text-success btn-sm btn-edit-user' data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#editAdminModal" (click)="getEditData(item.id,item.randomEncString)">
-                          <i class='fas fa-edit me-1'></i></button>-->
+                          <button *ngIf="item.isActive == 1" class='btn text-success btn-sm btn-edit-user' data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#editModal" (click)="getEditData(item.id)">
+                          <i class='fas fa-edit me-1'></i></button>
                         <button *ngIf="item.isActive == 1" class='btn text-danger btn-sm btn-del-user' data-type='delete' data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="getDeleteData(item.id)" >
                           <i class='fas fa-trash-alt me-1'></i></button>
                           <button *ngIf="item.isActive != 1" class='btn text-success btn-sm btn-plus-user' data-type='activate' data-bs-toggle="modal" data-bs-target="#activateModal" (click)="getDeleteData(item.id)" >
@@ -62,7 +62,7 @@
       </div>
       <div class="modal-footer justify-content-around">
         <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger p-2" (click)="deleteAdmin(true)" data-bs-dismiss="modal">Delete</button>
+        <button type="button" class="btn btn-danger p-2" (click)="deleteVideo(true)" data-bs-dismiss="modal">Delete</button>
       </div>
     </div>
   </div>
@@ -78,8 +78,75 @@
       </div>
       <div class="modal-footer justify-content-around">
         <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-success p-2" (click)="deleteAdmin(true)" data-bs-dismiss="modal">Activate</button>
+        <button type="button" class="btn btn-success p-2" (click)="deleteVideo(true)" data-bs-dismiss="modal">Activate</button>
       </div>
     </div>
   </div>
 </div>
+
+
+<!--edit modal-->
+
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Video</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <form [formGroup]="editVideoForm" (ngSubmit)="onSubmitEditVideo()">
+        <div class="form-group">
+          <input type="hidden" id="videoId" class="form-control" formControlName='videoId'>
+
+          <div class="col-md-12">
+          <label class="fw-bold" for="videoTag">Video Tag</label>
+          <div class="input-group">
+            <input  id="videoTag" type="text" class="form-control" formControlName="videoTag" readonly>
+          </div>
+          <span class="text-danger" *ngIf="editVideoForm.controls.videoTag.touched && editVideoForm.controls.videoTag.errors?.['required']">Video Tag is required</span>
+          <span class="text-danger" *ngIf="editVideoForm.controls.videoTag.errors?.['pattern']">Invalid Video Tag</span>
+          </div>
+
+          <div class="col-md-12">
+          <label class="fw-bold" for="videoText">Video Text</label>
+            <div class="input-group">
+            <input  id="videoText" type="text" class="form-control"  formControlName="videoText">
+          </div>
+          <span class="text-danger" *ngIf="editVideoForm.controls.videoText.touched && editVideoForm.controls.videoText.errors?.['required']">Video Text is required</span>
+          <span class="text-danger" *ngIf="editVideoForm.controls.videoText.errors?.['pattern']">Invalid Video Text</span>
+          </div>
+
+          <div class="col-md-12">
+          <label class="fw-bold"for="videoUrl">Video Url</label>
+            <div class="input-group">
+              <input id="videoUrl" class="form-control" type="file" formControlName="videoUrl"
+              (change)="onFileChange($event,'videoUrlBase64')" multiple >
+          </div>
+          <span class="text-danger" *ngIf="editVideoForm.controls.videoUrl.touched && editVideoForm.controls.videoUrl.errors?.['required']">Video is required</span>
+          <span class="text-danger" *ngIf="invalidVideoUrl == 1">Video must be video file and size must be less than 2 MB</span>
+        </div>
+
+        <div class="col-md-12">
+          <label class="fw-bold"for="altVideo">Alt Video</label>
+            <div class="input-group">
+              <input id="altVideo" class="form-control" type="file" formControlName="altVideo"
+              (change)="onFileChange($event,'altVideoBase64')" multiple >
+          </div>
+          <span class="text-danger" *ngIf="editVideoForm.controls.altVideo.touched && editVideoForm.controls.altVideo.errors?.['required']">Video is required</span>
+          <span class="text-danger" *ngIf="invalidAltVideo == 1">Video must be video file and size must be less than 2 MB</span>
+        </div>
+
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success p-2" [disabled]="!editVideoForm.valid  || invalidVideoUrl == 1 || invalidAltVideo == 1">Save</button>
+      </div>
+
+    </form>
+  </div>
+  </div>
+
