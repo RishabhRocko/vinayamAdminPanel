@@ -35,7 +35,7 @@ reset
 ---------------------------------------------
 */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
-pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
+pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q,
 s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
 figure, header, nav, section, article, aside, footer, figcaption {
   margin: 0;
@@ -113,10 +113,6 @@ p {
   color: #2a2a2a;
 }
 
-img {
-  width: 100%;
-  overflow: hidden;
-}
 
 /*
 ---------------------------------------------
