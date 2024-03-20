@@ -9,8 +9,9 @@ import { ImageComponent } from './admin/login/wrapper/image/image.component';
 import { VideoComponent } from './admin/login/wrapper/video/video.component';
 import { UsersComponent } from './admin/login/wrapper/users/users.component';
 import { AuthGuard } from './helper/auth.guard';
+import { WebComponent } from './web/web.component';
 const routes: Routes = [
-  {path :'',redirectTo:'admin',pathMatch:'full'},
+  {path :'',component:WebComponent},
   {path :'admin',component:SigninComponent},
   {path :'admin/signup',component:SignupComponent,canActivate: [AuthGuard]},
   {path :'admin/forgotpassword',component:ForgotPasswordComponent},

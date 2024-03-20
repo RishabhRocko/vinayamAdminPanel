@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule , ToastContainerDirective } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule , NgxUiLoaderHttpModule  } from "ngx-ui-loader";
+import { WebComponent } from './web/web.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { NgxUiLoaderModule, NgxUiLoaderRouterModule , NgxUiLoaderHttpModule  } f
     VideoComponent,
     UsersComponent,
     routingComponents,
+    WebComponent,
   ],
   imports: [
     BrowserModule,

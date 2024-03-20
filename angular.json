@@ -34,7 +34,11 @@
               "src/assets/css/fontawesome.min.css",
               "src/assets/css/jquerysctipttop.css",
               "src/assets/css/menu-style.css",
-              "src/assets/css/style.css"
+              "src/assets/css/style.css",
+              "src/assets/css/fontawesome.css",
+              "src/assets/css/templatemo-edu-meeting.css",
+              "src/assets/css/owl.css",
+              "src/assets/css/lightbox.css"
             ],
             "scripts": [
               "src/assets/js/all.min.js",
@@ -42,7 +46,15 @@
               "src/assets/js/chart.min.js",
               "src/assets/js/jquery-3.4.1.min.js",
               "src/assets/js/main.js",
-              "src/assets/js/menu.js"
+              "src/assets/js/menu.js",
+              "src/assets/js/isotope.min.js",
+              "src/assets/js/owl-carousel.js",
+              "src/assets/js/lightbox.js",
+              "src/assets/js/tabs.js",
+              "src/assets/js/video.js",
+              "src/assets/js/slick-slider.js",
+              "src/assets/js/custom.js",
+              "src/assets/js/external_imp.js"
             ]
           },
           "configurations": {
