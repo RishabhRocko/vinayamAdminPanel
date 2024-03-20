@@ -42,7 +42,7 @@
               </a>
 
               <a class="nav-link dropdown-toggle d-none d-sm-inline-block" data-bs-toggle="dropdown">
-                  <img src="{{landData.adminImage}}" class="avatar img-fluid rounded-circle me-1" alt="{{landData.adminName}}"/> <span class="text-dark">{{landData.adminName}}</span>
+                  <img src="{{landData?.adminImage}}" class="avatar img-fluid rounded-circle me-1" alt="{{landData?.adminName}}"/> <span class="text-dark">{{landData?.adminName}}</span>
               </a>
               <div class="dropdown-menu dropdown-menu-end">
                   <a class="dropdown-item" data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fas fa-user me-1"></i>Profile</a>
@@ -68,15 +68,15 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-3">
-            <img src="{{landData.adminImage}}"
+            <img src="{{landData?.adminImage}}"
               class="img-fluid" alt="" width="150px">
           </div>
           <div class="col-9">
             <p><strong>Information</strong></p>
-            <p>Name : {{landData.adminName}}</p>
-            <p>BarCode : {{landData.barCode}}</p>
-            <p>Email : {{landData.emailId}}</p>
-            <p>Role : {{landData.adminRole == 1 ? 'Super Admin' : 'Admin'}}</p>
+            <p>Name : {{landData?.adminName}}</p>
+            <p>BarCode : {{landData?.barCode}}</p>
+            <p>Email : {{landData?.emailId}}</p>
+            <p>Role : {{landData?.adminRole == 1 ? 'Super Admin' : 'Admin'}}</p>
           </div>
         </div>
       </div>
