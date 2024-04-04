@@ -34,4 +34,10 @@ export class UsersService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  saveAddStudentData(sendData:any)
+  {
+    let url = environment.url + 'saveAddStudent';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }

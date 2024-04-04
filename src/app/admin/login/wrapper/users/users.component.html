@@ -4,7 +4,15 @@
     <app-navbar></app-navbar>
 <main class="content">
   <div class="container-fluid p-0">
+    <div class="row">
+      <div class="col-md-6">
       <h1 class="h3 mb-3"><strong>Vinayam</strong> Students</h1>
+    </div>
+    <div class="col-md-6 text-right">
+      <button class='btn text-success' data-type='add' data-bs-toggle="modal" data-bs-target="#addStudentModal">
+        <i class='fas fa-plus me-1'></i>Add Student</button>
+    </div>
+  </div>
       <div class="row">
           <div class="col-lg-12 d-flex">
               <div class="card flex-fill">
@@ -13,7 +21,10 @@
                       <tr>
                           <th class="d-none d-md-table-cell">Student Name</th>
                           <th class="d-none d-md-table-cell">Guardian Name</th>
+                          <th class="d-none d-md-table-cell">Login Id</th>
+                          <th class="d-none d-md-table-cell">Login Pass</th>
                           <th class="d-none d-md-table-cell">Phone</th>
+                          <th class="d-none d-md-table-cell">DOB</th>
                           <th class="d-none d-md-table-cell">Email</th>
                           <th class="d-none d-md-table-cell">Class</th>
                           <th class="d-none d-md-table-cell">Status</th>
@@ -24,14 +35,17 @@
                       <tr *ngFor = "let item of landData">
                         <td class="d-none d-md-table-cell">{{item.studentFirstName}} {{item.studentLastName}}</td>
                         <td class="d-none d-md-table-cell">{{item.guardianFirstName}} {{item.guardianLastName}}</td>
+                        <td class="d-none d-md-table-cell">{{item.loginId}}</td>
+                        <td class="d-none d-md-table-cell">{{item.loginPassword}}</td>
                         <td class="d-none d-md-table-cell">{{item.phone}}</td>
+                        <td class="d-none d-md-table-cell">{{item.dob}}</td>
                         <td class="d-none d-md-table-cell">{{item.email}}</td>
                         <td class="d-none d-md-table-cell">{{item.class}}</td>
 
                         <td class="d-none d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
                         <td class="d-none d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-danger">Inactive</span></td>
 
-                        <td> <button *ngIf="item.isActive == 1"  class='btn text-success btn-sm btn-edit-user' data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#editStudentModal" (click)="getEditData(item.id,item.randomEncString)">
+                        <td> <button *ngIf="item.isActive == 1"  class='btn text-success btn-sm btn-edit-user' data-type='edit' data-bs-toggle="modal" data-bs-target="#editStudentModal" (click)="getEditData(item.id,item.randomEncString)">
                             <i class='fas fa-edit me-1'></i></button>
                           <button *ngIf="item.isActive == 1" class='btn text-danger btn-sm btn-del-user' data-type='delete' data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="getDeleteData(item.id,item.randomEncString)" >
                           <i class='fas fa-trash-alt me-1'></i></button>
@@ -103,7 +117,7 @@
 
           <div class="d-flex align-items-start bg-body-tertiary mb-3">
             <div class="col">
-            <label class="fw-bold" for="Name">Student First Name</label>
+            <label class="fw-bold" >Student First Name</label>
             <div class="input-group">
               <input  id="studentFirstName" type="text" class="form-control" formControlName="studentFirstName">
             </div>
@@ -111,7 +125,7 @@
           <span class="text-danger" *ngIf="editStudentForm.controls.studentFirstName.errors?.['pattern']">Invalid Student First Name</span>
             </div>
             <div class="col">
-            <label class="fw-bold" for="Email">Student Last Name</label>
+            <label class="fw-bold" >Student Last Name</label>
               <div class="input-group">
               <input  id="studentLastName" type="email" class="form-control" formControlName="studentLastName">
             </div>
@@ -122,7 +136,7 @@
 
           <div class="d-flex align-items-start bg-body-tertiary mb-3">
             <div class="col">
-            <label class="fw-bold" for="Name">Guardian First Name</label>
+            <label class="fw-bold" >Guardian First Name</label>
             <div class="input-group">
               <input  id="guardianFirstName" type="text" class="form-control" formControlName="guardianFirstName">
             </div>
@@ -130,7 +144,7 @@
           <span class="text-danger" *ngIf="editStudentForm.controls.guardianFirstName.errors?.['pattern']">Invalid Guardian First Name</span>
             </div>
             <div class="col">
-            <label class="fw-bold" for="Email">Guardian Last Name</label>
+            <label class="fw-bold" >Guardian Last Name</label>
               <div class="input-group">
               <input  id="guardianLastName" type="email" class="form-control" formControlName="guardianLastName">
             </div>
@@ -141,7 +155,7 @@
 
           <div class="d-flex align-items-start bg-body-tertiary mb-3">
             <div class="col">
-            <label class="fw-bold" for="Name">Phone</label>
+            <label class="fw-bold" >Phone</label>
             <div class="input-group">
               <input  id="phone" type="text" class="form-control" formControlName="phone">
             </div>
@@ -149,7 +163,7 @@
           <span class="text-danger" *ngIf="editStudentForm.controls.phone.errors?.['pattern']">Invalid Phone</span>
             </div>
             <div class="col">
-            <label class="fw-bold" for="Email">Class</label>
+            <label class="fw-bold" >Class</label>
               <div class="input-group">
               <select id="class" class="form-select" formControlName="class">
                 <option value="9" >class 9</option>
@@ -165,7 +179,14 @@
 
           <div class="d-flex align-items-start bg-body-tertiary mb-3">
             <div class="col">
-            <label class="fw-bold" for="Name">Email</label>
+              <label class="fw-bold" >DOB</label>
+              <div class="input-group">
+                <input  id="dob" type="date" class="form-control" formControlName="dob">
+              </div>
+              <span class="text-danger" *ngIf="editStudentForm.controls.dob.touched && editStudentForm.controls.dob.errors?.['required']">DOB is required</span>
+              </div>
+            <div class="col">
+            <label class="fw-bold" >Email</label>
             <div class="input-group">
               <input  id="email" type="text" class="form-control" formControlName="email">
             </div>
@@ -183,3 +204,113 @@
     </form>
   </div>
   </div>
+  </div>
+</div>
+
+
+<!--add student modal-->
+
+<div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Student</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <form [formGroup]="addStudentForm" (ngSubmit)="onSubmitAddStudent()">
+        <div class="form-group">
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Student First Name</label>
+            <div class="input-group">
+              <input  id="studentFirstName" type="text" class="form-control" formControlName="studentFirstName">
+            </div>
+            <span class="text-danger" *ngIf="addStudentForm.controls.studentFirstName.touched && addStudentForm.controls.studentFirstName.errors?.['required']">Student First Name is required</span>
+          <span class="text-danger" *ngIf="addStudentForm.controls.studentFirstName.errors?.['pattern']">Invalid Student First Name</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >Student Last Name</label>
+              <div class="input-group">
+              <input  id="studentLastName" type="email" class="form-control" formControlName="studentLastName">
+            </div>
+            <span class="text-danger" *ngIf="addStudentForm.controls.studentLastName.touched && addStudentForm.controls.studentLastName.errors?.['required']">Student Last Name is required</span>
+          <span class="text-danger" *ngIf="addStudentForm.controls.studentLastName.errors?.['pattern']">Invalid Student Last Name</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Guardian First Name</label>
+            <div class="input-group">
+              <input  id="guardianFirstName" type="text" class="form-control" formControlName="guardianFirstName">
+            </div>
+            <span class="text-danger" *ngIf="addStudentForm.controls.guardianFirstName.touched && addStudentForm.controls.guardianFirstName.errors?.['required']">Guardian First Name is required</span>
+          <span class="text-danger" *ngIf="addStudentForm.controls.guardianFirstName.errors?.['pattern']">Invalid Guardian First Name</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >Guardian Last Name</label>
+              <div class="input-group">
+              <input  id="guardianLastName" type="email" class="form-control" formControlName="guardianLastName">
+            </div>
+            <span class="text-danger" *ngIf="addStudentForm.controls.guardianLastName.touched && addStudentForm.controls.guardianLastName.errors?.['required']">Guardian Last Name is required</span>
+          <span class="text-danger" *ngIf="addStudentForm.controls.guardianLastName.errors?.['pattern']">Invalid Guardian Last Name</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Phone</label>
+            <div class="input-group">
+              <input  id="phone" type="text" class="form-control" formControlName="phone">
+            </div>
+            <span class="text-danger" *ngIf="addStudentForm.controls.phone.touched && addStudentForm.controls.phone.errors?.['required']">Phone is required</span>
+          <span class="text-danger" *ngIf="addStudentForm.controls.phone.errors?.['pattern']">Invalid Phone</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >Class</label>
+              <div class="input-group">
+              <select id="class" class="form-select" formControlName="class">
+                <option value="9" >class 9</option>
+                <option value="10" >class 10</option>
+                <option value="10" >class 11</option>
+                <option value="10" >class 12</option>
+              </select>
+            </div>
+            <span class="text-danger" *ngIf="addStudentForm.controls.class.touched && addStudentForm.controls.class.errors?.['required']">Class is required</span>
+          <span class="text-danger" *ngIf="addStudentForm.controls.class.errors?.['pattern']">Invalid Class</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+              <label class="fw-bold" >DOB</label>
+              <div class="input-group">
+                <input  id="dob" type="date" class="form-control" formControlName="dob">
+              </div>
+              <span class="text-danger" *ngIf="addStudentForm.controls.dob.touched && addStudentForm.controls.dob.errors?.['required']">DOB is required</span>
+              </div>
+            <div class="col">
+            <label class="fw-bold" >Email</label>
+            <div class="input-group">
+              <input  id="email" type="text" class="form-control" formControlName="email">
+            </div>
+            <span class="text-danger" *ngIf="addStudentForm.controls.email.touched && addStudentForm.controls.email.errors?.['required']">Email is required</span>
+          <span class="text-danger" *ngIf="addStudentForm.controls.email.errors?.['pattern']">Invalid Email</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success p-2" [disabled]="!addStudentForm.valid">Save</button>
+      </div>
+
+    </form>
+  </div>
+  </div>
+  </div>
+</div>
+

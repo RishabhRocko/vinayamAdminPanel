@@ -1,28 +1,28 @@
 <nav id="sidebar" class="sidebar js-sidebar">
   <div class="sidebar-content js-simplebar sidebar-menu">
       <span class="sidebar-brand">
-        Vinayam Group Classes
+        Vinayam Classes
       </span>
 
       <ul class="sidebar-nav">
           <li class="sidebar-header">
           </li>
-          <li class="sidebar-item {{dashboardPageActive == 1 ? 'active':''}}" [routerLink]="['../../admin/dashboard']">
+          <li class="sidebar-item {{PageActive == 'dashboard' ? 'active':''}}" [routerLink]="['../../admin/dashboard']">
               <a class="sidebar-link" >
                   <i class="fas fa-columns"></i> <span class="align-top" >Admins</span>
               </a>
           </li>
-          <li class="sidebar-item {{studentPageActive == 1 ? 'active':''}}" [routerLink]="['../../admin/student']">
+          <li class="sidebar-item {{PageActive == 'student' ? 'active':''}}" [routerLink]="['../../admin/student']">
               <a class="sidebar-link" >
                   <i class="far fa-user-circle"></i> <span class="align-top" >Students</span>
               </a>
           </li>
-            <li class="sidebar-item {{imagePageActive == 1 ? 'active':''}}" [routerLink]="['../../admin/image']">
+            <li class="sidebar-item {{PageActive == 'image' ? 'active':''}}" [routerLink]="['../../admin/image']">
               <a class="sidebar-link">
                 <i class="far fa-image"></i> <span class="align-top" >Images</span>
               </a>
           </li>
-          <li class="sidebar-item {{VideoPageActive == 1 ? 'active':''}}" [routerLink]="['../../admin/video']">
+          <li class="sidebar-item {{PageActive == 'video' ? 'active':''}}" [routerLink]="['../../admin/video']">
               <a class="sidebar-link">
                 <i class="fas fa-video"></i> <span class="align-top" >Videos</span>
               </a>

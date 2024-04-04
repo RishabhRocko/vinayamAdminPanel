@@ -41,6 +41,18 @@ export class UsersComponent implements OnInit {
     guardianLastName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
     phone: new FormControl( '',[Validators.required,Validators.pattern(/^[56789][0-9]{9,11}$/)] ),
     class: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
+    dob: new FormControl('',[Validators.required]),
+    email: new FormControl( '',[Validators.required,Validators.pattern(/^([\w\-\.\+]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/)] ),
+  });
+
+  addStudentForm = new FormGroup({
+    studentFirstName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
+    studentLastName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
+    guardianFirstName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
+    guardianLastName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
+    phone: new FormControl( '',[Validators.required,Validators.pattern(/^[56789][0-9]{9,11}$/)] ),
+    class: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
+    dob: new FormControl('',[Validators.required]),
     email: new FormControl( '',[Validators.required,Validators.pattern(/^([\w\-\.\+]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/)] ),
   });
   getEditData(id: any,encString: any)
@@ -62,6 +74,7 @@ export class UsersComponent implements OnInit {
             guardianLastName: this.editStudentData.guardianLastName,
             phone: this.editStudentData.phone,
             class: this.editStudentData.class,
+            dob: this.editStudentData.dob,
             email: this.editStudentData.email,
           });
         }else{
@@ -82,6 +95,31 @@ export class UsersComponent implements OnInit {
     if(localStorage.getItem('token')){
       this.user = {token:localStorage.getItem('token'),editForm:this.editStudentForm.value};
       this.UsersService.saveEditStudentData(this.user).subscribe((res: any) => {
+        let response = decryptData(res);
+        if(response.status == true)
+        {
+          this.toastr.success(response.message ? response.message : 'Success', 'Success', {
+            positionClass: 'successMessageClass'
+        });
+        window.location.reload();
+        }else{
+          this.toastr.error(response.message ? response.message : 'Error', 'Error', {
+            positionClass: 'errorMessageClass'
+        });
+        }
+      });
+    }else{
+      this.toastr.error('Unauthorized', 'Error', {
+        positionClass: 'errorMessageClass'
+    });
+    }
+  }
+
+  onSubmitAddStudent()
+  {
+    if(localStorage.getItem('token')){
+      this.user = {token:localStorage.getItem('token'),addForm:this.addStudentForm.value};
+      this.UsersService.saveAddStudentData(this.user).subscribe((res: any) => {
         let response = decryptData(res);
         if(response.status == true)
         {
