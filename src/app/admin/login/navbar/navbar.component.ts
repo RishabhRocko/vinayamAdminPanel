@@ -13,6 +13,9 @@ export class NavbarComponent {
   token: any;
   sendData:any;
   landData:any;
+  currentNotiData:any;
+  currentNotiCount:any;
+  allNotiData:any;
   constructor(private NavServiceService:NavServiceService,private toastr: ToastrService){}
 
   ngOnInit(): void {
@@ -23,6 +26,19 @@ export class NavbarComponent {
       if(response.status == true)
       {
         this.landData = response.data;
+      }else{
+        this.toastr.error(response.message ? response.message : 'Error', 'Error', {
+          positionClass: 'errorMessageClass'
+       });
+      }
+    });
+    this.NavServiceService.getNotification(this.sendData).subscribe((res: any) => {
+      let response = decryptData(res);
+      if(response.status == true)
+      {
+        this.currentNotiData = response.data.getCurrentNotification;
+        this.allNotiData = response.data.getAllNotification;
+        this.currentNotiCount = this.currentNotiData.length;
       }else{
         this.toastr.error(response.message ? response.message : 'Error', 'Error', {
           positionClass: 'errorMessageClass'

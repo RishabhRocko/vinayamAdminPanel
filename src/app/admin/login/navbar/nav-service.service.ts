@@ -15,4 +15,10 @@ export class NavServiceService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  getNotification(sendData:any)
+  {
+    let url = environment.url + 'getNotification';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }

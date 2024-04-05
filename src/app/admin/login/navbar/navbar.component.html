@@ -7,32 +7,35 @@
       <ul class="navbar-nav navbar-align">
           <li class="nav-item dropdown">
               <a class="nav-icon dropdown-toggle" id="alertsDropdown" data-bs-toggle="dropdown">
-                  <div class="position-relative">
-                      <i class="far fa-bell display-8"></i>
-                      <span class="indicator">4</span>
+                  <div class="position-relative" >
+                      <i class="far fa-bell display-8" ></i>
+                      <span class="indicator" *ngIf = "currentNotiCount != 0">{{currentNotiCount}}</span>
                   </div>
               </a>
               <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
                   <div class="dropdown-menu-header">
-                      4 New Notifications
+                    {{currentNotiCount}} New Notifications
                   </div>
                   <div class="list-group">
                       <span class="list-group-item">
-                          <div class="row g-0 align-items-center">
+                        <div *ngFor = "let item of currentNotiData">
+                          <div class="row g-0 align-items-center" >
                               <div class="col-2">
-                                  <i class="fas fa-exclamation-circle text-danger"></i>
+                                  <i class="far fa-bell display-8"></i>
                               </div>
                               <div class="col-10">
-                                  <div class="text-dark">Update completed</div>
-                                  <div class="text-muted small mt-1">Restart server 12 to complete the update.
+                                  <div class="text-dark">{{item.name}}  {{item.phone}}</div>
+                                  <div class="text-muted small mt-1">{{item.message}}
                                   </div>
-                                  <div class="text-muted small mt-1">30m ago</div>
+                                  <div class="text-muted small mt-1">{{item.createdAt}}</div>
                               </div>
+                          </div>
+                          <br/>
                           </div>
                       </span>
                   </div>
                   <div class="dropdown-menu-footer">
-                      <a class="text-muted">Show all notifications</a>
+                      <a class="text-muted" data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#notificationModal">Show all notifications</a>
                   </div>
               </div>
           </li>
@@ -78,6 +81,35 @@
             <p>Email : {{landData?.emailId}}</p>
             <p>Role : {{landData?.adminRole == 1 ? 'Super Admin' : 'Admin'}}</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Notification Modal -->
+<div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Notifications</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row" *ngFor = "let item of allNotiData">
+        <div class="col-9" >
+            <p><strong>Name : {{item?.name}}</strong></p>
+            <p>Email : {{item?.email}}</p>
+            <p>Phone : {{item?.phone}}</p>
+            <p>Subject : {{item?.subject}}</p>
+            <p>Class : {{item?.class}}</p>
+            <p>Message : {{item?.message}}</p>
+            <p>Date : {{item?.createdAt}}</p>
+            <br/>
+        </div>
         </div>
       </div>
     </div>
