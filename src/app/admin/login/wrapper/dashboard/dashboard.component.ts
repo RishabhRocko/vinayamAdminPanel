@@ -20,6 +20,8 @@ export class DashWrapperComponent implements OnInit {
   adminImageFileSize: any;
   adminImageFileType: any;
   invalidAdminImage : number = 0;
+  adminSearchBar:any;
+  page:any;
 
   constructor(private DashboardService:DashboardService,private toastr: ToastrService){}
   ngOnInit(): void {
@@ -166,6 +168,17 @@ export class DashWrapperComponent implements OnInit {
         positionClass: 'errorMessageClass'
      });
     }
+  }
+  onSearchKeyUp(event: KeyboardEvent) {
+    this.token = localStorage.getItem('token');
+    this.sendData = {"token":this.token,"searchVal":this.adminSearchBar};
+    this.DashboardService.adminSearch(this.sendData).subscribe((res: any) => {
+      let response = decryptData(res);
+      if(response.status == true)
+      {
+        this.landData = response.data;
+      }
+    });
   }
 
 }

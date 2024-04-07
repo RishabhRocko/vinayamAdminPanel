@@ -100,7 +100,7 @@
       </div>
       <div class="modal-body">
         <div class="row" *ngFor = "let item of allNotiData">
-        <div class="col-9" >
+        <div class="col-12" >
             <p><strong>Name : {{item?.name}}</strong></p>
             <p>Email : {{item?.email}}</p>
             <p>Phone : {{item?.phone}}</p>
@@ -108,6 +108,7 @@
             <p>Class : {{item?.class}}</p>
             <p>Message : {{item?.message}}</p>
             <p>Date : {{item?.createdAt}}</p>
+            <hr>
             <br/>
         </div>
         </div>

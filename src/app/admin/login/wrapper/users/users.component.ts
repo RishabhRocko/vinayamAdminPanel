@@ -16,6 +16,9 @@ export class UsersComponent implements OnInit {
   deleteEncString:any;
   editStudentData:any;
   user:any;
+  studentSearchBar: any;
+  page:any;
+
   constructor(private UsersService:UsersService,private toastr: ToastrService){}
 
   ngOnInit(): void {
@@ -170,5 +173,17 @@ export class UsersComponent implements OnInit {
         positionClass: 'errorMessageClass'
      });
     }
+  }
+
+  onSearchKeyUp(event: KeyboardEvent) {
+    this.token = localStorage.getItem('token');
+    this.sendData = {"token":this.token,"searchVal":this.studentSearchBar};
+    this.UsersService.studentSearch(this.sendData).subscribe((res: any) => {
+      let response = decryptData(res);
+      if(response.status == true)
+      {
+        this.landData = response.data;
+      }
+    });
   }
 }

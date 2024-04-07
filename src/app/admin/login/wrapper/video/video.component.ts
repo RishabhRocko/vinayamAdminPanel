@@ -20,6 +20,8 @@ export class VideoComponent {
   invalidAltVideo: number = 0;
   editVideoData:any;
   user:any;
+  videoSearchBar: any;
+  page:any;
 
   constructor(private VideoService:VideoService,private toastr: ToastrService){}
 
@@ -169,5 +171,16 @@ export class VideoComponent {
         positionClass: 'errorMessageClass'
      });
     }
+  }
+  onSearchKeyUp(event: KeyboardEvent) {
+    this.token = localStorage.getItem('token');
+    this.sendData = {"token":this.token,"searchVal":this.videoSearchBar};
+    this.VideoService.videoSearch(this.sendData).subscribe((res: any) => {
+      let response = decryptData(res);
+      if(response.status == true)
+      {
+        this.landData = response.data;
+      }
+    });
   }
 }

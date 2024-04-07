@@ -32,4 +32,10 @@ export class ImageService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  imageSearch(sendData:any)
+  {
+    let url = environment.url + 'imageSearch';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }

@@ -33,4 +33,10 @@ export class VideoService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  videoSearch(sendData:any)
+  {
+    let url = environment.url + 'videoSearch';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }

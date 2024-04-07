@@ -20,6 +20,7 @@ import { ToastrModule , ToastContainerDirective } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule , NgxUiLoaderHttpModule  } from "ngx-ui-loader";
 import { WebComponent } from './web/web.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { WebComponent } from './web/web.component';
     NgxUiLoaderModule,
     NgxUiLoaderRouterModule,
     NgxUiLoaderHttpModule ,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

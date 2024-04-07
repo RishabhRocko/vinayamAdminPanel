@@ -32,4 +32,10 @@ export class DashboardService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  adminSearch(sendData:any)
+  {
+    let url = environment.url + 'adminSearch';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }

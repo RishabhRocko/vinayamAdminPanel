@@ -21,6 +21,8 @@ export class ImageComponent {
   invalidAltImage: number = 0;
   editImageData:any;
   user:any;
+  imageSearchBar:any;
+  page:any;
 
   constructor(private ImageService:ImageService,private toastr: ToastrService){}
 
@@ -171,5 +173,17 @@ export class ImageComponent {
         positionClass: 'errorMessageClass'
      });
     }
+  }
+
+  onSearchKeyUp(event: KeyboardEvent) {
+    this.token = localStorage.getItem('token');
+    this.sendData = {"token":this.token,"searchVal":this.imageSearchBar};
+    this.ImageService.imageSearch(this.sendData).subscribe((res: any) => {
+      let response = decryptData(res);
+      if(response.status == true)
+      {
+        this.landData = response.data;
+      }
+    });
   }
 }

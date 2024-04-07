@@ -40,4 +40,10 @@ export class UsersService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  studentSearch(sendData:any)
+  {
+    let url = environment.url + 'studentSearch';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }
