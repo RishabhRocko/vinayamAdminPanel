@@ -21,7 +21,7 @@ export class VideoComponent {
   editVideoData:any;
   user:any;
   videoSearchBar: any;
-  page:any;
+  page:any = 1;
 
   constructor(private VideoService:VideoService,private toastr: ToastrService){}
 

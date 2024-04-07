@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
   editStudentData:any;
   user:any;
   studentSearchBar: any;
-  page:any;
+  page:any = 1;
 
   constructor(private UsersService:UsersService,private toastr: ToastrService){}
 

@@ -22,7 +22,7 @@ export class ImageComponent {
   editImageData:any;
   user:any;
   imageSearchBar:any;
-  page:any;
+  page:any = 1;
 
   constructor(private ImageService:ImageService,private toastr: ToastrService){}
 

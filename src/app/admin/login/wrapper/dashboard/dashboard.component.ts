@@ -21,7 +21,7 @@ export class DashWrapperComponent implements OnInit {
   adminImageFileType: any;
   invalidAdminImage : number = 0;
   adminSearchBar:any;
-  page:any;
+  page:any = 1;
 
   constructor(private DashboardService:DashboardService,private toastr: ToastrService){}
   ngOnInit(): void {

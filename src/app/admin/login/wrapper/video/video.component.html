@@ -8,7 +8,7 @@
       <div class="col-md-6">
         <h1 class="h3 mb-3"><strong>Vinayam</strong> Videos</h1>
     </div>
-    <div class="col-md-6 text-right">
+    <div *ngIf="page == 1" class="col-md-6 text-right">
       <input  id="videoSearch" class="rounded" type="text" [(ngModel)]="videoSearchBar" placeholder="  Enter to search" (keyup)="onSearchKeyUp($event)">
     </div>
   </div>
