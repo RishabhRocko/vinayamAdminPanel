@@ -1,3 +1,5 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
 .errorMessageClass {
   position: absolute;
   right: 50px;
@@ -21,3 +23,6 @@
   color: rgb(0, 85, 0);
   background-color: #84e17a;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

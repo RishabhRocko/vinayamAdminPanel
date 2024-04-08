@@ -22,7 +22,6 @@ import { NgxUiLoaderModule, NgxUiLoaderRouterModule , NgxUiLoaderHttpModule  } f
 import { WebComponent } from './web/web.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-
 @NgModule({
   declarations: [
     AppComponent,
