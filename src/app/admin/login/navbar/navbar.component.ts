@@ -16,6 +16,8 @@ export class NavbarComponent {
   currentNotiData:any;
   currentNotiCount:any;
   allNotiData:any;
+  page:any;
+  seperateNotification: any;
   constructor(private NavServiceService:NavServiceService,private toastr: ToastrService){}
 
   ngOnInit(): void {
@@ -45,5 +47,9 @@ export class NavbarComponent {
        });
       }
     });
+  }
+  viewNotification(data:any)
+  {
+    this.seperateNotification = data;
   }
 }

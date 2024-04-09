@@ -75,11 +75,11 @@
               class="img-fluid" alt="" width="150px">
           </div>
           <div class="col-9">
-            <p><strong>Information</strong></p>
-            <p>Name : {{landData?.adminName}}</p>
-            <p>BarCode : {{landData?.barCode}}</p>
-            <p>Email : {{landData?.emailId}}</p>
-            <p>Role : {{landData?.adminRole == 1 ? 'Super Admin' : 'Admin'}}</p>
+            <h6><strong>Information</strong></h6><br>
+            <h6>Name : {{landData?.adminName}}</h6><br>
+            <h6>BarCode : {{landData?.barCode}}</h6><br>
+            <h6>Email : {{landData?.emailId}}</h6><br>
+            <h6>Role : {{landData?.adminRole == 1 ? 'Super Admin' : 'Admin'}}</h6>
           </div>
         </div>
       </div>
@@ -88,9 +88,10 @@
 </div>
 
 
+
 <!-- Notification Modal -->
 <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-dialog-centered">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Notifications</h4>
@@ -99,18 +100,61 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="row" *ngFor = "let item of allNotiData">
-        <div class="col-12" >
-            <p><strong>Name : {{item?.name}}</strong></p>
-            <p>Email : {{item?.email}}</p>
-            <p>Phone : {{item?.phone}}</p>
-            <p>Subject : {{item?.subject}}</p>
-            <p>Class : {{item?.class}}</p>
-            <p>Message : {{item?.message}}</p>
-            <p>Date : {{item?.createdAt}}</p>
-            <hr>
-            <br/>
-        </div>
+        <div class="card flex-fill" style="overflow: scroll;">
+          <table class="table table-hover my-0 table-responsive">
+              <thead>
+                  <tr>
+                      <th class="d-md-table-cell">Name</th>
+                      <th class="d-md-table-cell">Phone</th>
+                      <th class="d-md-table-cell">Subject</th>
+                      <th class="d-md-table-cell">Class</th>
+                      <th class="d-md-table-cell">Date</th>
+                      <th class="d-md-table-cell">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor = "let item of allNotiData | paginate: { itemsPerPage: 10, currentPage: page }">
+                    <td class="d-md-table-cell">{{item.name}}</td>
+                    <td class="d-md-table-cell">{{item.phone}}</td>
+                    <td class="d-md-table-cell">{{item.subject}}</td>
+                    <td class="d-md-table-cell">{{item.class}}</td>
+                    <td class="d-md-table-cell">{{item.createdAt}}</td>
+
+                    <td> <button  class='btn text-success btn-sm btn-edit-user' data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#viewNotificationModal" (click)="viewNotification(item)">
+                        <i class='fas fa-eye me-1'></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+          </table>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- viewNotificationModal Modal -->
+<div class="modal fade" id="viewNotificationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Notification</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <h6><strong>{{seperateNotification?.name}}</strong></h6><br>
+            <h6>Email : {{seperateNotification?.email}}</h6><br>
+            <h6>Phone : {{seperateNotification?.phone}}</h6><br>
+            <h6>Class : {{seperateNotification?.class}}</h6><br>
+            <h6>Subject : {{seperateNotification?.subject}}</h6><br>
+            <h6>Message : {{seperateNotification?.message}}</h6><br>
+            <h6>Date : {{seperateNotification?.createdAt}}</h6>
+          </div>
         </div>
       </div>
     </div>

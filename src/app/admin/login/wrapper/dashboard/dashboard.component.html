@@ -14,36 +14,36 @@
   </div>
       <div class="row">
           <div class="col-lg-12 d-flex">
-              <div class="card flex-fill">
-                  <table class="table table-hover my-0">
+              <div class="card flex-fill" style="overflow: scroll;">
+                  <table class="table table-hover my-0 table-responsive">
                       <thead>
                           <tr>
-                              <th class="d-none d-md-table-cell">Admin Name</th>
-                              <th class="d-none d-md-table-cell">Admin Role</th>
-                              <th class="d-none d-md-table-cell">Admin Image</th>
-                              <th class="d-none d-md-table-cell">Bar Code</th>
-                              <th class="d-none d-md-table-cell">Email Id</th>
-                              <th class="d-none d-md-table-cell">Role Status</th>
-                              <th class="d-none d-md-table-cell">Admin Status</th>
-                              <th class="d-none d-md-table-cell">Action</th>
+                              <th class="d-md-table-cell">Admin Name</th>
+                              <th class="d-md-table-cell">Admin Role</th>
+                              <th class="d-md-table-cell">Admin Image</th>
+                              <th class="d-md-table-cell">Bar Code</th>
+                              <th class="d-md-table-cell">Email Id</th>
+                              <th class="d-md-table-cell">Role Status</th>
+                              <th class="d-md-table-cell">Admin Status</th>
+                              <th class="d-md-table-cell">Action</th>
                           </tr>
                       </thead>
                       <tbody>
                           <tr *ngFor = "let item of landData | paginate: { itemsPerPage: 10, currentPage: page }">
-                            <td class="d-none d-md-table-cell">{{item.adminName}}</td>
+                            <td class="d-md-table-cell">{{item.adminName}}</td>
 
-                            <td class="d-none d-md-table-cell" *ngIf="item.adminRole == 1">Super Admin</td>
-                            <td class="d-none d-md-table-cell" *ngIf="item.adminRole != 1">Admin</td>
+                            <td class="d-md-table-cell" *ngIf="item.adminRole == 1">Super Admin</td>
+                            <td class="d-md-table-cell" *ngIf="item.adminRole != 1">Admin</td>
 
-                            <td class="d-none d-md-table-cell"><img src="{{item.adminImage}}" alt="" width="60px"></td>
-                            <td class="d-none d-md-table-cell">{{item.barCode}}</td>
-                            <td class="d-none d-md-table-cell">{{item.emailId}}</td>
+                            <td class="d-md-table-cell"><img src="{{item.adminImage}}" alt="" width="60px"></td>
+                            <td class="d-md-table-cell">{{item.barCode}}</td>
+                            <td class="d-md-table-cell">{{item.emailId}}</td>
 
-                            <td class="d-none d-md-table-cell" *ngIf="item.roleStatus == 1"><span class="badge bg-success">Active</span></td>
-                            <td class="d-none d-md-table-cell" *ngIf="item.roleStatus != 1"><span class="badge bg-danger">Inactive</span></td>
+                            <td class="d-md-table-cell" *ngIf="item.roleStatus == 1"><span class="badge bg-success">Active</span></td>
+                            <td class="d-md-table-cell" *ngIf="item.roleStatus != 1"><span class="badge bg-danger">Inactive</span></td>
 
-                            <td class="d-none d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
-                            <td class="d-none d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-danger">Inactive</span></td>
+                            <td class="d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
+                            <td class="d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-danger">Inactive</span></td>
 
                             <td> <button *ngIf="item.isActive == 1" class='btn text-success btn-sm btn-edit-user' data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#editAdminModal" (click)="getEditData(item.id,item.randomEncString)">
                                 <i class='fas fa-edit me-1'></i></button>

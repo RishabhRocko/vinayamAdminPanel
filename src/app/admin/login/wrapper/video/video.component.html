@@ -14,29 +14,27 @@
   </div>
       <div class="row">
           <div class="col-lg-12 d-flex">
-              <div class="card flex-fill">
-                <table class="table table-hover my-0">
+              <div class="card flex-fill" style="overflow: scroll;">
+                <table class="table table-hover my-0 table-responsive">
                   <thead>
                       <tr>
-                          <th class="d-none d-md-table-cell">Sr No</th>
-                          <th class="d-none d-md-table-cell">Video Tag ID</th>
-                          <th class="d-none d-md-table-cell">Video Text</th>
-                          <th class="d-none d-md-table-cell">Video</th>
-                          <th class="d-none d-md-table-cell">Alt Video</th>
-                          <th class="d-none d-md-table-cell">Video Status</th>
-                          <th class="d-none d-md-table-cell">Action</th>
+                          <th class="d-md-table-cell">Video Text</th>
+                          <th class="d-md-table-cell">Video Tag ID</th>
+                          <th class="d-md-table-cell">Video</th>
+                          <th class="d-md-table-cell">Alt Video</th>
+                          <th class="d-md-table-cell">Video Status</th>
+                          <th class="d-md-table-cell">Action</th>
                       </tr>
                   </thead>
                   <tbody>
                       <tr *ngFor = "let item of landData  | paginate: { itemsPerPage: 10, currentPage: page }">
-                        <td class="d-none d-md-table-cell">{{item.id}}</td>
-                        <td class="d-none d-md-table-cell">{{item.videoTagId}}</td>
-                        <td class="d-none d-md-table-cell">{{item.videoText}}</td>
-                        <td class="d-none d-md-table-cell"><video src="{{item.videoUrl}}" alt="" width="200px"></video></td>
-                        <td class="d-none d-md-table-cell"><video src="{{item.altVideo}}" alt="" width="200px"></video></td>
+                        <td class="d-md-table-cell">{{item.videoText}}</td>
+                        <td class="d-md-table-cell">{{item.videoTagId}}</td>
+                        <td class="d-md-table-cell"><video src="{{item.videoUrl}}" alt="" width="125px"></video></td>
+                        <td class="d-md-table-cell"><video src="{{item.altVideo}}" alt="" width="125px"></video></td>
 
-                        <td class="d-none d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
-                        <td class="d-none d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-danger">Inactive</span></td>
+                        <td class="d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
+                        <td class="d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-danger">Inactive</span></td>
 
                         <td>
                           <button *ngIf="item.isActive == 1" class='btn text-success btn-sm btn-edit-user' data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#editModal" (click)="getEditData(item.id)">

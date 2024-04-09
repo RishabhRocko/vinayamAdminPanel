@@ -469,49 +469,64 @@
         <div class="col-lg-7 align-self-center">
           <div class="row">
             <div class="col-lg-12">
-              <form id="contact" action="" method="post">
+              <form  id="contact" [formGroup]="sendMessageForm" (ngSubmit)="onSubmitMessageForm()">
                 <div class="row">
-                  <div class="col-lg-12">
+                  <div class="col-lg-12" *ngIf="messageSent == 0" >
                     <h2>Let's get in touch</h2>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6" *ngIf="messageSent == 0" >
                     <fieldset>
-                      <input name="name" type="text" id="name" placeholder="YOURNAME...*" required="">
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.name.touched && sendMessageForm.controls.name.errors?.['required']">Name is required</p>
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.name.errors?.['pattern']">Invalid Name</p>
+                      <input type="text" id="name" placeholder="Enter Name" class="form-control" formControlName="name">
                     </fieldset>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6" *ngIf="messageSent == 0" >
                     <fieldset>
-                    <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="YOUR EMAIL..." required="">
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.phone.touched && sendMessageForm.controls.phone.errors?.['required']">Phone is required</p>
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.phone.errors?.['pattern']">Invalid Phone</p>
+                    <input type="text" id="phone"  placeholder="Enter Phone" class="form-control" formControlName="phone">
                   </fieldset>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6" *ngIf="messageSent == 0" >
                     <fieldset>
-                      <input name="subject" type="text" id="subject" placeholder="SUBJECT...*" required="">
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.class.touched && sendMessageForm.controls.class.errors?.['required']">Class is required</p>
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.class.errors?.['pattern']">Invalid Class</p>
+                      <input type="text" id="class" placeholder="Enter Class" class="form-control" formControlName="class">
                     </fieldset>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6" *ngIf="messageSent == 0" >
                     <fieldset>
-                      <input name="subject" type="text" id="subject" placeholder="SUBJECT...*" required="">
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.subject.touched && sendMessageForm.controls.subject.errors?.['required']">Subject is required</p>
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.subject.errors?.['pattern']">Invalid Subject</p>
+                      <input type="text" id="subject" placeholder="Enter Subject" class="form-control" formControlName="subject">
                     </fieldset>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-12" *ngIf="messageSent == 0" >
                     <fieldset>
-                      <input name="subject" type="text" id="subject" placeholder="SUBJECT...*" required="">
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.email.touched && sendMessageForm.controls.email.errors?.['required']">Email is required</p>
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.email.errors?.['pattern']">Invalid Email</p>
+                      <input type="email" id="email" placeholder="Enter Email" class="form-control" formControlName="email">
                     </fieldset>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-12" *ngIf="messageSent == 0" >
                     <fieldset>
-                      <input name="subject" type="text" id="subject" placeholder="SUBJECT...*" required="">
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.message.touched && sendMessageForm.controls.message.errors?.['required']">Message is required</p>
+                      <p class="text-danger" *ngIf="sendMessageForm.controls.message.errors?.['pattern']">Invalid Message</p>
+                      <textarea type="text" id="message" placeholder="Enter Message" class="form-control" formControlName="message"></textarea>
                     </fieldset>
                   </div>
-                  <div class="col-lg-12">
+                  <div class="col-lg-12" *ngIf="messageSent == 0" >
                     <fieldset>
-                      <textarea name="message" type="text" class="form-control" id="message" placeholder="YOUR MESSAGE..." required=""></textarea>
+                      <button type="submit" class="button" [disabled]="!sendMessageForm.valid">SEND MESSAGE NOW</button>
                     </fieldset>
                   </div>
-                  <div class="col-lg-12">
+                  <div class="col-lg-12" *ngIf="messageSent == 1" >
+                    <h2 class="text-success">{{sentMessage}}</h2>
+                  </div>
+                  <div class="col-lg-12" *ngIf="messageSent == 1">
                     <fieldset>
-                      <button type="submit" id="form-submit" class="button">SEND MESSAGE NOW</button>
+                      <button class="button" (click)="sentMessageAgain()">SEND MESSAGE Again</button>
                     </fieldset>
                   </div>
                 </div>
@@ -525,27 +540,31 @@
               <li>
                 <h6>Phone</h6>
                 <span *ngFor = "let item of contactData">
-                  <a href="tel:{{item.phone}}">{{item.phone}}</a>
+                  <a href="tel:{{item.phone}}"><p style="color:#3CF;font-size:15px;">{{item.phone}}</p></a>
                 </span>
               </li>
+              <br>
               <li>
                 <h6>Email</h6>
                 <span *ngFor = "let item of emailData">
-                  <a href = "mailto:{{item.email}}">{{item.email}}</a>
+                  <a href = "mailto:{{item.email}}"><p style="color:#3CF;font-size:15px;">{{item.email}}</p></a>
                 </span>
               </li>
+              <br>
               <li>
                 <h6>Address</h6>
                 <span *ngFor = "let item of addressData">
-                  <a href="{{item.coordinate}}" target="_blank" >{{item.text}}</a>
+                  <a href="{{item.coordinate}}" target="_blank"><p style="color:#3CF;font-size:15px;">{{item.text}}</p></a>
                 </span>
               </li>
+              <br>
               <li>
                 <h6>Social</h6>
                 <span>
                   <a *ngFor = "let item of socialData" href="{{item.social}}" target="_blank"><i class="{{item.type}}" style="font-size: 30px;margin:10px"></i></a>
                 </span>
               </li>
+              <br>
             </ul>
           </div>
         </div>
