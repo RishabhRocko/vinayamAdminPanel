@@ -1,98 +1,202 @@
 <div class="wrapper">
-  <app-sidebar></app-sidebar>
-  <div class="main">
+  <app-sidebar style="opacity: 1;transition: opacity 1s ease;{{sideBarToggleVar == false ? 'opacity: 0' : 'opacity: 1'}}"></app-sidebar>
+  <div class="main" style="{{sideBarToggleVar == false ? 'margin-left:0px' : ''}}">
+    <a class="sidebarToggleMain" (click)="sideBarToggleEvent($event)">
+      <img class="hamburgerToggle" src="../../../../assets/img/icons/hamburger.jpeg">
+    </a>
     <app-navbar></app-navbar>
-<main class="content">
-  <div class="container-fluid p-0">
-    <div class="row">
-      <div class="col-md-6">
-      <h1 class="h3 mb-3"><strong>Vinayam</strong> Admins</h1>
-    </div>
-    <div *ngIf="page == 1" class="col-md-6 text-right">
-      <input  id="adminSearch" class="rounded" type="text" [(ngModel)]="adminSearchBar" placeholder="  Enter to search" (keyup)="onSearchKeyUp($event)">
-    </div>
-  </div>
-      <div class="row">
-          <div class="col-lg-12 d-flex">
-              <div class="card flex-fill" style="overflow: scroll;">
-                  <table class="table table-hover my-0 table-responsive">
-                      <thead>
-                          <tr>
-                              <th class="d-md-table-cell">Admin Name</th>
-                              <th class="d-md-table-cell">Admin Role</th>
-                              <th class="d-md-table-cell">Admin Image</th>
-                              <th class="d-md-table-cell">Bar Code</th>
-                              <th class="d-md-table-cell">Email Id</th>
-                              <th class="d-md-table-cell">Role Status</th>
-                              <th class="d-md-table-cell">Admin Status</th>
-                              <th class="d-md-table-cell">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr *ngFor = "let item of landData | paginate: { itemsPerPage: 10, currentPage: page }">
-                            <td class="d-md-table-cell">{{item.adminName}}</td>
-
-                            <td class="d-md-table-cell" *ngIf="item.adminRole == 1">Super Admin</td>
-                            <td class="d-md-table-cell" *ngIf="item.adminRole != 1">Admin</td>
-
-                            <td class="d-md-table-cell"><img src="{{item.adminImage}}" alt="" width="60px"></td>
-                            <td class="d-md-table-cell">{{item.barCode}}</td>
-                            <td class="d-md-table-cell">{{item.emailId}}</td>
-
-                            <td class="d-md-table-cell" *ngIf="item.roleStatus == 1"><span class="badge bg-success">Active</span></td>
-                            <td class="d-md-table-cell" *ngIf="item.roleStatus != 1"><span class="badge bg-danger">Inactive</span></td>
-
-                            <td class="d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
-                            <td class="d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-danger">Inactive</span></td>
-
-                            <td> <button *ngIf="item.isActive == 1" class='btn text-success btn-sm btn-edit-user' data-type='edit' data-type='edit' data-bs-toggle="modal" data-bs-target="#editAdminModal" (click)="getEditData(item.id,item.randomEncString)">
-                                <i class='fas fa-edit me-1'></i></button>
-                              <button *ngIf="item.isActive == 1" class='btn text-danger btn-sm btn-del-user' data-type='delete' data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="getDeleteData(item.id,item.randomEncString)" >
-                                <i class='fas fa-trash-alt me-1'></i></button>
-                                <button *ngIf="item.isActive != 1" class='btn text-success btn-sm btn-plus-user' data-type='activate' data-bs-toggle="modal" data-bs-target="#activateModal" (click)="getDeleteData(item.id,item.randomEncString)" >
-                                <i class='fa fa-plus me-1'></i></button>
-                            </td>
-                          </tr>
-                        </tbody>
-                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
-                  </table>
-              </div>
+    <main class="content">
+      <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 class="h3 mb-3"><strong>Vinayam</strong> Admins</h1>
           </div>
-      </div>
+          <div *ngIf="page == 1" class="col-md-6 text-right">
+            <input
+              id="adminSearch"
+              class="rounded"
+              type="text"
+              [(ngModel)]="adminSearchBar"
+              placeholder="  Enter to search"
+              (keyup)="onSearchKeyUp($event)"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 d-flex">
+            <div class="card flex-fill" style="overflow: scroll">
+              <table class="table table-hover my-0 table-responsive">
+                <thead>
+                  <tr>
+                    <th class="d-md-table-cell">Admin Name</th>
+                    <th class="d-md-table-cell">Admin Role</th>
+                    <th class="d-md-table-cell">Admin Image</th>
+                    <th class="d-md-table-cell">Bar Code</th>
+                    <th class="d-md-table-cell">Email Id</th>
+                    <th class="d-md-table-cell">Role Status</th>
+                    <th class="d-md-table-cell">Admin Status</th>
+                    <th class="d-md-table-cell">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of landData
+                        | paginate : { itemsPerPage: 10, currentPage: page }
+                    "
+                  >
+                    <td class="d-md-table-cell">{{ item.adminName }}</td>
 
+                    <td class="d-md-table-cell" *ngIf="item.adminRole == 1">
+                      Super Admin
+                    </td>
+                    <td class="d-md-table-cell" *ngIf="item.adminRole != 1">
+                      Admin
+                    </td>
+
+                    <td class="d-md-table-cell">
+                      <img src="{{ item.adminImage }}" alt="" width="60px" />
+                    </td>
+                    <td class="d-md-table-cell">{{ item.barCode }}</td>
+                    <td class="d-md-table-cell">{{ item.emailId }}</td>
+
+                    <td class="d-md-table-cell" *ngIf="item.roleStatus == 1">
+                      <span class="badge bg-success">Active</span>
+                    </td>
+                    <td class="d-md-table-cell" *ngIf="item.roleStatus != 1">
+                      <span class="badge bg-danger">Inactive</span>
+                    </td>
+
+                    <td class="d-md-table-cell" *ngIf="item.isActive == 1">
+                      <span class="badge bg-success">Active</span>
+                    </td>
+                    <td class="d-md-table-cell" *ngIf="item.isActive != 1">
+                      <span class="badge bg-danger">Inactive</span>
+                    </td>
+
+                    <td>
+                      <button
+                        *ngIf="item.isActive == 1"
+                        class="btn text-success btn-sm btn-edit-user"
+                        data-type="edit"
+                        data-type="edit"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editAdminModal"
+                        (click)="getEditData(item.id, item.randomEncString)"
+                      >
+                        <i class="fas fa-edit me-1"></i>
+                      </button>
+                      <button
+                        *ngIf="item.isActive == 1"
+                        class="btn text-danger btn-sm btn-del-user"
+                        data-type="delete"
+                        data-bs-toggle="modal"
+                        data-bs-target="#deleteModal"
+                        (click)="getDeleteData(item.id, item.randomEncString)"
+                      >
+                        <i class="fas fa-trash-alt me-1"></i>
+                      </button>
+                      <button
+                        *ngIf="item.isActive != 1"
+                        class="btn text-success btn-sm btn-plus-user"
+                        data-type="activate"
+                        data-bs-toggle="modal"
+                        data-bs-target="#activateModal"
+                        (click)="getDeleteData(item.id, item.randomEncString)"
+                      >
+                        <i class="fa fa-plus me-1"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <pagination-controls
+                  (pageChange)="page = $event"
+                ></pagination-controls>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
-</main>
-</div>
 </div>
 <app-footer></app-footer>
 
 <!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body text-center">
-        <img src="../../../../../assets/img/icons/cross.png" alt="img" width="30px" class="mb-3">
+        <img
+          src="../../../../../assets/img/icons/cross.png"
+          alt="img"
+          width="30px"
+          class="mb-3"
+        />
         <h5 class="text-dark">Are you sure you want to delete ?</h5>
       </div>
       <div class="modal-footer justify-content-around">
-        <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger p-2" (click)="deleteAdmin(true)" data-bs-dismiss="modal">Delete</button>
+        <button
+          type="button"
+          class="btn btn-secondary p-2"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger p-2"
+          (click)="deleteAdmin(true)"
+          data-bs-dismiss="modal"
+        >
+          Delete
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Activate Modal -->
-<div class="modal fade" id="activateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="activateModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body text-center">
-        <img src="../../../../../assets/img/icons/cross.png" alt="img" width="30px" class="mb-3">
+        <img
+          src="../../../../../assets/img/icons/cross.png"
+          alt="img"
+          width="30px"
+          class="mb-3"
+        />
         <h5 class="text-dark">Are you sure you want to Activate ?</h5>
       </div>
       <div class="modal-footer justify-content-around">
-        <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-success p-2" (click)="deleteAdmin(true)" data-bs-dismiss="modal">Activate</button>
+        <button
+          type="button"
+          class="btn btn-secondary p-2"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-success p-2"
+          (click)="deleteAdmin(true)"
+          data-bs-dismiss="modal"
+        >
+          Activate
+        </button>
       </div>
     </div>
   </div>
@@ -100,88 +204,193 @@
 
 <!--edit admin modal-->
 
-
-<div class="modal fade" id="editAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="editAdminModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Edit Admin</h4>
-        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          data-bs-dismiss="modal"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body text-center">
-      <form [formGroup]="editAdminForm" (ngSubmit)="onSubmitEditAdmin()">
-        <div class="form-group">
-          <input type="hidden" id="adminId" class="form-control" formControlName='adminId'>
+        <form [formGroup]="editAdminForm" (ngSubmit)="onSubmitEditAdmin()">
+          <div class="form-group">
+            <input
+              type="hidden"
+              id="adminId"
+              class="form-control"
+              formControlName="adminId"
+            />
 
-          <div class="col-md-12">
-          <label class="fw-bold" for="Name">Admin Name</label>
-          <div class="input-group">
-            <input  id="userName" type="text" class="form-control" formControlName="userName" >
-          </div>
-          <span class="text-danger" *ngIf="editAdminForm.controls.userName.touched && editAdminForm.controls.userName.errors?.['required']">Admin Name is required</span>
-          <span class="text-danger" *ngIf="editAdminForm.controls.userName.errors?.['pattern']">Invalid Admin Name</span>
-          </div>
+            <div class="col-md-12">
+              <label class="fw-bold" for="Name">Admin Name</label>
+              <div class="input-group">
+                <input
+                  id="userName"
+                  type="text"
+                  class="form-control"
+                  formControlName="userName"
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.userName.touched && editAdminForm.controls.userName.errors?.['required']"
+                >Admin Name is required</span
+              >
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.userName.errors?.['pattern']"
+                >Invalid Admin Name</span
+              >
+            </div>
 
-          <div class="col-md-12">
-          <label class="fw-bold" for="Email">Admin Email</label>
-            <div class="input-group">
-            <input  id="emailId" type="email" class="form-control"  formControlName="emailId">
-          </div>
-          <span class="text-danger" *ngIf="editAdminForm.controls.emailId.touched && editAdminForm.controls.emailId.errors?.['required']">Email Id is required</span>
-          <span class="text-danger" *ngIf="editAdminForm.controls.emailId.errors?.['pattern']">Invalid Email Id</span>
-          </div>
+            <div class="col-md-12">
+              <label class="fw-bold" for="Email">Admin Email</label>
+              <div class="input-group">
+                <input
+                  id="emailId"
+                  type="email"
+                  class="form-control"
+                  formControlName="emailId"
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.emailId.touched && editAdminForm.controls.emailId.errors?.['required']"
+                >Email Id is required</span
+              >
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.emailId.errors?.['pattern']"
+                >Invalid Email Id</span
+              >
+            </div>
 
-          <div class="col-md-12">
-          <label class="fw-bold"for="Role">Admin Role</label>
-            <div class="input-group">
-            <select id="adminRole" class="form-select" formControlName="adminRole">
-              <option value="1" >Super Admin</option>
-              <option value="2" >Admin</option>
-            </select>
-          </div>
-          <span class="text-danger" *ngIf="editAdminForm.controls.adminRole.touched && editAdminForm.controls.adminRole.errors?.['required']">Admin Role is required</span>
-          <span class="text-danger" *ngIf="editAdminForm.controls.adminRole.errors?.['pattern']">Invalid Admin Role</span>
-          </div>
+            <div class="col-md-12">
+              <label class="fw-bold" for="Role">Admin Role</label>
+              <div class="input-group">
+                <select
+                  id="adminRole"
+                  class="form-select"
+                  formControlName="adminRole"
+                >
+                  <option value="1">Super Admin</option>
+                  <option value="2">Admin</option>
+                </select>
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.adminRole.touched && editAdminForm.controls.adminRole.errors?.['required']"
+                >Admin Role is required</span
+              >
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.adminRole.errors?.['pattern']"
+                >Invalid Admin Role</span
+              >
+            </div>
 
-          <div class="col-md-12">
-          <label class="fw-bold"for="Profile Picture" > Profile Picture</label>
-            <div class="input-group">
-              <input id="adminImage" class="form-control" type="file" formControlName="adminImage"
-              (change)="onFileChange($event)" multiple >
-          </div>
-          <span class="text-danger" *ngIf="editAdminForm.controls.adminImage.touched && editAdminForm.controls.adminImage.errors?.['required']">Admin Image is required</span>
-          <span class="text-danger" *ngIf="invalidAdminImage == 1">Admin Image must be image file and size must be less than 200 kb</span>
-        </div>
+            <div class="col-md-12">
+              <label class="fw-bold" for="Profile Picture">
+                Profile Picture</label
+              >
+              <div class="input-group">
+                <input
+                  id="adminImage"
+                  class="form-control"
+                  type="file"
+                  formControlName="adminImage"
+                  (change)="onFileChange($event)"
+                  multiple
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.adminImage.touched && editAdminForm.controls.adminImage.errors?.['required']"
+                >Admin Image is required</span
+              >
+              <span class="text-danger" *ngIf="invalidAdminImage == 1"
+                >Admin Image must be image file and size must be less than 200
+                kb</span
+              >
+            </div>
 
-          <div class="col-md-12">
-          <label class="fw-bold"for="Password"> Password</label>
-            <div class="input-group">
-            <input id="password"  type="password" class="form-control" formControlName="password">
-          </div>
-          <span class="text-danger" *ngIf="editAdminForm.controls.password.touched && editAdminForm.controls.password.errors?.['required']">Password is required</span>
-          <span class="text-danger" *ngIf="editAdminForm.controls.password.errors?.['pattern']">Invalid Password</span>
-          </div>
+            <div class="col-md-12">
+              <label class="fw-bold" for="Password"> Password</label>
+              <div class="input-group">
+                <input
+                  id="password"
+                  type="password"
+                  class="form-control"
+                  formControlName="password"
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.password.touched && editAdminForm.controls.password.errors?.['required']"
+                >Password is required</span
+              >
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.password.errors?.['pattern']"
+                >Invalid Password</span
+              >
+            </div>
 
-          <div class="col-md-12">
-          <label class="fw-bold"for="Confirm Password">Confirm Password</label>
-            <div class="input-group">
-            <input id="confirmPassword" type="password" class="form-control" formControlName="confirmPassword">
+            <div class="col-md-12">
+              <label class="fw-bold" for="Confirm Password"
+                >Confirm Password</label
+              >
+              <div class="input-group">
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  class="form-control"
+                  formControlName="confirmPassword"
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.confirmPassword.touched && editAdminForm.controls.confirmPassword.errors?.['required']"
+                >Confirm Password is required</span
+              >
+              <span
+                class="text-danger"
+                *ngIf="editAdminForm.controls.confirmPassword.errors?.['pattern']"
+                >Invalid Confirm Password</span
+              >
+            </div>
           </div>
-          <span class="text-danger" *ngIf="editAdminForm.controls.confirmPassword.touched && editAdminForm.controls.confirmPassword.errors?.['required']">Confirm Password is required</span>
-          <span class="text-danger" *ngIf="editAdminForm.controls.confirmPassword.errors?.['pattern']">Invalid Confirm Password</span>
+          <div class="modal-footer justify-content-around">
+            <button
+              type="button"
+              class="btn btn-secondary p-2"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="btn btn-success p-2"
+              [disabled]="!editAdminForm.valid || invalidAdminImage == 1"
+            >
+              Save
+            </button>
           </div>
-
-        </div>
-        <div class="modal-footer justify-content-around">
-          <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-success p-2" [disabled]="!editAdminForm.valid  || invalidAdminImage == 1">Save</button>
+        </form>
       </div>
-
-    </form>
-  </div>
-  </div>
+    </div>
   </div>
 </div>
-

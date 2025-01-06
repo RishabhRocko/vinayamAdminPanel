@@ -22,7 +22,7 @@ export class VideoComponent {
   user:any;
   videoSearchBar: any;
   page:any = 1;
-
+  sideBarToggleVar:boolean = true;
   constructor(private VideoService:VideoService,private toastr: ToastrService){}
 
   ngOnInit(): void {
@@ -182,5 +182,9 @@ export class VideoComponent {
         this.landData = response.data;
       }
     });
+  }
+  sideBarToggleEvent(event:any)
+  {
+    this.sideBarToggleVar = !this.sideBarToggleVar;
   }
 }

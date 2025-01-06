@@ -63,6 +63,8 @@ export class ForgotPasswordComponent {
           this.toastr.error(response.message ? response.message : 'Error', 'Error', {
             positionClass: 'errorMessageClass'
         });
+        this.otpSend = 0;
+        this.submitOtpForm.reset();
         }
       });
     }else{

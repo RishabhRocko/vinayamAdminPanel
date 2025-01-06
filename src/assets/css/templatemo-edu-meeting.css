@@ -442,6 +442,36 @@ header
   display: none;
 }
 
+
+.header-area .main-nav .after-trigger {
+  cursor: pointer;
+    color: black;
+    font-size: 43px;
+    display: block;
+    position: absolute;
+    top: 17px;
+    width: 32px;
+    height: 40px;
+    z-index: 99;
+    right: 40px;
+}
+
+.header-area .main-nav .menu_selection {
+  cursor: pointer;
+    border-radius: 10px;
+    position: absolute;
+    background-color: #dfd2d2a1;
+    right: 0px;
+    font-size: 28px;
+    top: 103px;
+    padding: 20px;
+    line-height: 3.5rem;
+    font-weight:bolder;
+  }
+  .header-area .main-nav .menu_selection a{
+    color:black;
+}
+
 .background-header .main-nav .menu-trigger {
   top: 23px;
 }
@@ -569,6 +599,9 @@ header
 @media (max-width: 767px) {
   .header-area .main-nav .logo {
     color: #1e1e1e;
+    padding-top: 10px;
+    line-height: normal;
+    width: 60%;
   }
   .header-area.header-sticky .nav li a:hover,
   .header-area.header-sticky .nav li a.active {
@@ -579,7 +612,7 @@ header
     width: 100%;
   }
   .header-area {
-    background-color: #f7f7f7;
+    background-color: #dfd2d2a1;
     padding: 0px 15px;
     height: 100px;
     box-shadow: none;
@@ -884,7 +917,7 @@ upcoming meetings
 */
 
 section.upcoming-meetings {
-  background-image: url(../img/images/meetings-bg.jpg);
+  /* background-image: url(../img/images/meetings-bg.jpg); */
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -1019,7 +1052,7 @@ apply now
 */
 
 section.apply-now {
-  background-image: url(../img/images/apply-bg.jpg);
+  /* background-image: url(../img/images/apply-bg.jpg); */
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -1103,7 +1136,7 @@ courses
 */
 
 section.our-courses {
-  background-image: url(../img/images/meetings-bg.jpg);
+  /* background-image: url(../img/images/meetings-bg.jpg); */
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -1251,7 +1284,7 @@ our facts
 */
 
 section.our-facts {
-  background-image: url(../img/images/facts-bg.jpg);
+  /* background-image: url(../img/images/facts-bg.jpg); */
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -1321,7 +1354,7 @@ contact us
 */
 
 section.contact-us {
-  background-image: url(../img/images/meetings-bg.jpg);
+  /* background-image: url(../img/images/meetings-bg.jpg); */
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;

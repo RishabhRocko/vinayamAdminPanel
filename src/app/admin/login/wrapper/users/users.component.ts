@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit {
   user:any;
   studentSearchBar: any;
   page:any = 1;
-
+  sideBarToggleVar:boolean = true;
   constructor(private UsersService:UsersService,private toastr: ToastrService){}
 
   ngOnInit(): void {
@@ -185,5 +185,9 @@ export class UsersComponent implements OnInit {
         this.landData = response.data;
       }
     });
+  }
+  sideBarToggleEvent(event:any)
+  {
+    this.sideBarToggleVar = !this.sideBarToggleVar;
   }
 }

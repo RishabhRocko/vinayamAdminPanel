@@ -23,7 +23,7 @@ export class ImageComponent {
   user:any;
   imageSearchBar:any;
   page:any = 1;
-
+  sideBarToggleVar:boolean = true;
   constructor(private ImageService:ImageService,private toastr: ToastrService){}
 
   ngOnInit(): void {
@@ -185,5 +185,9 @@ export class ImageComponent {
         this.landData = response.data;
       }
     });
+  }
+  sideBarToggleEvent(event:any)
+  {
+    this.sideBarToggleVar = !this.sideBarToggleVar;
   }
 }

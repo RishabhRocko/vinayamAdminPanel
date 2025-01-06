@@ -20,6 +20,7 @@ export class WebComponent implements OnInit{
   branch2: any;
   messageSent:number = 0;
   sentMessage:any;
+  menuTriggerVar:boolean = false;
   constructor(private WebService:WebService,private router: Router,private toastr: ToastrService){}
   ngOnInit(): void {
     localStorage.removeItem("token");
@@ -72,5 +73,9 @@ export class WebComponent implements OnInit{
   }
   sentMessageAgain(){
     this.messageSent = 0;
+  }
+  menuTrigger(event:any)
+  {
+    this.menuTriggerVar = !this.menuTriggerVar;
   }
 }

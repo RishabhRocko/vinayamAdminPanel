@@ -12,14 +12,28 @@
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
                           <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                          <li class="scroll-to-section"><a href="#meetings">Students</a></li>
-                          <li class="scroll-to-section"><a href="#apply">Apply Now</a></li>
-                          <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                          <li class="scroll-to-section"><a href="#whyVinayam">Why Vinayam?</a></li>
                           <li class="scroll-to-section"><a href="#facts">Facts</a></li>
+                          <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                          <li class="scroll-to-section"><a href="#meetings">Students</a></li>
                           <li class="scroll-to-section"><a href="#contact">Contact Us</a></li>
                           <li><a (click)="onAdmin()">Admin</a></li>
-                      </ul>
-
+                        </ul>
+                        <a class='menu-trigger' *ngIf="menuTriggerVar == false" (click)="menuTrigger($event)">
+                          <span>Menu</span>
+                      </a>
+                      <a class="after-trigger" *ngIf="menuTriggerVar == true" (click)="menuTrigger($event)">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div *ngIf="menuTriggerVar == true" class="menu_selection" (click)="menuTrigger($event)">
+                    <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                          <li class="scroll-to-section"><a href="#whyVinayam">Why Vinayam?</a></li>
+                          <li class="scroll-to-section"><a href="#facts">Facts</a></li>
+                          <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                          <li class="scroll-to-section"><a href="#meetings">Students</a></li>
+                          <li class="scroll-to-section"><a href="#contact">Contact Us</a></li>
+                          <li><a href="" (click)="onAdmin()">Admin</a></li>
+                    </div>
                       <!-- ***** Menu End ***** -->
                   </nav>
               </div>
@@ -40,7 +54,7 @@
                 <div class="caption">
               <h6>Hello Students</h6>
               <h2>Welcome to Vinayam Classes</h2>
-              <p>This is a class provided by Vinayam Classes</p>
+              <p style="font-size:18px;">At Vinayam Classes, we believe that education is not just about textbooks and exams. It’s about nurturing curious minds, fostering creativity, and igniting a passion for learning. Our mission is to provide personalized, high-quality tutoring that goes beyond the classroom.</p>
               <div class="main-button-red">
                   <div class="scroll-to-section"><a href="#contact">Join Us Now!</a></div>
               </div>
@@ -52,124 +66,22 @@
   </section>
   <!-- ***** Main Banner Area End ***** -->
 
-  <section class="upcoming-meetings" id="meetings">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="section-heading">
-            <h2>Upcoming Meetings</h2>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="categories">
-            <h4>Meeting Catgories</h4>
-            <ul>
-              <li><a href="">Sed tempus enim leo</a></li>
-              <li><a href="">Aenean molestie quis</a></li>
-              <li><a href="">Cras et metus vestibulum</a></li>
-              <li><a href="">Nam et condimentum</a></li>
-              <li><a href="">Phasellus nec sapien</a></li>
-            </ul>
-            <div class="main-button-red">
-              <a href="">All Upcoming Meetings</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-8">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="meeting-item">
-                <div class="thumb">
-                  <div class="price">
-                    <span>$22.00</span>
-                  </div>
-                  <a href=""><img width="100%" src="../../../../assets/img/images/meeting-01.jpg" alt="New Lecturer Meeting"></a>
-                </div>
-                <div class="down-content">
-                  <div class="date">
-                    <h6>Nov <span>10</span></h6>
-                  </div>
-                  <a href=""><h4>New Lecturers Meeting</h4></a>
-                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="meeting-item">
-                <div class="thumb">
-                  <div class="price">
-                    <span>$36.00</span>
-                  </div>
-                  <a href=""><img width="100%" src="../../../../assets/img/images/meeting-02.jpg" alt="Online Teaching"></a>
-                </div>
-                <div class="down-content">
-                  <div class="date">
-                    <h6>Nov <span>24</span></h6>
-                  </div>
-                  <a href=""><h4>Online Teaching Techniques</h4></a>
-                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="meeting-item">
-                <div class="thumb">
-                  <div class="price">
-                    <span>$14.00</span>
-                  </div>
-                  <a href=""><img width="100%" src="../../../../assets/img/images/meeting-03.jpg" alt="Higher Education"></a>
-                </div>
-                <div class="down-content">
-                  <div class="date">
-                    <h6>Nov <span>26</span></h6>
-                  </div>
-                  <a href=""><h4>Higher Education Conference</h4></a>
-                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="meeting-item">
-                <div class="thumb">
-                  <div class="price">
-                    <span>$48.00</span>
-                  </div>
-                  <a href=""><img width="100%" src="../../../../assets/img/images/meeting-04.jpg" alt="Student Training"></a>
-                </div>
-                <div class="down-content">
-                  <div class="date">
-                    <h6>Nov <span>30</span></h6>
-                  </div>
-                  <a href=""><h4>Student Training Meetup</h4></a>
-                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="apply-now" id="apply">
+
+  <section class="apply-now" id="whyVinayam" style="background-image: url(../../../../assets/img/images/meetings-bg.jpg);">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 align-self-center">
           <div class="row">
             <div class="col-lg-12">
               <div class="item">
-                <h3>APPLY FOR BACHELOR DEGREE</h3>
-                <p>You are allowed to use this edu meeting CSS template for your school or university or business. You can feel free to modify or edit this layout.</p>
+                <h3>Why Choose Vinayam Classes?</h3>
+                <p style="font-size:18px;">1. <strong>Expert Faculty:</strong> Our experienced and dedicated teachers are committed to helping students grasp complex concepts, build strong foundations, and excel in their studies.<br><br>
+                  2. <strong>Customized Learning:</strong> We understand that every student is unique. That’s why we tailor our teaching methods to suit individual learning styles, ensuring effective understanding and retention.<br><br>
+                  3. <strong>Holistic Approach:</strong> Beyond academics, we focus on character development, critical thinking, and problem-solving skills. We want our students to thrive not only in exams but also in life.<br><br>
+                  4. <strong>Interactive Sessions:</strong> Our interactive classes encourage active participation, discussions, and collaborative learning. We create an engaging environment where questions are welcomed and curiosity is celebrated.<br><br>
+                  5. <strong>Comprehensive Curriculum:</strong> Whether it’s mathematics, science, languages, we cover it all. Our well-structured curriculum ensures comprehensive coverage of topics.<br><br></p>
                 <div class="main-button-red">
-                  <div class="scroll-to-section"><a href="#contact">Join Us Now!</a></div>
-              </div>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="item">
-                <h3>APPLY FOR BACHELOR DEGREE</h3>
-                <p>You are not allowed to redistribute the template ZIP file on any other template website. Please contact us for more information.</p>
-                <div class="main-button-yellow">
                   <div class="scroll-to-section"><a href="#contact">Join Us Now!</a></div>
               </div>
               </div>
@@ -239,7 +151,58 @@
     </div>
   </section>
 
-  <section class="our-courses" id="courses">
+  <section class="our-facts" id="facts" style="background-image: url(../../../../assets/img/images/apply-bg.jpg);">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-lg-12">
+              <h2>A Few Facts About Our Institute</h2>
+            </div>
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-12">
+                  <div class="count-area-content percentage">
+                    <div class="count-digit">100</div>
+                    <div class="count-title">Succesed Students</div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="count-area-content">
+                    <div class="count-digit">20</div>
+                    <div class="count-title">Years Expierence</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-12">
+                  <div class="count-area-content new-students">
+                    <div class="count-digit">2345</div>
+                    <div class="count-title">New Students</div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="count-area-content">
+                    <div class="count-digit">32</div>
+                    <div class="count-title">Awards</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 align-self-center">
+          <div class="video">
+            <a href="" target="_blank"><img src="../../../../assets/img/images/play-icon.png" alt=""></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="our-courses" id="courses" style="background-image: url(../../../../assets/img/images/meetings-bg.jpg);">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -412,58 +375,109 @@
     </div>
   </section>
 
-  <section class="our-facts" id="facts">
+
+  <section class="upcoming-meetings" id="meetings" style="background-image: url(../../../../assets/img/images/facts-bg.jpg);">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6">
-          <div class="row">
-            <div class="col-lg-12">
-              <h2>A Few Facts About Our University</h2>
-            </div>
-            <div class="col-lg-6">
-              <div class="row">
-                <div class="col-12">
-                  <div class="count-area-content percentage">
-                    <div class="count-digit">94</div>
-                    <div class="count-title">Succesed Students</div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="count-area-content">
-                    <div class="count-digit">126</div>
-                    <div class="count-title">Current Teachers</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="row">
-                <div class="col-12">
-                  <div class="count-area-content new-students">
-                    <div class="count-digit">2345</div>
-                    <div class="count-title">New Students</div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="count-area-content">
-                    <div class="count-digit">32</div>
-                    <div class="count-title">Awards</div>
-                  </div>
-                </div>
-              </div>
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <h2>Upcoming Meetings</h2>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="categories">
+            <h4>Meeting Catgories</h4>
+            <ul>
+              <li><a href="">Sed tempus enim leo</a></li>
+              <li><a href="">Aenean molestie quis</a></li>
+              <li><a href="">Cras et metus vestibulum</a></li>
+              <li><a href="">Nam et condimentum</a></li>
+              <li><a href="">Phasellus nec sapien</a></li>
+            </ul>
+            <div class="main-button-red">
+              <a href="">All Upcoming Meetings</a>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 align-self-center">
-          <div class="video">
-            <a href="" target="_blank"><img src="../../../../assets/img/images/play-icon.png" alt=""></a>
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="meeting-item">
+                <div class="thumb">
+                  <div class="price">
+                    <span>$22.00</span>
+                  </div>
+                  <a href=""><img width="100%" src="../../../../assets/img/images/meeting-01.jpg" alt="New Lecturer Meeting"></a>
+                </div>
+                <div class="down-content">
+                  <div class="date">
+                    <h6>Nov <span>10</span></h6>
+                  </div>
+                  <a href=""><h4>New Lecturers Meeting</h4></a>
+                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="meeting-item">
+                <div class="thumb">
+                  <div class="price">
+                    <span>$36.00</span>
+                  </div>
+                  <a href=""><img width="100%" src="../../../../assets/img/images/meeting-02.jpg" alt="Online Teaching"></a>
+                </div>
+                <div class="down-content">
+                  <div class="date">
+                    <h6>Nov <span>24</span></h6>
+                  </div>
+                  <a href=""><h4>Online Teaching Techniques</h4></a>
+                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="meeting-item">
+                <div class="thumb">
+                  <div class="price">
+                    <span>$14.00</span>
+                  </div>
+                  <a href=""><img width="100%" src="../../../../assets/img/images/meeting-03.jpg" alt="Higher Education"></a>
+                </div>
+                <div class="down-content">
+                  <div class="date">
+                    <h6>Nov <span>26</span></h6>
+                  </div>
+                  <a href=""><h4>Higher Education Conference</h4></a>
+                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="meeting-item">
+                <div class="thumb">
+                  <div class="price">
+                    <span>$48.00</span>
+                  </div>
+                  <a href=""><img width="100%" src="../../../../assets/img/images/meeting-04.jpg" alt="Student Training"></a>
+                </div>
+                <div class="down-content">
+                  <div class="date">
+                    <h6>Nov <span>30</span></h6>
+                  </div>
+                  <a href=""><h4>Student Training Meetup</h4></a>
+                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="contact-us" id="contact">
+
+
+  <section class="contact-us" id="contact" style="background-image: url(../../../../assets/img/images/meetings-bg.jpg);">
     <div class="container">
       <div class="row">
         <div class="col-lg-7 align-self-center">

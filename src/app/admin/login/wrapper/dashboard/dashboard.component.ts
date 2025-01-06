@@ -22,6 +22,7 @@ export class DashWrapperComponent implements OnInit {
   invalidAdminImage : number = 0;
   adminSearchBar:any;
   page:any = 1;
+  sideBarToggleVar:boolean = true;
 
   constructor(private DashboardService:DashboardService,private toastr: ToastrService){}
   ngOnInit(): void {
@@ -179,5 +180,9 @@ export class DashWrapperComponent implements OnInit {
         this.landData = response.data;
       }
     });
+  }
+  sideBarToggleEvent(event:any)
+  {
+    this.sideBarToggleVar = !this.sideBarToggleVar;
   }
 }
