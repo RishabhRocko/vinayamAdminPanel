@@ -7,6 +7,83 @@
     <app-navbar></app-navbar>
     <main class="content">
       <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 class="h3 mb-3"><strong>Vinayam</strong> Admins</h1>
+          </div>
+          <div *ngIf="page == 1" class="col-md-6 text-right">
+            <input
+              id="courseSearch"
+              class="rounded"
+              type="text"
+              [(ngModel)]="courseSearchBar"
+              placeholder="  Enter to search"
+              (keyup)="onSearchKeyUp($event)"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 d-flex">
+            <div class="card flex-fill" style="overflow: scroll">
+              <table class="table table-hover my-0 table-responsive">
+                <thead>
+                  <tr>
+                    <th class="d-md-table-cell">Course Name</th>
+                    <th class="d-md-table-cell">Course Description</th>
+                    <th class="d-md-table-cell">Course Image</th>
+                    <th class="d-md-table-cell">Course Duration</th>
+                    <th class="d-md-table-cell">Course Level</th>
+                    <th class="d-md-table-cell">Course Instructor</th>
+                    <th class="d-md-table-cell">Course Price</th>
+                    <th class="d-md-table-cell">Course Category</th>
+                    <th class="d-md-table-cell">Course Start Date</th>
+                    <th class="d-md-table-cell">Course End Date</th>
+                    <th class="d-md-table-cell">Course Status</th>
+                    <th class="d-md-table-cell">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of landData
+                        | paginate : { itemsPerPage: 10, currentPage: page }
+                    "
+                  >
+                    <td class="d-md-table-cell">{{ item.courseName }}</td>
+                    <td class="d-md-table-cell">{{ item.courseDescription }}</td>
+
+                    <td class="d-md-table-cell">
+                      <img src="{{ item.courseImage }}" alt="" width="60px" />
+                    </td>
+                    <td class="d-md-table-cell">{{ item.courseDuration }}</td>
+                    <td class="d-md-table-cell">{{ item.courseLevel }}</td>
+                    <td class="d-md-table-cell">{{ item.courseInstructor }}</td>
+                    <td class="d-md-table-cell">{{ item.coursePrice }}</td>
+                    <td class="d-md-table-cell">{{ item.courseCategory }}</td>
+                    <td class="d-md-table-cell">{{ item.courseStartDate }}</td>
+                    <td class="d-md-table-cell">{{ item.courseEndDate }}</td>
+
+
+
+                    <td class="d-md-table-cell" *ngIf="item.isActive == 1">
+                      <span class="badge bg-success">Active</span>
+                    </td>
+                    <td class="d-md-table-cell" *ngIf="item.isActive != 1">
+                      <span class="badge bg-danger">Inactive</span>
+                    </td>
+
+                    <td>
+
+                    </td>
+                  </tr>
+                </tbody>
+                <pagination-controls
+                  (pageChange)="page = $event"
+                ></pagination-controls>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
