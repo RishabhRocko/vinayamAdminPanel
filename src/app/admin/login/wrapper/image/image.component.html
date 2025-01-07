@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <app-sidebar style="opacity: 1;transition: opacity 1s ease;{{sideBarToggleVar == false ? 'opacity: 0' : 'opacity: 1'}}"></app-sidebar>
+  <app-sidebar style="{{sideBarToggleVar == false ? 'opacity: 0;display: none;' : ''}}"></app-sidebar>
   <div class="main" style="{{sideBarToggleVar == false ? 'margin-left:0px' : ''}}">
     <a class="sidebarToggleMain" (click)="sideBarToggleEvent($event)">
       <img class="hamburgerToggle" src="../../../../assets/img/icons/hamburger.jpeg">

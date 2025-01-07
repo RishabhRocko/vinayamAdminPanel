@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <app-sidebar style="{{sideBarToggleVar == false ? 'opacity: 0;display: none;' : ''}}"></app-sidebar>
+  <div class="main" style="{{sideBarToggleVar == false ? 'margin-left:0px' : ''}}">
+    <a class="sidebarToggleMain" (click)="sideBarToggleEvent($event)">
+      <img class="hamburgerToggle" src="../../../../assets/img/icons/hamburger.jpeg">
+    </a>
+    <app-navbar></app-navbar>
+    <main class="content">
+      <div class="container-fluid p-0">
+      </div>
+    </main>
+  </div>
+</div>
+<app-footer></app-footer>
