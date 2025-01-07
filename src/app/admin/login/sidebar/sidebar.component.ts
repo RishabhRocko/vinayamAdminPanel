@@ -22,6 +22,18 @@ export class SidebarComponent {
       case '/admin/video':
         this.PageActive = 'video';
           break;
+      case '/admin/course':
+        this.PageActive = 'course';
+          break;
+      case '/admin/fee':
+        this.PageActive = 'fee';
+          break;
+      case '/admin/test':
+        this.PageActive = 'test';
+          break;
+      case '/admin/score':
+        this.PageActive = 'score';
+          break;
       default:
           break;
     }

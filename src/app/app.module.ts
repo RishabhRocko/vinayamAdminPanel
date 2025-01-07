@@ -21,6 +21,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule , NgxUiLoaderHttpModule  } from "ngx-ui-loader";
 import { WebComponent } from './web/web.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CourseComponent } from './admin/login/wrapper/course/course.component';
+import { FeeComponent } from './admin/login/wrapper/fee/fee.component';
+import { TestComponent } from './admin/login/wrapper/test/test.component';
+import { ScoreComponent } from './admin/login/wrapper/score/score.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     UsersComponent,
     routingComponents,
     WebComponent,
+    CourseComponent,
+    FeeComponent,
+    TestComponent,
+    ScoreComponent,
   ],
   imports: [
     BrowserModule,
