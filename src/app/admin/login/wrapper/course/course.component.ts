@@ -25,7 +25,6 @@ export class CourseComponent implements OnInit {
       if(response.status == true)
       {
         this.landData = response.data;
-        console.log(this.landData);
       }else{
         this.toastr.error(response.message ? response.message : 'Error', 'Error', {
           positionClass: 'errorMessageClass'
@@ -42,7 +41,6 @@ export class CourseComponent implements OnInit {
         if(response.status == true)
         {
           this.landData = response.data;
-          console.log(this.landData);
         }
       });
     }
