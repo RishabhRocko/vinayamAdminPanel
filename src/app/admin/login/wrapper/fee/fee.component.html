@@ -7,8 +7,240 @@
     <app-navbar></app-navbar>
     <main class="content">
       <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col-md-6">
+          <h1 class="h3 mb-3"><strong>Vinayam</strong> Fees</h1>
+        </div>
+        <div *ngIf="page == 1" class="col-md-6 text-right">
+          <input  id="feesSearch" class="rounded" type="text" [(ngModel)]="feesSearchBar" placeholder="  Enter to search" (keyup)="onSearchKeyUp($event)">
+          <button class='btn text-success' data-type='add' data-bs-toggle="modal" data-bs-target="#addFeesModal">
+            <i class='fas fa-plus me-1'></i>Add Fees</button>
+        </div>
+          <div class="row">
+              <div class="col-lg-12 d-flex">
+                  <div class="card flex-fill" style="overflow: scroll;">
+                      <table class="table table-hover my-0 table-responsive">
+                        <thead>
+                          <tr>
+                              <th class="d-md-table-cell">Student Name</th>
+                              <th class="d-md-table-cell">Course Name</th>
+                              <th class="d-md-table-cell">Fee Amount</th>
+                              <th class="d-md-table-cell">Month Due</th>
+                              <th class="d-md-table-cell">Date</th>
+                              <th class="d-md-table-cell">Status</th>
+                              <th class="d-md-table-cell">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor = "let item of landData  | paginate: { itemsPerPage: 10, currentPage: page }">
+                            <td class="d-md-table-cell">{{item.studentName}}</td>
+                            <td class="d-md-table-cell">{{item.courseName}}</td>
+                            <td class="d-md-table-cell">{{item.feeAmount}}</td>
+                            <td class="d-md-table-cell" *ngIf="item.lastMonthDue == 0"><span class="badge bg-success">Paid</span></td>
+                            <td class="d-md-table-cell" *ngIf="item.lastMonthDue != 0"><span class="badge bg-danger">Unpaid</span></td>
+                            <td class="d-md-table-cell">{{item.createdAt}}</td>
+
+                            <td class="d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
+                            <td class="d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-danger">Inactive</span></td>
+
+                            <td> <button *ngIf="item.isActive == 1"  class='btn text-success btn-sm btn-edit-user' data-type='edit' data-bs-toggle="modal" data-bs-target="#editFeesModal" (click)="getEditData(item.id,item.randomEncString)">
+                                <i class='fas fa-edit me-1'></i></button>
+                              <button *ngIf="item.isActive == 1" class='btn text-danger btn-sm btn-del-user' data-type='delete' data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="getDeleteData(item.id,item.randomEncString)" >
+                              <i class='fas fa-trash-alt me-1'></i></button>
+                              <button *ngIf="item.isActive != 1" class='btn text-success btn-sm btn-plus-user' data-type='activate' data-bs-toggle="modal" data-bs-target="#activateModal" (click)="getDeleteData(item.id,item.randomEncString)" >
+                              <i class='fa fa-plus me-1'></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                      </table>
+                  </div>
+              </div>
+          </div>
+          </div>
+
       </div>
     </main>
   </div>
 </div>
 <app-footer></app-footer>
+
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <img src="../../../../../assets/img/icons/cross.png" alt="img" width="30px" class="mb-3">
+        <h5 class="text-dark">Are you sure you want to delete ?</h5>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger p-2" (click)="deleteFees(true)" data-bs-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Activate Modal -->
+<div class="modal fade" id="activateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <img src="../../../../../assets/img/icons/cross.png" alt="img" width="30px" class="mb-3">
+        <h5 class="text-dark">Are you sure you want to Activate ?</h5>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success p-2" (click)="deleteFees(true)" data-bs-dismiss="modal">Activate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--edit student modal-->
+
+
+<div class="modal fade" id="editFeesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Fees</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <form [formGroup]="editFeesForm" (ngSubmit)="onSubmitEditFees()">
+        <div class="form-group">
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Select Student</label>
+            <div class="input-group">
+              <select id="studentName" class="form-select" formControlName="studentName">
+                <option *ngFor = "let s of studentData" value="{{s.id}}" >{{s.studentFirstName}} {{s.studentLastName}}</option>
+              </select>
+            </div>
+            <span class="text-danger" *ngIf="editFeesForm.controls.studentName.touched && editFeesForm.controls.studentName.errors?.['required']">Student is required</span>
+          <span class="text-danger" *ngIf="editFeesForm.controls.studentName.errors?.['pattern']">Invalid Student</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >select Course</label>
+              <div class="input-group">
+              <select id="courseName" class="form-select" formControlName="courseName">
+                <option *ngFor = "let c of courseData" value="{{c.id}}" >{{c.courseName}}</option>
+              </select>
+            </div>
+            <span class="text-danger" *ngIf="editFeesForm.controls.courseName.touched && editFeesForm.controls.courseName.errors?.['required']">Course is required</span>
+          <span class="text-danger" *ngIf="editFeesForm.controls.courseName.errors?.['pattern']">Invalid Course</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Fee Amount</label>
+            <div class="input-group">
+              <input  id="feeAmount" type="text" class="form-control" formControlName="feeAmount">
+            </div>
+            <span class="text-danger" *ngIf="editFeesForm.controls.feeAmount.touched && editFeesForm.controls.feeAmount.errors?.['required']">Fee Amount is required</span>
+          <span class="text-danger" *ngIf="editFeesForm.controls.feeAmount.errors?.['pattern']">Invalid Fee Amount</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >Month Due</label>
+              <div class="input-group">
+                <select id="lastMonthDue" class="form-select" formControlName="lastMonthDue">
+                  <option value="0" >Paid</option>
+                  <option value="1" >Unpaid</option>
+                </select>
+            </div>
+            <span class="text-danger" *ngIf="editFeesForm.controls.lastMonthDue.touched && editFeesForm.controls.lastMonthDue.errors?.['required']">Month Due is required</span>
+          <span class="text-danger" *ngIf="editFeesForm.controls.lastMonthDue.errors?.['pattern']">Invalid Month Due</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success p-2" [disabled]="!editFeesForm.valid">Save</button>
+      </div>
+
+    </form>
+  </div>
+  </div>
+  </div>
+</div>
+
+
+<!--add student modal-->
+
+<div class="modal fade" id="addFeesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Fees</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <form [formGroup]="addFeesForm" (ngSubmit)="onSubmitAddFees()">
+        <div class="form-group">
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Select Student</label>
+            <div class="input-group">
+              <select id="studentName" class="form-select" formControlName="studentName">
+                <option *ngFor = "let s of studentData" value="{{s.id}}" >{{s.studentFirstName}} {{s.studentLastName}}</option>
+              </select>
+            </div>
+            <span class="text-danger" *ngIf="addFeesForm.controls.studentName.touched && addFeesForm.controls.studentName.errors?.['required']">Student is required</span>
+          <span class="text-danger" *ngIf="addFeesForm.controls.studentName.errors?.['pattern']">Invalid Student</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >select Course</label>
+              <div class="input-group">
+                <select id="courseName" class="form-select" formControlName="courseName">
+                  <option *ngFor = "let c of courseData" value="{{c.id}}" >{{c.courseName}}</option>
+                </select>
+            </div>
+            <span class="text-danger" *ngIf="addFeesForm.controls.courseName.touched && addFeesForm.controls.courseName.errors?.['required']">Course is required</span>
+          <span class="text-danger" *ngIf="addFeesForm.controls.courseName.errors?.['pattern']">Invalid Course</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Fee Amount</label>
+            <div class="input-group">
+              <input  id="feeAmount" type="text" class="form-control" formControlName="feeAmount">
+            </div>
+            <span class="text-danger" *ngIf="addFeesForm.controls.feeAmount.touched && addFeesForm.controls.feeAmount.errors?.['required']">Fee Amount is required</span>
+          <span class="text-danger" *ngIf="addFeesForm.controls.feeAmount.errors?.['pattern']">Invalid Fee Amount</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >Month Due</label>
+              <div class="input-group">
+              <select id="lastMonthDue" class="form-select" formControlName="lastMonthDue">
+                <option value="0" >Paid</option>
+                <option value="1" >Unpaid</option>
+              </select>
+            </div>
+            <span class="text-danger" *ngIf="addFeesForm.controls.lastMonthDue.touched && addFeesForm.controls.lastMonthDue.errors?.['required']">Month Due is required</span>
+          <span class="text-danger" *ngIf="addFeesForm.controls.lastMonthDue.errors?.['pattern']">Invalid Month Due</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success p-2" [disabled]="!addFeesForm.valid">Save</button>
+      </div>
+
+    </form>
+  </div>
+  </div>
+  </div>
+</div>
+
