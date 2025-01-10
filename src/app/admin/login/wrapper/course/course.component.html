@@ -30,17 +30,17 @@
               <table class="table table-hover my-0 table-responsive">
                 <thead>
                   <tr>
-                    <th class="d-md-table-cell">Course Name</th>
-                    <th class="d-md-table-cell">Course Description</th>
-                    <th class="d-md-table-cell">Course Image</th>
-                    <th class="d-md-table-cell">Course Duration</th>
-                    <th class="d-md-table-cell">Course Level</th>
-                    <th class="d-md-table-cell">Course Instructor</th>
-                    <th class="d-md-table-cell">Course Price</th>
-                    <th class="d-md-table-cell">Course Category</th>
-                    <th class="d-md-table-cell">Course Start Date</th>
-                    <th class="d-md-table-cell">Course End Date</th>
-                    <th class="d-md-table-cell">Course Status</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('courseName',booleanValue)">Course Name</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('courseDescription',booleanValue)">Course Description</th>
+                    <th class="d-md-table-cell" >Course Image</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('courseDuration',booleanValue)">Course Duration</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('courseLevel',booleanValue)">Course Level</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('courseInstructor',booleanValue)">Course Instructor</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('coursePrice',booleanValue)">Course Price</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('courseCategory',booleanValue)">Course Category</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('courseStartDate',booleanValue)">Course Start Date</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('courseEndDate',booleanValue)">Course End Date</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('isActive',booleanValue)">Course Status</th>
                     <th class="d-md-table-cell">Action</th>
                   </tr>
                 </thead>

@@ -22,20 +22,20 @@
                       <table class="table table-hover my-0 table-responsive">
                         <thead>
                           <tr>
-                              <th class="d-md-table-cell">Student Name</th>
-                              <th class="d-md-table-cell">Course Name</th>
-                              <th class="d-md-table-cell">Fee Amount</th>
-                              <th class="d-md-table-cell">Month Due</th>
-                              <th class="d-md-table-cell">Date</th>
-                              <th class="d-md-table-cell">Status</th>
-                              <th class="d-md-table-cell">Action</th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('studentName',booleanValue)">Student Name</th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('courseName',booleanValue)">Course Name</th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('feeAmount',booleanValue)">Fee Amount</th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('lastMonthDue',booleanValue)">Month Due</th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('createdAt',booleanValue)">Date</th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('isActive',booleanValue)">Status</th>
+                              <th class="d-md-table-cell" >Action</th>
                           </tr>
                       </thead>
                       <tbody>
                           <tr *ngFor = "let item of landData  | paginate: { itemsPerPage: 10, currentPage: page }">
                             <td class="d-md-table-cell">{{item.studentName}}</td>
                             <td class="d-md-table-cell">{{item.courseName}}</td>
-                            <td class="d-md-table-cell">{{item.feeAmount}}</td>
+                            <td class="d-md-table-cell"><i class="fas fa-rupee-sign"></i> {{item.feeAmount}}</td>
                             <td class="d-md-table-cell" *ngIf="item.lastMonthDue == 0"><span class="badge bg-success">Paid</span></td>
                             <td class="d-md-table-cell" *ngIf="item.lastMonthDue != 0"><span class="badge bg-danger">Unpaid</span></td>
                             <td class="d-md-table-cell">{{item.createdAt}}</td>

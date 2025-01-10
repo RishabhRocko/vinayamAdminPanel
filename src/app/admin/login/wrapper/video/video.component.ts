@@ -23,6 +23,7 @@ export class VideoComponent {
   videoSearchBar: any;
   page:any = 1;
   sideBarToggleVar:boolean = true;
+  booleanValue: boolean = false;
   constructor(private VideoService:VideoService,private toastr: ToastrService){}
 
   ngOnInit(): void {
@@ -183,6 +184,17 @@ export class VideoComponent {
       }
     });
   }
+
+  sort(colName: string | number,boolean: boolean) {
+    if (boolean == true){
+      this.landData.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => a[colName] > b[colName] ? 1 : a[colName] < b[colName] ? -1 : 0);
+      this.booleanValue = !this.booleanValue;
+    }else{
+      this.landData.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => a[colName] < b[colName] ? 1 : a[colName] > b[colName] ? -1 : 0);
+      this.booleanValue = !this.booleanValue;
+    }
+}
+
   sideBarToggleEvent(event:any)
   {
     this.sideBarToggleVar = !this.sideBarToggleVar;

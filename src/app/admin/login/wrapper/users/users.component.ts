@@ -15,10 +15,15 @@ export class UsersComponent implements OnInit {
   deleteId:any;
   deleteEncString:any;
   editStudentData:any;
+  studentImageBase64Data: any;
+  studentImageFileSize: any;
+  studentImageFileType: any;
+  invalidStudentImage : number = 0;
   user:any;
   studentSearchBar: any;
   page:any = 1;
   sideBarToggleVar:boolean = true;
+  booleanValue: boolean = false;
   constructor(private UsersService:UsersService,private toastr: ToastrService){}
 
   ngOnInit(): void {
@@ -36,9 +41,35 @@ export class UsersComponent implements OnInit {
       }
     });
   }
+
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.encodeFileBase64(file);
+    }
+  }
+
+  encodeFileBase64(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.studentImageBase64Data = reader.result as string;
+      this.studentImageFileSize = file.size,
+      this.studentImageFileType = file.type.split("/")
+      if((this.studentImageFileType[0] != 'image') || (this.studentImageFileSize > 204800))
+      {
+        this.invalidStudentImage = 1;
+      }else{
+        this.invalidStudentImage = 0;
+      }
+
+    };
+    reader.readAsDataURL(file);
+  }
+
   editStudentForm = new FormGroup({
     studentId: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
     studentFirstName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
+    studentImage: new FormControl( ''),
     studentLastName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
     guardianFirstName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
     guardianLastName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
@@ -50,6 +81,7 @@ export class UsersComponent implements OnInit {
 
   addStudentForm = new FormGroup({
     studentFirstName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
+    studentImage: new FormControl( '',[Validators.required]),
     studentLastName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
     guardianFirstName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
     guardianLastName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
@@ -72,6 +104,7 @@ export class UsersComponent implements OnInit {
           this.editStudentForm.setValue({
             studentId: this.editStudentData.id,
             studentFirstName: this.editStudentData.studentFirstName,
+            studentImage:null,
             studentLastName: this.editStudentData.studentLastName,
             guardianFirstName: this.editStudentData.guardianFirstName,
             guardianLastName: this.editStudentData.guardianLastName,
@@ -96,7 +129,7 @@ export class UsersComponent implements OnInit {
   onSubmitEditStudent()
   {
     if(localStorage.getItem('token')){
-      this.user = {token:localStorage.getItem('token'),editForm:this.editStudentForm.value};
+      this.user = {token:localStorage.getItem('token'),studentImage: this.studentImageBase64Data,editForm:this.editStudentForm.value};
       this.UsersService.saveEditStudentData(this.user).subscribe((res: any) => {
         let response = decryptData(res);
         if(response.status == true)
@@ -121,7 +154,7 @@ export class UsersComponent implements OnInit {
   onSubmitAddStudent()
   {
     if(localStorage.getItem('token')){
-      this.user = {token:localStorage.getItem('token'),addForm:this.addStudentForm.value};
+      this.user = {token:localStorage.getItem('token'),studentImage: this.studentImageBase64Data,addForm:this.addStudentForm.value};
       this.UsersService.saveAddStudentData(this.user).subscribe((res: any) => {
         let response = decryptData(res);
         if(response.status == true)
@@ -186,6 +219,16 @@ export class UsersComponent implements OnInit {
       }
     });
   }
+
+  sort(colName: string | number,boolean: boolean) {
+    if (boolean == true){
+      this.landData.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => a[colName] > b[colName] ? 1 : a[colName] < b[colName] ? -1 : 0);
+      this.booleanValue = !this.booleanValue;
+    }else{
+      this.landData.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => a[colName] < b[colName] ? 1 : a[colName] > b[colName] ? -1 : 0);
+      this.booleanValue = !this.booleanValue;
+    }
+}
   sideBarToggleEvent(event:any)
   {
     this.sideBarToggleVar = !this.sideBarToggleVar;

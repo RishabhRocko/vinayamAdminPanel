@@ -21,11 +21,11 @@
                 <table class="table table-hover my-0 table-responsive">
                   <thead>
                       <tr>
-                          <th class="d-md-table-cell">Image Text</th>
-                          <th class="d-md-table-cell">Image Tag ID</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('imageText',booleanValue)">Image Text</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('imageTagId',booleanValue)">Image Tag ID</th>
                           <th class="d-md-table-cell">Image</th>
-                          <th class="d-md-table-cell">Alt Image</th>
-                          <th class="d-md-table-cell">Image Status</th>
+                          <th class="d-md-table-cell" >Alt Image</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('isActive',booleanValue)">Image Status</th>
                           <th class="d-md-table-cell">Action</th>
                       </tr>
                   </thead>

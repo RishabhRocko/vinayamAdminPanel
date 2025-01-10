@@ -22,21 +22,25 @@
                   <table class="table table-hover my-0 table-responsive">
                     <thead>
                       <tr>
-                          <th class="d-md-table-cell">Student Name</th>
-                          <th class="d-md-table-cell">Guardian Name</th>
-                          <th class="d-md-table-cell">Login Id</th>
-                          <th class="d-md-table-cell">Login Pass</th>
-                          <th class="d-md-table-cell">Phone</th>
-                          <th class="d-md-table-cell">DOB</th>
-                          <th class="d-md-table-cell">Email</th>
-                          <th class="d-md-table-cell">Class</th>
-                          <th class="d-md-table-cell">Status</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('studentFirstName',booleanValue)">Student Name</th>
+                          <th class="d-md-table-cell" >Student Image</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('guardianFirstName',booleanValue)">Guardian Name</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('loginId',booleanValue)">Login Id</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('loginPassword',booleanValue)">Login Pass</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('phone',booleanValue)">Phone</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('dob',booleanValue)">DOB</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('email',booleanValue)">Email</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('class',booleanValue)">Class</th>
+                          <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('isActive',booleanValue)">Status</th>
                           <th class="d-md-table-cell">Action</th>
                       </tr>
                   </thead>
                   <tbody>
                       <tr *ngFor = "let item of landData  | paginate: { itemsPerPage: 10, currentPage: page }">
                         <td class="d-md-table-cell">{{item.studentFirstName}} {{item.studentLastName}}</td>
+                        <td class="d-md-table-cell">
+                          <img src="{{ item.studentImage }}" alt="" width="60px" />
+                        </td>
                         <td class="d-md-table-cell">{{item.guardianFirstName}} {{item.guardianLastName}}</td>
                         <td class="d-md-table-cell">{{item.loginId}}</td>
                         <td class="d-md-table-cell">{{item.loginPassword}}</td>
@@ -200,6 +204,33 @@
             </div>
           </div>
 
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+              <label class="fw-bold" for="Student Image">
+                Student Image</label
+              >
+              <div class="input-group">
+                <input
+                  id="studentImage"
+                  class="form-control"
+                  type="file"
+                  formControlName="studentImage"
+                  (change)="onFileChange($event)"
+                  multiple
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="editStudentForm.controls.studentImage.touched && editStudentForm.controls.studentImage.errors?.['required']"
+                >Student Image is required</span
+              >
+              <span class="text-danger" *ngIf="invalidStudentImage == 1"
+                >Student Image must be image file and size must be less than 200
+                kb</span
+              >
+            </div>
+          </div>
+
         </div>
         <div class="modal-footer justify-content-around">
           <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
@@ -306,6 +337,34 @@
           <span class="text-danger" *ngIf="addStudentForm.controls.email.errors?.['pattern']">Invalid Email</span>
             </div>
           </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+              <label class="fw-bold" for="Student Image">
+                Student Image</label
+              >
+              <div class="input-group">
+                <input
+                  id="studentImage"
+                  class="form-control"
+                  type="file"
+                  formControlName="studentImage"
+                  (change)="onFileChange($event)"
+                  multiple
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="addStudentForm.controls.studentImage.touched && addStudentForm.controls.studentImage.errors?.['required']"
+                >Student Image is required</span
+              >
+              <span class="text-danger" *ngIf="invalidStudentImage == 1"
+                >Student Image must be image file and size must be less than 200
+                kb</span
+              >
+            </div>
+          </div>
+
 
         </div>
         <div class="modal-footer justify-content-around">

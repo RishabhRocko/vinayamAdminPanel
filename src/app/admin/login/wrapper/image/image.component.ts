@@ -24,6 +24,7 @@ export class ImageComponent {
   imageSearchBar:any;
   page:any = 1;
   sideBarToggleVar:boolean = true;
+  booleanValue: boolean = false;
   constructor(private ImageService:ImageService,private toastr: ToastrService){}
 
   ngOnInit(): void {
@@ -186,6 +187,17 @@ export class ImageComponent {
       }
     });
   }
+
+  sort(colName: string | number,boolean: boolean) {
+    if (boolean == true){
+      this.landData.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => a[colName] > b[colName] ? 1 : a[colName] < b[colName] ? -1 : 0);
+      this.booleanValue = !this.booleanValue;
+    }else{
+      this.landData.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => a[colName] < b[colName] ? 1 : a[colName] > b[colName] ? -1 : 0);
+      this.booleanValue = !this.booleanValue;
+    }
+}
+
   sideBarToggleEvent(event:any)
   {
     this.sideBarToggleVar = !this.sideBarToggleVar;
