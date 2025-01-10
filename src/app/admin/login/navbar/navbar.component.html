@@ -91,6 +91,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Notifications</h4>
+        <input
+              id="notiSearch"
+              class="rounded"
+              type="text"
+              [(ngModel)]="notiSearchBar"
+              placeholder="  Enter to search"
+              (keyup)="onSearchKeyUp($event)"
+            />
         <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -100,11 +108,11 @@
           <table class="table table-hover my-0 table-responsive">
               <thead>
                   <tr>
-                      <th class="d-md-table-cell">Name</th>
-                      <th class="d-md-table-cell">Phone</th>
-                      <th class="d-md-table-cell">Subject</th>
-                      <th class="d-md-table-cell">Class</th>
-                      <th class="d-md-table-cell">Date</th>
+                      <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('name',booleanValue)">Name</th>
+                      <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('phone',booleanValue)">Phone</th>
+                      <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('subject',booleanValue)">Subject</th>
+                      <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('class',booleanValue)">Class</th>
+                      <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('createdAt',booleanValue)">Date</th>
                       <th class="d-md-table-cell">Action</th>
                   </tr>
               </thead>

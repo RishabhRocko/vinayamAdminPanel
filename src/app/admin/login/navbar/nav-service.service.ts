@@ -21,4 +21,10 @@ export class NavServiceService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  notiSearch(sendData:any)
+  {
+    let url = environment.url + 'notiSearch';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }
