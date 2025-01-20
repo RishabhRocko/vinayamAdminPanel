@@ -35,6 +35,8 @@ export class FeeComponent {
           this.courseData = response.courseData;
           this.studentData = response.studentData;
         }else{
+          this.courseData = response.courseData;
+          this.studentData = response.studentData;
           this.toastr.error(response.message ? response.message : 'Error', 'Error', {
             positionClass: 'errorMessageClass'
          });

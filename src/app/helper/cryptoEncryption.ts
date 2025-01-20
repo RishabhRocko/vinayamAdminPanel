@@ -20,8 +20,12 @@ const CryptoJSAesJson = {
 };
 
 export function encryptData(data: any): string {
-  const encrypted = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey, { format: CryptoJSAesJson }).toString();
-  return encrypted;
+  if (environment.isEncryption) {
+    const encrypted = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey, { format: CryptoJSAesJson }).toString();
+    return encrypted;
+  }else{
+    return data;
+  }
 }
 
 export function decryptData(encryptedData: string): any {
@@ -29,12 +33,16 @@ export function decryptData(encryptedData: string): any {
     if (!encryptedData) {
       return null;
     }
-    const decrypted = CryptoJS.AES.decrypt(JSON.stringify(encryptedData), secretKey, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8);
-    if (!decrypted) {
-      return null;
+    if (environment.isDecryption) {
+      const decrypted = CryptoJS.AES.decrypt(JSON.stringify(encryptedData), secretKey, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8);
+      if (!decrypted) {
+        return null;
+      }
+      const data = JSON.parse(decodeURIComponent(JSON.parse(decrypted)));
+      return data;
+    } else {
+      return encryptedData;
     }
-    const data = JSON.parse(decodeURIComponent(JSON.parse(decrypted)));
-    return data;
   } catch (error) {
     return null;
   }

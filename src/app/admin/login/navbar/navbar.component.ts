@@ -17,7 +17,7 @@ export class NavbarComponent {
   notiSearchBar:any;
   currentNotiCount:any;
   allNotiData:any;
-  page:any;
+  page:any = 1;
   seperateNotification: any;
   booleanValue: boolean = false;
   constructor(private NavServiceService:NavServiceService,private toastr: ToastrService){}

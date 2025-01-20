@@ -26,6 +26,7 @@ import { FeeComponent } from './admin/login/wrapper/fee/fee.component';
 import { TestComponent } from './admin/login/wrapper/test/test.component';
 import { ScoreComponent } from './admin/login/wrapper/score/score.component';
 import { OrderModule } from 'ngx-order-pipe';
+import { SafePipe } from './safe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { OrderModule } from 'ngx-order-pipe';
     FeeComponent,
     TestComponent,
     ScoreComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,

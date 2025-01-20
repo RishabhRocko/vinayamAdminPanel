@@ -7,8 +7,589 @@
     <app-navbar></app-navbar>
     <main class="content">
       <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 class="h3 mb-3"><strong>Vinayam</strong> Tests</h1>
+          </div>
+          <div *ngIf="page == 1" class="col-md-6 text-right">
+            <input
+              id="testSearch"
+              class="rounded"
+              type="text"
+              [(ngModel)]="testSearchBar"
+              placeholder="  Enter to search"
+              (keyup)="onSearchKeyUp($event)"
+            />
+            <button class='btn text-success' data-type='add' data-bs-toggle="modal" data-bs-target="#addTestModal">
+              <i class='fas fa-plus me-1'></i>Add Test</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 d-flex">
+            <div class="card flex-fill" style="overflow: scroll">
+              <table class="table table-hover my-0 table-responsive">
+                <thead>
+                  <tr>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('testName',booleanValue)">Test Name <i class="fa-solid fa-filter"></i></th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('testDescription',booleanValue)">Test Description <i class="fa-solid fa-filter"></i></th>
+                    <th class="d-md-table-cell" >Test Image</th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('courseName',booleanValue)">Course Name <i class="fa-solid fa-filter"></i></th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('testDate',booleanValue)">Test Date <i class="fa-solid fa-filter"></i></th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('duration',booleanValue)">Test Duration <i class="fa-solid fa-filter"></i></th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('totalMarks',booleanValue)">Total Marks <i class="fa-solid fa-filter"></i></th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('passingMarks',booleanValue)">Passing Marks <i class="fa-solid fa-filter"></i></th>
+                    <th class="d-md-table-cell" >Question Paper </th>
+                    <th class="d-md-table-cell" >Answer Key </th>
+                    <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('isActive',booleanValue)">Test Status <i class="fa-solid fa-filter"></i></th>
+                    <th class="d-md-table-cell">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of landData
+                        | paginate : { itemsPerPage: 10, currentPage: page }
+                    "
+                  >
+                    <td class="d-md-table-cell">{{ item.testName }}</td>
+                    <td class="d-md-table-cell">{{ item.testDescription }}</td>
+
+                    <td class="d-md-table-cell">
+                      <img src="{{ item.testImage }}" alt="" width="60px" />
+                    </td>
+                    <td class="d-md-table-cell">{{ item.courseName }}</td>
+                    <td class="d-md-table-cell">{{ item.testDate }}</td>
+                    <td class="d-md-table-cell">{{ item.duration }} Minutes</td>
+                    <td class="d-md-table-cell">{{ item.totalMarks }}</td>
+                    <td class="d-md-table-cell">{{ item.passingMarks }}</td>
+                    <td class="d-md-table-cell"> <i class="fa-solid fa-file-pdf fa-3x text-primary" style="cursor: pointer;" title="click to view pdf"  data-bs-toggle="modal"
+                      data-bs-target="#viewPdfModal" (click)="viewPdf(item.questionPaper)"></i></td>
+                    <td class="d-md-table-cell"> <i class="fa-solid fa-file-pdf fa-3x text-primary" style="cursor: pointer;" title="click to view pdf"  data-bs-toggle="modal"
+                      data-bs-target="#viewPdfModal" (click)="viewPdf(item.answerKey)"></i></td>
+
+
+
+                    <td class="d-md-table-cell" *ngIf="item.isActive == 1">
+                      <span class="badge bg-success">Active</span>
+                    </td>
+                    <td class="d-md-table-cell" *ngIf="item.isActive != 1">
+                      <span class="badge bg-danger">Inactive</span>
+                    </td>
+
+                    <td>
+                      <button
+                      *ngIf="item.isActive == 1"
+                      class="btn text-success btn-sm btn-edit-user"
+                      data-type="edit"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editTestModal"
+                      (click)="getEditData(item.id, item.randomEncString)"
+                    >
+                      <i class="fas fa-edit me-1"></i>
+                    </button>
+                    <button
+                      *ngIf="item.isActive == 1"
+                      class="btn text-danger btn-sm btn-del-user"
+                      data-type="delete"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteModal"
+                      (click)="getDeleteData(item.id, item.randomEncString)"
+                    >
+                      <i class="fas fa-trash-alt me-1"></i>
+                    </button>
+                    <button
+                      *ngIf="item.isActive != 1"
+                      class="btn text-success btn-sm btn-plus-user"
+                      data-type="activate"
+                      data-bs-toggle="modal"
+                      data-bs-target="#activateModal"
+                      (click)="getDeleteData(item.id, item.randomEncString)"
+                    >
+                      <i class="fa fa-plus me-1"></i>
+                    </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <pagination-controls
+                  (pageChange)="page = $event"
+                ></pagination-controls>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
 </div>
 <app-footer></app-footer>
+
+
+
+<!-- View Pdf Modal -->
+<div
+  class="modal fade"
+  id="viewPdfModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-right">
+        <button
+        type="button"
+        class="btn btn-secondary p-2"
+        data-bs-dismiss="modal"
+      >
+        Close
+      </button>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <iframe [src]="viewPdfUrl | safe" width="100%" height="800"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <img
+          src="../../../../../assets/img/icons/cross.png"
+          alt="img"
+          width="30px"
+          class="mb-3"
+        />
+        <h5 class="text-dark">Are you sure you want to delete ?</h5>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button
+          type="button"
+          class="btn btn-secondary p-2"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger p-2"
+          (click)="deleteTest(true)"
+          data-bs-dismiss="modal"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Activate Modal -->
+<div
+  class="modal fade"
+  id="activateModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <img
+          src="../../../../../assets/img/icons/cross.png"
+          alt="img"
+          width="30px"
+          class="mb-3"
+        />
+        <h5 class="text-dark">Are you sure you want to Activate ?</h5>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button
+          type="button"
+          class="btn btn-secondary p-2"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-success p-2"
+          (click)="deleteTest(true)"
+          data-bs-dismiss="modal"
+        >
+          Activate
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--add Test modal-->
+
+<div class="modal fade" id="addTestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Test</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <form [formGroup]="addTestForm" (ngSubmit)="onSubmitAddTest()">
+        <div class="form-group">
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Test Name</label>
+            <div class="input-group">
+              <input  id="testName" type="text" class="form-control" formControlName="testName">
+            </div>
+            <span class="text-danger" *ngIf="addTestForm.controls.testName.touched && addTestForm.controls.testName.errors?.['required']">Test Name is required</span>
+          <span class="text-danger" *ngIf="addTestForm.controls.testName.errors?.['pattern']">Invalid Test Name</span>
+            </div>
+
+            <div class="col">
+              <label class="fw-bold" >Test Date</label>
+              <div class="input-group">
+                <input  id="testDate" type="date" class="form-control" formControlName="testDate">
+              </div>
+              <span class="text-danger" *ngIf="addTestForm.controls.testDate.touched && addTestForm.controls.testDate.errors?.['required']">Test Date is required</span>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Test Description</label>
+              <div class="input-group">
+              <textarea  id="testDescription" class="form-control" formControlName="testDescription" rows="1">
+                </textarea>
+            </div>
+            <span class="text-danger" *ngIf="addTestForm.controls.testDescription.touched && addTestForm.controls.testDescription.errors?.['required']">Test Description is required</span>
+          <span class="text-danger" *ngIf="addTestForm.controls.testDescription.errors?.['pattern']">Invalid Test Description</span>
+            </div>
+          </div>
+
+
+
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Test Duration</label>
+            <div class="input-group">
+              <input  id="duration" type="text" class="form-control" formControlName="duration"><button>Minutes</button>
+            </div>
+            <span class="text-danger" *ngIf="addTestForm.controls.duration.touched && addTestForm.controls.duration.errors?.['required']">Test Duration is required</span>
+          <span class="text-danger" *ngIf="addTestForm.controls.duration.errors?.['pattern']">Invalid Test Duration</span>
+            </div>
+
+            <div class="col">
+              <label class="fw-bold" >Course Name</label>
+                <div class="input-group">
+                <select id="courseName" class="form-select" formControlName="courseName">
+                  <option value="Beginner" >Beginner</option>
+                </select>
+              </div>
+              <span class="text-danger" *ngIf="addTestForm.controls.courseName.touched && addTestForm.controls.courseName.errors?.['required']">Course Name is required</span>
+            <span class="text-danger" *ngIf="addTestForm.controls.courseName.errors?.['pattern']">Invalid Course Name</span>
+              </div>
+
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Total Marks</label>
+            <div class="input-group">
+              <input  id="totalMarks" type="text" class="form-control" formControlName="totalMarks">
+            </div>
+            <span class="text-danger" *ngIf="addTestForm.controls.totalMarks.touched && addTestForm.controls.totalMarks.errors?.['required']">Total Marks is required</span>
+          <span class="text-danger" *ngIf="addTestForm.controls.totalMarks.errors?.['pattern']">Invalid Total Marks</span>
+            </div>
+            <div class="col">
+              <label class="fw-bold" >Passing Marks</label>
+              <div class="input-group">
+                <input  id="passingMarks" type="text" class="form-control" formControlName="passingMarks">
+              </div>
+              <span class="text-danger" *ngIf="addTestForm.controls.passingMarks.touched && addTestForm.controls.passingMarks.errors?.['required']">Passing Marks is required</span>
+            <span class="text-danger" *ngIf="addTestForm.controls.passingMarks.errors?.['pattern']">Invalid Passing Marks</span>
+              </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+
+
+            <div class="col">
+              <label class="fw-bold" for="Test Image">
+                Test Image</label
+              >
+              <div class="input-group">
+                <input
+                  id="testImage"
+                  class="form-control"
+                  type="file"
+                  formControlName="testImage"
+                  (change)="onFileChange($event,'testImage')"
+                  multiple
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="addTestForm.controls.testImage.touched && addTestForm.controls.testImage.errors?.['required']"
+                >Test Image is required</span
+              >
+              <span class="text-danger" *ngIf="invalidTestImage == 1"
+                >Test Image must be image file and size must be less than 200
+                kb</span
+              >
+            </div>
+
+            <div class="col">
+              <label class="fw-bold" for="Test Image">
+                Question Paper</label
+              >
+              <div class="input-group">
+                <input
+                  id="questionPaper"
+                  class="form-control"
+                  type="file"
+                  formControlName="questionPaper"
+                  (change)="onFileChange($event,'questionPaper')"
+                  multiple
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="addTestForm.controls.questionPaper.touched && addTestForm.controls.questionPaper.errors?.['required']"
+                >Question Paper is required</span
+              >
+              <span class="text-danger" *ngIf="invalidQuestionPaper == 1"
+                >Question Paper must be PDF file and size must be less than 500
+                kb</span
+              >
+            </div>
+
+            <div class="col">
+              <label class="fw-bold" for="Answer Key">
+                Answer Key</label
+              >
+              <div class="input-group">
+                <input
+                  id="answerKey"
+                  class="form-control"
+                  type="file"
+                  formControlName="answerKey"
+                  (change)="onFileChange($event,'answerKey')"
+                  multiple
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="addTestForm.controls.answerKey.touched && addTestForm.controls.answerKey.errors?.['required']"
+                >Answer Key is required</span
+              >
+              <span class="text-danger" *ngIf="invalidAnswerKey == 1"
+                >Answer Key must be PDF file and size must be less than 500
+                kb</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success p-2" [disabled]="!addTestForm.valid">Save</button>
+      </div>
+
+    </form>
+  </div>
+  </div>
+  </div>
+</div>
+
+
+
+<!--edit Test modal-->
+
+<div class="modal fade" id="editTestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Test</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <form [formGroup]="editTestForm" (ngSubmit)="onSubmitEditTest()">
+        <div class="form-group">
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Test Name</label>
+            <div class="input-group">
+              <input  id="testName" type="text" class="form-control" formControlName="testName">
+            </div>
+            <span class="text-danger" *ngIf="editTestForm.controls.testName.touched && editTestForm.controls.testName.errors?.['required']">Test Name is required</span>
+          <span class="text-danger" *ngIf="editTestForm.controls.testName.errors?.['pattern']">Invalid Test Name</span>
+            </div>
+
+            <div class="col">
+              <label class="fw-bold" >Test Date</label>
+              <div class="input-group">
+                <input  id="testDate" type="date" class="form-control" formControlName="testDate">
+              </div>
+              <span class="text-danger" *ngIf="editTestForm.controls.testDate.touched && editTestForm.controls.testDate.errors?.['required']">Test Date is required</span>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Test Description</label>
+              <div class="input-group">
+              <textarea  id="testDescription" class="form-control" formControlName="testDescription" rows="1">
+                </textarea>
+            </div>
+            <span class="text-danger" *ngIf="editTestForm.controls.testDescription.touched && editTestForm.controls.testDescription.errors?.['required']">Test Description is required</span>
+          <span class="text-danger" *ngIf="editTestForm.controls.testDescription.errors?.['pattern']">Invalid Test Description</span>
+            </div>
+          </div>
+
+
+
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Test Duration</label>
+            <div class="input-group">
+              <input  id="duration" type="text" class="form-control" formControlName="duration"><button>Months</button>
+            </div>
+            <span class="text-danger" *ngIf="editTestForm.controls.duration.touched && editTestForm.controls.duration.errors?.['required']">Test Duration is required</span>
+          <span class="text-danger" *ngIf="editTestForm.controls.duration.errors?.['pattern']">Invalid Test Duration</span>
+            </div>
+
+            <div class="col">
+              <label class="fw-bold" >Course Name</label>
+                <div class="input-group">
+                <select id="courseName" class="form-select" formControlName="courseName">
+                  <option value="Beginner" >Beginner</option>
+                </select>
+              </div>
+              <span class="text-danger" *ngIf="editTestForm.controls.courseName.touched && editTestForm.controls.courseName.errors?.['required']">Course Name is required</span>
+            <span class="text-danger" *ngIf="editTestForm.controls.courseName.errors?.['pattern']">Invalid Course Name</span>
+              </div>
+
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Total Marks</label>
+            <div class="input-group">
+              <input  id="totalMarks" type="text" class="form-control" formControlName="totalMarks">
+            </div>
+            <span class="text-danger" *ngIf="editTestForm.controls.totalMarks.touched && editTestForm.controls.totalMarks.errors?.['required']">Total Marks is required</span>
+          <span class="text-danger" *ngIf="editTestForm.controls.totalMarks.errors?.['pattern']">Invalid Total Marks</span>
+            </div>
+            <div class="col">
+              <label class="fw-bold" >Passing Marks</label>
+              <div class="input-group">
+                <input  id="passingMarks" type="text" class="form-control" formControlName="passingMarks">
+              </div>
+              <span class="text-danger" *ngIf="editTestForm.controls.passingMarks.touched && editTestForm.controls.passingMarks.errors?.['required']">Passing Marks is required</span>
+            <span class="text-danger" *ngIf="editTestForm.controls.passingMarks.errors?.['pattern']">Invalid Passing Marks</span>
+              </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+
+
+            <div class="col">
+              <label class="fw-bold" for="Test Image">
+                Test Image</label
+              >
+              <div class="input-group">
+                <input
+                  id="testImage"
+                  class="form-control"
+                  type="file"
+                  formControlName="testImage"
+                  (change)="onFileChange($event,'testImage')"
+                  multiple
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="editTestForm.controls.testImage.touched && editTestForm.controls.testImage.errors?.['required']"
+                >Test Image is required</span
+              >
+              <span class="text-danger" *ngIf="invalidTestImage == 1"
+                >Test Image must be image file and size must be less than 200
+                kb</span
+              >
+            </div>
+
+            <div class="col">
+              <label class="fw-bold" for="Test Image">
+                Question Paper</label
+              >
+              <div class="input-group">
+                <input
+                  id="questionPaper"
+                  class="form-control"
+                  type="file"
+                  formControlName="questionPaper"
+                  (change)="onFileChange($event,'questionPaper')"
+                  multiple
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="editTestForm.controls.questionPaper.touched && editTestForm.controls.questionPaper.errors?.['required']"
+                >Question Paper is required</span
+              >
+              <span class="text-danger" *ngIf="invalidQuestionPaper == 1"
+                >Question Paper must be PDF file and size must be less than 500
+                kb</span
+              >
+            </div>
+
+            <div class="col">
+              <label class="fw-bold" for="Answer Key">
+                Answer Key</label
+              >
+              <div class="input-group">
+                <input
+                  id="answerKey"
+                  class="form-control"
+                  type="file"
+                  formControlName="answerKey"
+                  (change)="onFileChange($event,'answerKey')"
+                  multiple
+                />
+              </div>
+              <span
+                class="text-danger"
+                *ngIf="editTestForm.controls.answerKey.touched && editTestForm.controls.answerKey.errors?.['required']"
+                >Answer Key is required</span
+              >
+              <span class="text-danger" *ngIf="invalidAnswerKey == 1"
+                >Answer Key must be PDF file and size must be less than 500
+                kb</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success p-2" [disabled]="!editTestForm.valid">Save</button>
+      </div>
+
+    </form>
+  </div>
+  </div>
+  </div>
+</div>
