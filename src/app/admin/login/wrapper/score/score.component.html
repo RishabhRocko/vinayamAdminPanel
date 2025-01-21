@@ -7,8 +7,275 @@
     <app-navbar></app-navbar>
     <main class="content">
       <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col-md-6">
+          <h1 class="h3 mb-3"><strong>Vinayam</strong> Score</h1>
+        </div>
+        <div *ngIf="page == 1" class="col-md-6 text-right">
+          <input  id="scoreSearch" class="rounded" type="text" [(ngModel)]="scoreSearchBar" placeholder="  Enter to search" (keyup)="onSearchKeyUp($event)">
+          <button class='btn text-success' data-type='add' data-bs-toggle="modal" data-bs-target="#addScoreModal">
+            <i class='fas fa-plus me-1'></i>Add Score</button>
+        </div>
+          <div class="row">
+              <div class="col-lg-12 d-flex">
+                  <div class="card flex-fill" style="overflow: scroll;">
+                      <table class="table table-hover my-0 table-responsive">
+                        <thead>
+                          <tr>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('studentName',booleanValue)">Student Name <i class="fa-solid fa-filter"></i></th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('testName',booleanValue)">Test Name <i class="fa-solid fa-filter"></i></th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('score',booleanValue)">Score <i class="fa-solid fa-filter"></i></th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('maxScore',booleanValue)">Max Score <i class="fa-solid fa-filter"></i></th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('percentage',booleanValue)">Percentage <i class="fa-solid fa-filter"></i></th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('grade',booleanValue)">Grade <i class="fa-solid fa-filter"></i></th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('createdAt',booleanValue)">Date <i class="fa-solid fa-filter"></i></th>
+                              <th class="d-md-table-cell" style="cursor: pointer;" title="click to filter" (click)="sort('isActive',booleanValue)">Status <i class="fa-solid fa-filter"></i></th>
+                              <th class="d-md-table-cell" >Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor = "let item of landData  | paginate: { itemsPerPage: 10, currentPage: page }">
+                            <td class="d-md-table-cell">{{item.studentName}}</td>
+                            <td class="d-md-table-cell">{{item.testName}}</td>
+                            <td class="d-md-table-cell"> {{item.score}}</td>
+                            <td class="d-md-table-cell"> {{item.maxScore}}</td>
+                            <td class="d-md-table-cell">{{item.percentage}} <i class="fa-solid fa-percent"></i></td>
+                            <td class="d-md-table-cell"> {{item.grade}}</td>
+                            <td class="d-md-table-cell">{{item.createdAt}}</td>
+
+                            <td class="d-md-table-cell" *ngIf="item.isActive == 1"><span class="badge bg-success">Active</span></td>
+                            <td class="d-md-table-cell" *ngIf="item.isActive != 1"><span class="badge bg-danger">Inactive</span></td>
+
+                            <td> <button *ngIf="item.isActive == 1"  class='btn text-success btn-sm btn-edit-user' data-type='edit' data-bs-toggle="modal" data-bs-target="#editScoreModal" (click)="getEditData(item.id,item.randomEncString)">
+                                <i class='fas fa-edit me-1'></i></button>
+                              <button *ngIf="item.isActive == 1" class='btn text-danger btn-sm btn-del-user' data-type='delete' data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="getDeleteData(item.id,item.randomEncString)" >
+                              <i class='fas fa-trash-alt me-1'></i></button>
+                              <button *ngIf="item.isActive != 1" class='btn text-success btn-sm btn-plus-user' data-type='activate' data-bs-toggle="modal" data-bs-target="#activateModal" (click)="getDeleteData(item.id,item.randomEncString)" >
+                              <i class='fa fa-plus me-1'></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                      </table>
+                  </div>
+              </div>
+          </div>
+          </div>
+
       </div>
     </main>
   </div>
 </div>
 <app-footer></app-footer>
+
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <img src="../../../../../assets/img/icons/cross.png" alt="img" width="30px" class="mb-3">
+        <h5 class="text-dark">Are you sure you want to delete ?</h5>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger p-2" (click)="deleteScore(true)" data-bs-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Activate Modal -->
+<div class="modal fade" id="activateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <img src="../../../../../assets/img/icons/cross.png" alt="img" width="30px" class="mb-3">
+        <h5 class="text-dark">Are you sure you want to Activate ?</h5>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success p-2" (click)="deleteScore(true)" data-bs-dismiss="modal">Activate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--edit student modal-->
+
+
+<div class="modal fade" id="editScoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Score</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <form [formGroup]="editScoreForm" (ngSubmit)="onSubmitEditScore()">
+        <div class="form-group">
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Select Student</label>
+            <div class="input-group">
+              <select id="studentName" class="form-select" formControlName="studentName">
+                <option *ngFor = "let s of studentData" value="{{s.id}}" >{{s.studentFirstName}} {{s.studentLastName}}</option>
+              </select>
+            </div>
+            <span class="text-danger" *ngIf="editScoreForm.controls.studentName.touched && editScoreForm.controls.studentName.errors?.['required']">Student is required</span>
+          <span class="text-danger" *ngIf="editScoreForm.controls.studentName.errors?.['pattern']">Invalid Student</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >select Test</label>
+              <div class="input-group">
+              <select id="testName" class="form-select" formControlName="testName" (change)="changeTest($event,'edit')">
+                <option *ngFor = "let c of testData" value="{{c.id}}" >{{c.testName}}</option>
+              </select>
+            </div>
+            <span class="text-danger" *ngIf="editScoreForm.controls.testName.touched && editScoreForm.controls.testName.errors?.['required']">Test is required</span>
+          <span class="text-danger" *ngIf="editScoreForm.controls.testName.errors?.['pattern']">Invalid Test</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Score</label>
+            <div class="input-group">
+              <input  id="score" type="text" class="form-control" formControlName="score" (keyup)="calculateData($event,'edit')" >
+            </div>
+            <span class="text-danger" *ngIf="editScoreForm.controls.score.touched && editScoreForm.controls.score.errors?.['required']">Score is required</span>
+          <span class="text-danger" *ngIf="editScoreForm.controls.score.errors?.['pattern']">Invalid Score</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >Max Score</label>
+              <div class="input-group">
+                <input  id="maxScore" type="text" class="form-control" formControlName="maxScore" readonly>
+            </div>
+            <span class="text-danger" *ngIf="editScoreForm.controls.maxScore.touched && editScoreForm.controls.maxScore.errors?.['required']">Max Score is required</span>
+          <span class="text-danger" *ngIf="editScoreForm.controls.maxScore.errors?.['pattern']">Invalid Max Score</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Percentage</label>
+            <div class="input-group">
+              <input  id="percentage" type="text" class="form-control" formControlName="percentage" readonly> <button><i class="fa-solid fa-percent"></i></button>
+            </div>
+            <span class="text-danger" *ngIf="editScoreForm.controls.percentage.touched && editScoreForm.controls.percentage.errors?.['required']">Percentage is required</span>
+          <span class="text-danger" *ngIf="editScoreForm.controls.percentage.errors?.['pattern']">Invalid Percentage</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >Grade</label>
+              <div class="input-group">
+                <input  id="grade" type="text" class="form-control" formControlName="grade" readonly>
+            </div>
+            <span class="text-danger" *ngIf="editScoreForm.controls.grade.touched && editScoreForm.controls.grade.errors?.['required']">Grade is required</span>
+          <span class="text-danger" *ngIf="editScoreForm.controls.grade.errors?.['pattern']">Invalid Grade</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success p-2" [disabled]="!editScoreForm.valid">Save</button>
+      </div>
+
+    </form>
+  </div>
+  </div>
+  </div>
+</div>
+
+
+<!--add student modal-->
+
+<div class="modal fade" id="addScoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Score</h4>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <form [formGroup]="addScoreForm" (ngSubmit)="onSubmitAddScore()">
+        <div class="form-group">
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Select Student</label>
+            <div class="input-group">
+              <select id="studentName" class="form-select" formControlName="studentName">
+                <option *ngFor = "let s of studentData" value="{{s.id}}" >{{s.studentFirstName}} {{s.studentLastName}}</option>
+              </select>
+            </div>
+            <span class="text-danger" *ngIf="addScoreForm.controls.studentName.touched && addScoreForm.controls.studentName.errors?.['required']">Student is required</span>
+          <span class="text-danger" *ngIf="addScoreForm.controls.studentName.errors?.['pattern']">Invalid Student</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >select Test</label>
+              <div class="input-group">
+                <select id="testName" class="form-select" formControlName="testName" (change)="changeTest($event,'add')">
+                  <option *ngFor = "let c of testData" value="{{c.id}}" >{{c.testName}}</option>
+                </select>
+            </div>
+            <span class="text-danger" *ngIf="addScoreForm.controls.testName.touched && addScoreForm.controls.testName.errors?.['required']">Test is required</span>
+          <span class="text-danger" *ngIf="addScoreForm.controls.testName.errors?.['pattern']">Invalid Test</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Score</label>
+            <div class="input-group">
+              <input  id="score" type="text" class="form-control" formControlName="score" (keyup)="calculateData($event,'add')" [readonly]="isReadonly">
+            </div>
+            <span class="text-danger" *ngIf="addScoreForm.controls.score.touched && addScoreForm.controls.score.errors?.['required']">Score is required</span>
+          <span class="text-danger" *ngIf="addScoreForm.controls.score.errors?.['pattern']">Invalid Score</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >Max Score</label>
+              <div class="input-group">
+                <input  id="maxScore" type="text" class="form-control" formControlName="maxScore" readonly>
+            </div>
+            <span class="text-danger" *ngIf="addScoreForm.controls.maxScore.touched && addScoreForm.controls.maxScore.errors?.['required']">Max Score is required</span>
+          <span class="text-danger" *ngIf="addScoreForm.controls.maxScore.errors?.['pattern']">Invalid Max Score</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start bg-body-tertiary mb-3">
+            <div class="col">
+            <label class="fw-bold" >Percentage</label>
+            <div class="input-group">
+              <input  id="percentage" type="text" class="form-control" formControlName="percentage" readonly> <button><i class="fa-solid fa-percent"></i></button>
+            </div>
+            <span class="text-danger" *ngIf="addScoreForm.controls.percentage.touched && addScoreForm.controls.percentage.errors?.['required']">Percentage is required</span>
+          <span class="text-danger" *ngIf="addScoreForm.controls.percentage.errors?.['pattern']">Invalid Percentage</span>
+            </div>
+            <div class="col">
+            <label class="fw-bold" >Grade</label>
+              <div class="input-group">
+                <input  id="grade" type="text" class="form-control" formControlName="grade" readonly>
+            </div>
+            <span class="text-danger" *ngIf="addScoreForm.controls.grade.touched && addScoreForm.controls.grade.errors?.['required']">Grade is required</span>
+          <span class="text-danger" *ngIf="addScoreForm.controls.grade.errors?.['pattern']">Invalid Grade</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button type="button" class="btn btn-secondary p-2" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success p-2" [disabled]="!addScoreForm.valid">Save</button>
+      </div>
+
+    </form>
+  </div>
+  </div>
+  </div>
+</div>
+
