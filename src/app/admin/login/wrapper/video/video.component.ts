@@ -71,7 +71,7 @@ export class VideoComponent {
       }
       this.videoFileSize = file.size,
       this.videoFileType = file.type.split("/")
-      if((this.videoFileType[0] != 'video') || (this.videoFileSize > 2048000))
+      if((this.videoFileType[0] != 'video') || (this.videoFileSize > 10240000))
       {
         if(type == 'videoUrlBase64'){
           this.invalidVideoUrl = 1;

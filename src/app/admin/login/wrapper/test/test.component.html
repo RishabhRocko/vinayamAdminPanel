@@ -294,7 +294,7 @@
               <label class="fw-bold" >Course Name</label>
                 <div class="input-group">
                 <select id="courseName" class="form-select" formControlName="courseName">
-                  <option value="Beginner" >Beginner</option>
+                  <option *ngFor = "let c of courseData" value="{{c.id}}" >{{c.courseName}}</option>
                 </select>
               </div>
               <span class="text-danger" *ngIf="addTestForm.controls.courseName.touched && addTestForm.controls.courseName.errors?.['required']">Course Name is required</span>
@@ -476,7 +476,7 @@
               <label class="fw-bold" >Course Name</label>
                 <div class="input-group">
                 <select id="courseName" class="form-select" formControlName="courseName">
-                  <option value="Beginner" >Beginner</option>
+                  <option *ngFor = "let c of courseData" value="{{c.id}}" >{{c.courseName}}</option>
                 </select>
               </div>
               <span class="text-danger" *ngIf="editTestForm.controls.courseName.touched && editTestForm.controls.courseName.errors?.['required']">Course Name is required</span>

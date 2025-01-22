@@ -1,4 +1,5 @@
 import { Component , OnInit} from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { FormGroup,FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { WebService } from './web.service';
@@ -18,10 +19,13 @@ export class WebComponent implements OnInit{
   socialData: any;
   branch1: any;
   branch2: any;
+  vinayamInfoData: any;
+  whyVinayamInfo: any;
+  vinayamHomeInfo: any;
   messageSent:number = 0;
   sentMessage:any;
   menuTriggerVar:boolean = false;
-  constructor(private WebService:WebService,private router: Router,private toastr: ToastrService){}
+  constructor(private WebService:WebService,private router: Router,private toastr: ToastrService,private elementRef: ElementRef<HTMLElement>){}
   ngOnInit(): void {
     localStorage.removeItem("token");
     this.sendData = {"type":"webInfo"};
@@ -34,8 +38,20 @@ export class WebComponent implements OnInit{
         this.emailData = response?.data.email;
         this.socialData = response?.data.social;
         this.webData = response?.data.website;
+        this.vinayamInfoData = response?.data.vinayamInfo;
+        this.whyVinayamInfo = this.vinayamInfoData[0].whyVinayamInfo;
+        this.vinayamHomeInfo = this.vinayamInfoData[0].vinayamHomeInfo;
         this.branch1 = this.addressData[0].coordinate;
         this.branch2 = this.addressData[1].coordinate;
+
+        for (let i = 0; i < response?.imageData.length; i++) {
+          const element = document.getElementById(response?.imageData[i].imageTagName);
+          element?.style.setProperty('background-image', 'url('+response?.imageData[i].imageUrl+')');
+        }
+        for (let i = 0; i < response?.videoData.length; i++) {
+          const element = document.getElementById(response?.videoData[i].videoTagName);
+          element?.setAttribute('src',response?.videoData[i].videoUrl);
+        }
       }
     });
   }
