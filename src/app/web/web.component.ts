@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { WebService } from './web.service';
 import { ToastrService } from 'ngx-toastr';
 import { decryptData } from 'src/app/helper/cryptoEncryption';
+
 @Component({
   selector: 'app-web',
   templateUrl: './web.component.html',

@@ -44,7 +44,7 @@
 
   <!-- ***** Main Banner Area Start ***** -->
   <section class="section main-banner" id="top" data-section="section1">
-      <video autoplay muted loop id="bg-video">
+      <video [autoplay]="true" [muted]="true" [loop]="true" id="bg-video">
       </video>
 
       <div class="video-overlay header-text">
@@ -189,7 +189,7 @@
           </div>
         </div>
         <div class="col-lg-6 align-self-center">
-            <video style="border-radius:20px;" autoplay muted loop id="facts-video" height="100%" width="100%">
+            <video style="border-radius:20px;" [autoplay]="true" [muted]="true" [loop]="true" id="facts-video" height="100%" width="100%">
               </video>
         </div>
       </div>
