@@ -21,4 +21,10 @@ export class WebService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  studentLogin(sendData:any)
+  {
+    let url = environment.url + 'studentLogin';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
 }

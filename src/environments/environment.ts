@@ -5,8 +5,8 @@
 export const environment = {
   production : false,
   secretKey : '123456',
-  isEncryption : false,
-  isDecryption : false,
+  isEncryption : true,
+  isDecryption : true,
   url : "http://vinayamclasses.in/VGCAPI/"
 };
 

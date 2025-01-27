@@ -81,7 +81,7 @@ export class CourseComponent implements OnInit {
       courseId: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
       courseName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)]),
       courseImage: new FormControl( ''),
-      courseDescription: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)]),
+      courseDescription: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][A-Za-z0-9 _.,!"'-]*$/)]),
       courseDuration: new FormControl( '',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
       courseLevel: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
       courseInstructor: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)] ),
@@ -93,7 +93,7 @@ export class CourseComponent implements OnInit {
     addCourseForm = new FormGroup({
       courseName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)]),
       courseImage: new FormControl( '',[Validators.required]),
-      courseDescription: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)]),
+      courseDescription: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][A-Za-z0-9 _.,!"'-]*$/)]),
       courseDuration: new FormControl( '',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
       courseLevel: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
       courseInstructor: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)] ),

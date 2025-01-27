@@ -120,7 +120,7 @@ export class TestComponent {
     testId: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
     testName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)]),
     testImage: new FormControl( ''),
-    testDescription: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)]),
+    testDescription: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][A-Za-z0-9 _.,!"'-]*$/)]),
     duration: new FormControl( '',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
     testDate: new FormControl( '',[Validators.required]),
     courseName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)] ),
@@ -132,7 +132,7 @@ export class TestComponent {
   addTestForm = new FormGroup({
     testName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)]),
     testImage: new FormControl( '',[Validators.required]),
-    testDescription: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)]),
+    testDescription: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][A-Za-z0-9 _.,!"'-]*$/)]),
     duration: new FormControl( '',[Validators.required,Validators.pattern(/^[0-9]*$/)]),
     testDate: new FormControl( '',[Validators.required]),
     courseName: new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9\s]*$/)] ),

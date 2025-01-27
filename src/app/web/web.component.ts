@@ -25,7 +25,15 @@ export class WebComponent implements OnInit{
   vinayamHomeInfo: any;
   messageSent:number = 0;
   sentMessage:any;
+  page:any = 1;
+  isStudentLogin:boolean = false;
   menuTriggerVar:boolean = false;
+  courseData: any;
+  courseDetails: any;
+  loginTestData: any;
+  testData: any;
+  testDetails: any;
+  viewPdfUrl: any;
   constructor(private WebService:WebService,private router: Router,private toastr: ToastrService,private elementRef: ElementRef<HTMLElement>){}
   ngOnInit(): void {
     localStorage.removeItem("token");
@@ -47,12 +55,18 @@ export class WebComponent implements OnInit{
 
         for (let i = 0; i < response?.imageData.length; i++) {
           const element = document.getElementById(response?.imageData[i].imageTagName);
-          element?.style.setProperty('background-image', 'url('+response?.imageData[i].imageUrl+')');
+          if(response?.imageData[i].isBgImage == 1){
+            element?.style.setProperty('background-image', 'url('+response?.imageData[i].imageUrl+')');
+          }else{
+            element?.setAttribute('src',response?.imageData[i].imageUrl);
+          }
         }
         for (let i = 0; i < response?.videoData.length; i++) {
           const element = document.getElementById(response?.videoData[i].videoTagName);
           element?.setAttribute('src',response?.videoData[i].videoUrl);
         }
+        this.courseData = response?.courseData;
+        this.testData = response?.testData;
       }
     });
   }
@@ -63,6 +77,10 @@ export class WebComponent implements OnInit{
     subject:  new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9 ]*$/)]),
     email: new FormControl( '',[Validators.required,Validators.pattern(/^([\w\-\.\+]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/)] ),
     message: new FormControl( '',[Validators.required,Validators.pattern(/^[A-Za-z0-9][a-zA-Z0-9 .&,@$()?_#-\/\+[\]*]*$/)] ),
+  });
+  studentLoginForm = new FormGroup({
+    studentName:  new FormControl( '',[Validators.required,Validators.pattern(/^[a-zA-Z]*$/)]),
+    studentDob: new FormControl( '',[Validators.required] ),
   });
 
   onSubmitMessageForm(){
@@ -83,6 +101,36 @@ export class WebComponent implements OnInit{
           });
           }
         });
+  }
+  onsubmitStudentLogin(){
+    this.user = {loginForm:this.studentLoginForm.value};
+        this.WebService.studentLogin(this.user).subscribe((res: any) => {
+          let response = decryptData(res);
+          if(response.status == true)
+          {
+            this.isStudentLogin = true;
+            this.loginTestData = response.testData;
+            this.studentLoginForm.reset();
+            this.toastr.success(response.message ? response.message : 'Success', 'Success', {
+              positionClass: 'successMessageClass'
+          });
+          }else{
+            this.isStudentLogin = true;
+            this.loginTestData = [];
+            this.toastr.error(response.message ? response.message : 'Error', 'Error', {
+              positionClass: 'errorMessageClass'
+          });
+          }
+        });
+  }
+  viewPdf(base64:any){
+    this.viewPdfUrl = base64;
+  }
+  getCourseDetails(item:any){
+    this.courseDetails = item;
+  }
+  getTestDetails(item:any){
+    this.testDetails = item;
   }
   onAdmin()
   {
