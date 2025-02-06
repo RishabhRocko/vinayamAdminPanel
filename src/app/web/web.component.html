@@ -525,6 +525,9 @@ aria-labelledby="exampleModalLabel"
           <h6><span class="text-secondary">Test Duration</span> : {{testDetails?.duration}} Minutes</h6><hr>
             <h6> <span class="text-secondary">Total Marks</span> : {{testDetails?.totalMarks}}</h6><hr>
             <h6> <span class="text-secondary">Passing Marks</span> : {{testDetails?.passingMarks}}</h6><hr>
+            <h6> <span class="text-secondary">Your Marks</span> : {{testDetails?.score}}</h6><hr>
+            <h6> <span class="text-secondary">Percentage</span> : {{testDetails?.percentage}}</h6><hr>
+            <h6> <span class="text-secondary">Grade</span> : {{testDetails?.grade}}</h6><hr>
             <h6> <span class="text-secondary">Question Paper</span> : <i class="fa-solid fa-file-pdf fa-2x text-primary" style="cursor: pointer;" title="click to view pdf"  data-bs-toggle="modal"
               data-bs-target="#viewPdfModal" (click)="viewPdf(testDetails.questionPaper)"></i></h6><hr>
             <h6> <span class="text-secondary">Answer Key</span> : <i class="fa-solid fa-file-pdf fa-2x text-primary" style="cursor: pointer;" title="click to view pdf"  data-bs-toggle="modal"

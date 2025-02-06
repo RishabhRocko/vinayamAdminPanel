@@ -31,6 +31,7 @@ export class WebComponent implements OnInit{
   courseData: any;
   courseDetails: any;
   loginTestData: any;
+  loginScoreData: any;
   testData: any;
   testDetails: any;
   viewPdfUrl: any;
@@ -110,6 +111,10 @@ export class WebComponent implements OnInit{
           {
             this.isStudentLogin = true;
             this.loginTestData = response.testData;
+            this.loginScoreData = response.scoreData;
+            for (let i = 0; i < this.loginTestData?.length; i++) {
+              this.loginTestData[i].scoreData = this.loginScoreData[i];
+            }
             this.studentLoginForm.reset();
             this.toastr.success(response.message ? response.message : 'Success', 'Success', {
               positionClass: 'successMessageClass'
