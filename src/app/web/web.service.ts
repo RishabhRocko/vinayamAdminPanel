@@ -15,6 +15,12 @@ export class WebService {
     let encData:string = encryptData(sendData);
     return this.http.post<any>(url,encData);
   }
+  videoInfo(sendData:any)
+  {
+    let url = environment.url + 'videoInfo';
+    let encData:string = encryptData(sendData);
+    return this.http.post<any>(url,encData);
+  }
   saveNotification(sendData:any)
   {
     let url = environment.url + 'saveNotification';

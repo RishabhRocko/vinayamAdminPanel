@@ -62,12 +62,18 @@ export class WebComponent implements OnInit{
             element?.setAttribute('src',response?.imageData[i].imageUrl);
           }
         }
+        this.courseData = response?.courseData;
+        this.testData = response?.testData;
+      }
+    });
+    this.WebService.videoInfo(this.sendData).subscribe((res: any) => {
+      let response = decryptData(res);
+      if(response.status == true)
+      {
         for (let i = 0; i < response?.videoData.length; i++) {
           const element = document.getElementById(response?.videoData[i].videoTagName);
           element?.setAttribute('src',response?.videoData[i].videoUrl);
         }
-        this.courseData = response?.courseData;
-        this.testData = response?.testData;
       }
     });
   }
