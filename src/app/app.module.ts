@@ -70,3 +70,4 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

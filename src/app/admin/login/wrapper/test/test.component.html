@@ -145,11 +145,7 @@
       </button>
       </div>
       <div class="modal-footer justify-content-around">
-        <pdf-viewer [src]="viewPdfUrl"
-              [render-text]="true"
-              [original-size]="false"
-              style="width: 100%; height: 800px"
-        ></pdf-viewer>
+        <iframe [src]="viewPdfUrl | safe" width="100%" height="800"></iframe>
       </div>
     </div>
   </div>
